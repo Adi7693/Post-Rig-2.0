@@ -27,7 +27,10 @@ namespace PostRig2._0
         static readonly double rallyCarDampingCoefficient = 16000.0;
 
         private bool NewCarBuilt = false;
+
         private bool NewSimSetup = false;
+        private bool SingleStepIP = false;
+        private bool MultipleStepIP = false;
 
 
         public Document Doc { get; set; }
@@ -362,6 +365,31 @@ namespace PostRig2._0
             FileRibbonBasePanel.BringToFront();
         }
 
+        private void OnRibbonPageChanged(object sender, EventArgs e)
+        {
+            if (NewCarBuilt)
+            {
+                if (MainFormRibbonControl.SelectedPage == DesignRibbonPage)
+                {
+                    ShowDesignPanelBarButton_ItemClick(sender, null);
+                }
+
+                else if (NewSimSetup)
+                {
+                    if (MainFormRibbonControl.SelectedPage == SimSetupRibbonPage)
+                    {
+                        SimulationSetupBasePanel.Visible = true;
+
+                        SimulationSetupBasePanel.BringToFront();
+                    }
+                }
+            }
+
+        }
+
+
+        // Design Ribbon Panel Actions
+
         private void BuildCarHomeRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             VehicleDataHomeRibbonPanel.Visible = true;
@@ -371,21 +399,12 @@ namespace PostRig2._0
             NewCarBuilt = true;
         }
 
-        private void NewSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+
+        private void OnTextInputChanged(object sender, EventArgs e)
         {
-            SimulationSetupBasePanel.Visible = true;
-
-            SimulationSetupBasePanel.BringToFront();
-
-            NewSimSetup = true;
+            UpdateDocumentFromUI();
         }
 
-        private void ShowDesignPanelBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            DesignRibbonBasePanel.Visible = true;
-
-            DesignRibbonBasePanel.BringToFront();
-        }
 
         private void VehicleTemplateButtonPanel_ButtonChecked(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -425,74 +444,156 @@ namespace PostRig2._0
             UpdateUIFromDocument();
         }
 
-        private void OnRibbonPageChanged(object sender, EventArgs e)
+        private void ShowDesignPanelBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (NewCarBuilt)
+            DesignRibbonBasePanel.Visible = true;
+
+            DesignRibbonBasePanel.BringToFront();
+        }
+
+        // Simulation Setup Panel Actions
+
+
+        private void NewSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SimulationSetupBasePanel.Visible = true;
+
+            SimulationSetupBasePanel.BringToFront();
+
+            SimSetupParametersColumn.TreeList.Nodes[1].Collapse();
+            SimSetupParametersColumn.TreeList.Nodes[1].Visible = false;
+
+            NewSimSetup = true;
+        }
+
+        
+
+        private void SingleStepIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
+        {
+            if (SingleStepIPCheckItem.Checked)
             {
-                if (MainFormRibbonControl.SelectedPage == DesignRibbonPage)
+                SingleStepIP = true;
+                MultipleStepIP = false;
+
+                if (SingleStepIP)
                 {
-                    ShowDesignPanelBarButton_ItemClick(sender, null);
+                    SimSetupParametersColumn.TreeList.Nodes[1].ExpandAll();
+                    SimSetupParametersColumn.TreeList.Nodes[1].Visible = true;
+
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].Visible = true;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].Visible = false;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].Visible = false;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[3].Visible = true;
                 }
 
-                else if (NewSimSetup)
-                {
-                    if(MainFormRibbonControl.SelectedPage == SimSetupRibbonPage)
-                    {
-                        SimulationSetupBasePanel.Visible = true;
-
-                        SimulationSetupBasePanel.BringToFront();
-                    }
-                }
+                
             }
+            
+        }
+
+        private void MultipleStepIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
+        {
+            if (MultipleStepIPCheckItem.Checked)
+            {
+                SingleStepIP = false;
+                MultipleStepIP = true;
+
+                if (MultipleStepIP)
+                {
+                    SimSetupParametersColumn.TreeList.Nodes[1].ExpandAll();
+                    SimSetupParametersColumn.TreeList.Nodes[1].Visible = true;
+
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].Visible = true;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].Visible = true;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].Visible = true;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[3].Visible = true;
+                }
+
+                
+            }
+            
+        }
+
+        private void SingleStepIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
+        {
+            SingleStepIPCheckItem.Checked = true;
+            MultipleStepIPCheckItem.Checked = false;
+
 
         }
 
-        private void OnTextInputChanged(object sender, EventArgs e)
+        private void MultipleStepIPCheckItem_OnClick(object sender,ItemClickEventArgs e)
         {
-            UpdateDocumentFromUI();
+            SingleStepIPCheckItem.Checked = false;
+            MultipleStepIPCheckItem.Checked = true; ;
         }
 
-        private void StepIPSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        private void InitialiseSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
             UpdateDocumentFromUI();
-            Doc.Input.Calculate();
-            Doc.Input.StepInputCalculate();
 
-            StepSignalChartControl.Dock = DockStyle.Fill;
-
-            Series StepFunction = new Series("Displacement", ViewType.Line);
-
-            StepSignalChartControl.Series.Clear();
-
-            for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+            if (SingleStepIP)
             {
-                StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.StepInput[i]));
+                Doc.Input.SingleStepIPNeedsToRecalculate = true;
+                Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+            }
+            else if (MultipleStepIP)
+            {
+                Doc.Input.SingleStepIPNeedsToRecalculate = false;
+                Doc.Input.MultipleStepIPNeedsToRecalculate = true;
             }
 
-            StepSignalChartControl.Series.Add(StepFunction);
 
-            XYDiagram diagram = (XYDiagram)StepSignalChartControl.Diagram;
 
-            //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
-            diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            diagram.AxisX.Alignment = AxisAlignment.Near;
-            diagram.AxisX.Title.Text = "Time (s)";
-            diagram.AxisX.Title.TextColor = Color.Black;
-            diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+            Doc.Input.InputDataCalculate();
+        }
 
-            //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
-            diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            diagram.AxisY.Alignment = AxisAlignment.Near;
-            diagram.AxisY.Title.Text = "Displacement";
-            diagram.AxisY.Title.TextColor = Color.Black;
-            diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+        private void InputSignalSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if(SingleStepIP || MultipleStepIP)
+            {
+                StepSignalChartControl.Dock = DockStyle.Fill;
+                StepSignalChartControl.Visible = true;
 
-            StepSignalChartControl.Update();
+                Series StepFunction = new Series("Displacement", ViewType.Line);
+
+                StepSignalChartControl.Series.Clear();
+
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                {
+                    StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.StepInput[i]));
+                }
+
+                StepSignalChartControl.Series.Add(StepFunction);
+
+                XYDiagram diagram = (XYDiagram)StepSignalChartControl.Diagram;
+
+                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Alignment = AxisAlignment.Near;
+                diagram.AxisX.Title.Text = "Time (s)";
+                diagram.AxisX.Title.TextColor = Color.Black;
+                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Alignment = AxisAlignment.Near;
+                diagram.AxisY.Title.Text = "Displacement (m)";
+                diagram.AxisY.Title.TextColor = Color.Black;
+                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                StepSignalChartControl.Update();
+            }
+            
+        }
+
+        private void UpdateSimSetupPlotBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            InputSignalSimSetupBarButton_ItemClick(sender, e);
         }
     }
 }

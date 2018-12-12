@@ -6,7 +6,7 @@ namespace Input
     public class InputData
     {
         private bool TimeNeedsToRecalculate;
-        private bool StepInputNeedsToRecalculate;
+
         private bool FrequencyNeedsToRecalculate;
         private bool ForceNeedsToRecalculate;
         private bool ResponseNeedsToRecalculate;
@@ -29,12 +29,64 @@ namespace Input
         //private double _tStepInput = 0.0;
 
 
+
+
+
+        private bool singleStepIPNeedsToRecalculate;
+
+        public bool SingleStepIPNeedsToRecalculate
+        {
+            get
+            {
+                return singleStepIPNeedsToRecalculate;
+            }
+
+            set
+            {
+                if (value.Equals(singleStepIPNeedsToRecalculate))
+                {
+                    singleStepIPNeedsToRecalculate = true;
+                }
+                else
+                {
+                    singleStepIPNeedsToRecalculate = false;
+                }
+            }
+        }
+
+
+        private bool multipleStepIPNeedsToRecalculate;
+
+        public bool MultipleStepIPNeedsToRecalculate
+        {
+            get
+            {
+                return multipleStepIPNeedsToRecalculate;
+            }
+
+            set
+            {
+                if (value.Equals(multipleStepIPNeedsToRecalculate))
+                {
+                    multipleStepIPNeedsToRecalculate = true;
+                }
+                else
+                {
+                    multipleStepIPNeedsToRecalculate = false;
+                }
+
+            }
+        }
+
+
+
         #region Constructor
 
         public InputData()
         {
             TimeNeedsToRecalculate = false;
-            StepInputNeedsToRecalculate = false;
+            singleStepIPNeedsToRecalculate = false;
+            multipleStepIPNeedsToRecalculate = false;
             FrequencyNeedsToRecalculate = false;
             ForceNeedsToRecalculate = false;
             ResponseNeedsToRecalculate = false;
@@ -48,10 +100,12 @@ namespace Input
 
             StartTime = 0.0;
             EndTime = 10.0;
-            TimeStep = 0.001;
+            TimeStep = 0.01;
 
             StepStartTime = 1.0;
             StepAmplitude = 1.0;
+            StepLength = 1.0;
+            IntervalBetweenSteps = 1.0;
 
             ExcitationFrequencyHz = 1.0;
             InputForce = 10.0;
@@ -88,10 +142,9 @@ namespace Input
                 {
                     _startTime = value;
                     TimeNeedsToRecalculate = true;
+                    singleStepIPNeedsToRecalculate = true;
+                    multipleStepIPNeedsToRecalculate = true;
 
-                    //InputDataNeedsToRecalculate = true;
-                    //ResponseNeedsToRecalculate = true;
-                    StepInputNeedsToRecalculate = true;
                 }
             }
         }
@@ -111,10 +164,8 @@ namespace Input
                 {
                     _timeStep = value;
                     TimeNeedsToRecalculate = true;
-
-                    //InputDataNeedsToRecalculate = true;
-                    //ResponseNeedsToRecalculate = true;
-                    StepInputNeedsToRecalculate = true;
+                    singleStepIPNeedsToRecalculate = true;
+                    multipleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -137,18 +188,15 @@ namespace Input
                     {
                         _endTime = value;
                         TimeNeedsToRecalculate = true;
-
-                        //InputDataNeedsToRecalculate = true;
-                        //ResponseNeedsToRecalculate = true;
-                        StepInputNeedsToRecalculate = true;
-
+                        singleStepIPNeedsToRecalculate = true;
+                        multipleStepIPNeedsToRecalculate = true;
                     }
                 }
 
                 //else
                 //{
                 //    TimeNeedsToRecalculate = false;
-                //    StepInputNeedsToRecalculate = false;
+                //    SingleStepIPNeedsToRecalculate = false;
                 //}
             }
         }
@@ -171,7 +219,7 @@ namespace Input
                     if (value > StartTime && value < EndTime)
                     {
                         stepStartTime = value;
-                        StepInputNeedsToRecalculate = true;
+                        singleStepIPNeedsToRecalculate = true;
 
                         //InputDataNeedsToRecalculate = true;
                         //ResponseNeedsToRecalculate = true;
@@ -194,7 +242,7 @@ namespace Input
                 if (!value.Equals(stepAmplitude))
                 {
                     stepAmplitude = value;
-                    StepInputNeedsToRecalculate = true;
+                    singleStepIPNeedsToRecalculate = true;
 
                     //InputDataNeedsToRecalculate = true;
                     //ResponseNeedsToRecalculate = true;
@@ -220,7 +268,7 @@ namespace Input
                 if (!value.Equals(intervalBetweenStep))
                 {
                     intervalBetweenStep = value;
-                    StepInputNeedsToRecalculate = true;
+                    singleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -240,7 +288,7 @@ namespace Input
                 if (!value.Equals(stepLength))
                 {
                     stepLength = value;
-                    StepInputNeedsToRecalculate = true;
+                    singleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -640,18 +688,47 @@ namespace Input
             }
         }
 
-        public void StepInputCalculate()
+        private void SingleStepIPCalculate()
         {
-            if (StepInputNeedsToRecalculate)
+            if (singleStepIPNeedsToRecalculate)
             {
                 if (StepInput == null)
                 {
                     StepInput = new List<double>();
                 }
 
-
                 StepInput.Clear();
 
+                foreach (double item in TimeIntervals)
+                {
+
+                    if (item < StepStartTime)
+                    {
+                        StepInput.Add(0.0);
+                    }
+
+                    else if (item >= StepStartTime)
+                    {
+                        StepInput.Add(StepAmplitude);
+                    }
+                }
+            }
+        }
+
+
+
+
+        private void MultipleStepIPCalculate()
+        {
+            if (multipleStepIPNeedsToRecalculate)
+            {
+                if (StepInput == null)
+                {
+                    StepInput = new List<double>();
+                }
+
+                StepInput.Clear();
+                
                 for (double time = 0.0; time < StepStartTime; time += TimeStep)
                 {
                     StepInput.Add(0.0);
@@ -677,24 +754,8 @@ namespace Input
                 {
                     StepInput.Add(0.0);
                 }
-            }
-            
-            foreach (double item in TimeIntervals)
-            {
-
-                if (item < StepStartTime)
-                {
-                    StepInput.Add(0.0);
-                }
-
-                else if (item >= StepStartTime)
-                {
-                    StepInput.Add(StepAmplitude);
-                }
 
             }
-
-            StepInputNeedsToRecalculate = false;
         }
 
         private void CosineFuntionCalculate()
@@ -1216,21 +1277,29 @@ namespace Input
 
         #endregion
 
-        public void Calculate()
+        public void InputDataCalculate()
         {
-            //_tTime = 0.0;
-            //_tCosinTerm = 0.0;
-            //_tHarmonicForce = 0.0;
-            //_tResponseToHarmonicIP = 0.0;
-            //_tResponseToInitialConditions = 0.0;
-            //_tTotalResponse = 0.0;
-            //_tStepInput = 0.0;
+
 
             TimeCalculate();
-            StepInputCalculate();
             CosineFuntionCalculate();
             HarmonicForceCalculate();
 
+            if (singleStepIPNeedsToRecalculate)
+            {
+                SingleStepIPCalculate();
+            }
+
+            else if (multipleStepIPNeedsToRecalculate)
+            {
+                MultipleStepIPCalculate();
+            }
+
+            
+        }
+
+        public void OutputDataCalculate()
+        {
             ResponseToInitialConditionsCalculate();
             ResponseToHarmonicIPCalculate();
             TotalResponseCalculate();
@@ -1254,10 +1323,8 @@ namespace Input
             BodyForceICRCalculate();
             BodyForceHRCalculate();
             BodyForceTRCalculate();
-
-
-            //return _tTime + _tStepInput + _tCosinTerm + _tHarmonicForce + _tResponseToHarmonicIP + _tResponseToInitialConditions+ _tTotalResponse;
         }
+
 
         public bool NeedsToRecalculate
         {
