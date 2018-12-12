@@ -49,10 +49,13 @@ namespace Input
             StartTime = 0.0;
             EndTime = 10.0;
             TimeStep = 0.001;
-            StepAmplitudeChangeTime = 0.5;
+
+            StepStartTime = 1.0;
             StepAmplitude = 1.0;
+
             ExcitationFrequencyHz = 1.0;
             InputForce = 10.0;
+
             VehicleMass = 1.0;
             SpringStiffness = 1.0;
             DampingCoefficient = 1.0;
@@ -72,6 +75,7 @@ namespace Input
 
         #region Input Properties
         private double _startTime;
+
         public double StartTime
         {
             get
@@ -87,12 +91,14 @@ namespace Input
 
                     //InputDataNeedsToRecalculate = true;
                     //ResponseNeedsToRecalculate = true;
-                    //StepInputNeedsToRecalculate = true;
+                    StepInputNeedsToRecalculate = true;
                 }
             }
         }
 
+
         private double _timeStep;
+
         public double TimeStep
         {
             get
@@ -108,13 +114,14 @@ namespace Input
 
                     //InputDataNeedsToRecalculate = true;
                     //ResponseNeedsToRecalculate = true;
-                    //StepInputNeedsToRecalculate = true;
+                    StepInputNeedsToRecalculate = true;
                 }
             }
         }
 
 
         private double _endTime;
+
         public double EndTime
         {
             get
@@ -133,7 +140,7 @@ namespace Input
 
                         //InputDataNeedsToRecalculate = true;
                         //ResponseNeedsToRecalculate = true;
-                        //StepInputNeedsToRecalculate = true;
+                        StepInputNeedsToRecalculate = true;
 
                     }
                 }
@@ -146,27 +153,28 @@ namespace Input
             }
         }
 
-        private double stepAmplitudeChangeTime;
 
-        public double StepAmplitudeChangeTime
+
+        private double stepStartTime;
+
+        public double StepStartTime
         {
             get
             {
-                return stepAmplitudeChangeTime;
+                return stepStartTime;
             }
 
             set
             {
-                if (!value.Equals(stepAmplitudeChangeTime))
+                if (!value.Equals(stepStartTime))
                 {
                     if (value > StartTime && value < EndTime)
                     {
-                        stepAmplitudeChangeTime = value;
+                        stepStartTime = value;
                         StepInputNeedsToRecalculate = true;
 
                         //InputDataNeedsToRecalculate = true;
                         //ResponseNeedsToRecalculate = true;
-
                     }
                 }
             }
@@ -191,6 +199,48 @@ namespace Input
                     //InputDataNeedsToRecalculate = true;
                     //ResponseNeedsToRecalculate = true;
 
+                }
+            }
+        }
+
+
+
+
+        private double intervalBetweenStep;
+
+        public double IntervalBetweenSteps
+        {
+            get
+            {
+                return intervalBetweenStep;
+            }
+
+            set
+            {
+                if (!value.Equals(intervalBetweenStep))
+                {
+                    intervalBetweenStep = value;
+                    StepInputNeedsToRecalculate = true;
+                }
+            }
+        }
+
+
+        private double stepLength;
+
+        public double StepLength
+        {
+            get
+            {
+                return stepLength;
+            }
+
+            set
+            {
+                if (!value.Equals(stepLength))
+                {
+                    stepLength = value;
+                    StepInputNeedsToRecalculate = true;
                 }
             }
         }
@@ -386,6 +436,20 @@ namespace Input
 
 
         #region Derived Properties
+
+        public double NumberOfSteps
+        {
+            get
+            {
+                double N = Math.Floor((EndTime - StepStartTime) / (StepLength + IntervalBetweenSteps));
+                return N;
+            }
+        }
+
+
+
+
+
         // In rad/s
         public double ExcitationFrequencyRad
         {
@@ -576,7 +640,7 @@ namespace Input
             }
         }
 
-        private void StepInputCalculate()
+        public void StepInputCalculate()
         {
             if (StepInputNeedsToRecalculate)
             {
@@ -588,26 +652,49 @@ namespace Input
 
                 StepInput.Clear();
 
-                //DateTime time = DateTime.Now;
-
-
-                foreach (double item in TimeIntervals)
+                for (double time = 0.0; time < StepStartTime; time += TimeStep)
                 {
+                    StepInput.Add(0.0);
+                }
 
-                    if (item < StepAmplitudeChangeTime)
-                    {
-                        StepInput.Add(0.0);
-                    }
 
-                    else if (item >= StepAmplitudeChangeTime)
+                for (int count = 0; count < NumberOfSteps; count++)
+                {
+                    for (double time = StepStartTime; time <= StepStartTime + StepLength; time += TimeStep)
                     {
                         StepInput.Add(StepAmplitude);
                     }
 
+                    for (double time = StepStartTime + StepLength; time <= StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
+                    {
+                        StepInput.Add(0.0);
+                    }
                 }
 
-                StepInputNeedsToRecalculate = false;
+                double StepInputEndTime = (StepLength + IntervalBetweenSteps) * NumberOfSteps + StepStartTime;
+
+                for (double time = StepInputEndTime; time < EndTime; time += TimeStep)
+                {
+                    StepInput.Add(0.0);
+                }
             }
+            
+            foreach (double item in TimeIntervals)
+            {
+
+                if (item < StepStartTime)
+                {
+                    StepInput.Add(0.0);
+                }
+
+                else if (item >= StepStartTime)
+                {
+                    StepInput.Add(StepAmplitude);
+                }
+
+            }
+
+            StepInputNeedsToRecalculate = false;
         }
 
         private void CosineFuntionCalculate()
@@ -673,6 +760,7 @@ namespace Input
                 ForceNeedsToRecalculate = false;
             }
         }
+
 
         #region Response Calculations
 

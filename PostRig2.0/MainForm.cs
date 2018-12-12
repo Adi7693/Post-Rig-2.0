@@ -8,25 +8,31 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.ButtonPanel;
+using DevExpress.XtraCharts;
 
 namespace PostRig2._0
 {
     public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        static readonly double roadCarCornerWeight = 400.0 ;
-        static readonly double touringCarCornerWeight= 250.0;
-        static readonly double singleSeaterCornerWeight = 175.0;
-        static readonly double roadCarSpringStiffness= 80000.0;
-        static readonly double touringCarSpringStiffness = 120000.0;
-        static readonly double singleSeaterSpringStiffness = 150000.0;
-        static readonly double roadCarDampingCoefficient= 4000.0;
-        static readonly double touringCarDampingCoefficient = 8000.0;
-        static readonly double singleSeaterDampingCoefficient = 8500.0;
+        static readonly double roadCarCornerWeight = 400.0;
+        static readonly double roadCarSpringStiffness = 80000.0;
+        static readonly double roadCarDampingCoefficient = 4000.0;
+
+        static readonly double raceCarCornerWeight = 250.0;
+        static readonly double raceCarSpringStiffness = 120000.0;
+        static readonly double raceCarDampingCoefficient = 11000.0;
+
+        static readonly double rallyCarCornerWeight = 175.0;
+        static readonly double rallyCarSpringStiffness = 150000.0;
+        static readonly double rallyCarDampingCoefficient = 16000.0;
+
+        private bool NewCarBuilt = false;
+        private bool NewSimSetup = false;
 
 
         public Document Doc { get; set; }
 
-        private void CheckButtonById (string caption)
+        private void CheckButtonById(string caption)
         {
             foreach (IBaseButton Button in VehicleTemplateButtonPanel.Buttons)
             {
@@ -52,14 +58,14 @@ namespace PostRig2._0
                 CheckButtonById("Road Car");
             }
 
-            else if (cornerWeight == touringCarCornerWeight && springStiffness == touringCarSpringStiffness && dampingCoefficient == touringCarDampingCoefficient)
+            else if (cornerWeight == raceCarCornerWeight && springStiffness == raceCarSpringStiffness && dampingCoefficient == raceCarDampingCoefficient)
             {
-                CheckButtonById("Touring Car");
+                CheckButtonById("Race Car");
             }
 
-            else if (cornerWeight == singleSeaterCornerWeight && springStiffness == singleSeaterSpringStiffness && dampingCoefficient == singleSeaterDampingCoefficient)
+            else if (cornerWeight == rallyCarCornerWeight && springStiffness == rallyCarSpringStiffness && dampingCoefficient == rallyCarDampingCoefficient)
             {
-                CheckButtonById("Single Seater");
+                CheckButtonById("Rally Car");
             }
             else
             {
@@ -81,6 +87,18 @@ namespace PostRig2._0
                 DampingCoeffTextBox.Text = Doc.Input.DampingCoefficient.ToString();
 
                 ValidateVehicleTemplateCheckedButton();
+
+                SimSetupValuesColumn.TreeList.Nodes[0].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StartTime);
+                SimSetupValuesColumn.TreeList.Nodes[0].Nodes[1].SetValue(SimSetupValuesColumn, Doc.Input.TimeStep);
+                SimSetupValuesColumn.TreeList.Nodes[0].Nodes[2].SetValue(SimSetupValuesColumn, Doc.Input.EndTime);
+
+                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StepStartTime);
+                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].SetValue(SimSetupValuesColumn, Doc.Input.StepLength);
+                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].SetValue(SimSetupValuesColumn, Doc.Input.IntervalBetweenSteps);
+                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[3].SetValue(SimSetupValuesColumn, Doc.Input.StepAmplitude);
+
+
+
             }
         }
 
@@ -90,12 +108,14 @@ namespace PostRig2._0
             {
                 // Set Properties from Data input by the user
 
+                string strval;
+
                 double dblVal = -1.0;
-                
+
 
                 bool Error = false;
 
-                if(double.TryParse(CornerWeightTextBox.Text, out dblVal))
+                if (double.TryParse(CornerWeightTextBox.Text, out dblVal))
                 {
                     Doc.Input.VehicleMass = dblVal;
                 }
@@ -104,7 +124,7 @@ namespace PostRig2._0
                     Error = true;
                 }
 
-                if(double.TryParse(SpringStiffnessTextBox.Text, out dblVal))
+                if (double.TryParse(SpringStiffnessTextBox.Text, out dblVal))
                 {
                     Doc.Input.SpringStiffness = dblVal;
                 }
@@ -113,7 +133,7 @@ namespace PostRig2._0
                     Error = true;
                 }
 
-                if(double.TryParse(DampingCoeffTextBox.Text, out dblVal))
+                if (double.TryParse(DampingCoeffTextBox.Text, out dblVal))
                 {
                     Doc.Input.DampingCoefficient = dblVal;
                 }
@@ -121,6 +141,86 @@ namespace PostRig2._0
                 {
                     Error = true;
                 }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[0].GetValue(SimSetupValuesColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.StartTime = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[1].GetValue(SimSetupValuesColumn).ToString();
+
+                if(double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.TimeStep = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[2].GetValue(SimSetupValuesColumn).ToString();
+
+                if(double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.EndTime = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].GetValue(SimSetupValuesColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.StepStartTime = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].GetValue(SimSetupValuesColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.StepLength = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].GetValue(SimSetupValuesColumn).ToString();
+
+                if(double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.IntervalBetweenSteps = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[3].GetValue(SimSetupValuesColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.StepAmplitude = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+
+
 
                 if (Error)
                 {
@@ -147,11 +247,11 @@ namespace PostRig2._0
             InitializeComponent();
 
             VersionLabel.Text = ProductVersion.ToString();
+            SimSetupTreeList.ExpandAll();
 
-            
         }
 
-        
+
         // New File Creation
 
         private void NewFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -163,13 +263,16 @@ namespace PostRig2._0
             FileRibbonBasePanel.Visible = false;
 
             DesignRibbonPage.Visible = true;
+
+
             DesignRibbonBasePanel.Visible = true;
+            SimSetupRibbonPage.Visible = true;
 
 
 
             MainFormRibbonControl.SelectedPage = DesignRibbonPage;
 
-            
+
         }
 
 
@@ -195,7 +298,11 @@ namespace PostRig2._0
                 FileRibbonBasePanel.Visible = false;
 
                 DesignRibbonPage.Visible = true;
+
                 DesignRibbonBasePanel.Visible = true;
+                SimSetupRibbonPage.Visible = true;
+
+                MainFormRibbonControl.SelectedPage = DesignRibbonPage;
             }
         }
 
@@ -260,6 +367,17 @@ namespace PostRig2._0
             VehicleDataHomeRibbonPanel.Visible = true;
 
             VehicleDataModelPanel.Visible = true;
+
+            NewCarBuilt = true;
+        }
+
+        private void NewSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SimulationSetupBasePanel.Visible = true;
+
+            SimulationSetupBasePanel.BringToFront();
+
+            NewSimSetup = true;
         }
 
         private void ShowDesignPanelBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -291,17 +409,17 @@ namespace PostRig2._0
                 Doc.Input.DampingCoefficient = roadCarDampingCoefficient;
 
             }
-            else if (e.Button.Properties.Caption == "Touring Car")
+            else if (e.Button.Properties.Caption == "Race Car")
             {
-                Doc.Input.VehicleMass = touringCarCornerWeight;
-                Doc.Input.SpringStiffness = touringCarSpringStiffness;
-                Doc.Input.DampingCoefficient = touringCarDampingCoefficient;
+                Doc.Input.VehicleMass = raceCarCornerWeight;
+                Doc.Input.SpringStiffness = raceCarSpringStiffness;
+                Doc.Input.DampingCoefficient = raceCarDampingCoefficient;
             }
-            else if (e.Button.Properties.Caption == "Single Seater")
+            else if (e.Button.Properties.Caption == "Rally Car")
             {
-                Doc.Input.VehicleMass = singleSeaterCornerWeight;
-                Doc.Input.SpringStiffness = singleSeaterSpringStiffness;
-                Doc.Input.DampingCoefficient = singleSeaterDampingCoefficient;
+                Doc.Input.VehicleMass = rallyCarCornerWeight;
+                Doc.Input.SpringStiffness = rallyCarSpringStiffness;
+                Doc.Input.DampingCoefficient = rallyCarDampingCoefficient;
             }
 
             UpdateUIFromDocument();
@@ -309,15 +427,72 @@ namespace PostRig2._0
 
         private void OnRibbonPageChanged(object sender, EventArgs e)
         {
-            if(MainFormRibbonControl.SelectedPage == DesignRibbonPage)
+            if (NewCarBuilt)
             {
-                ShowDesignPanelBarButton_ItemClick(sender, null);
+                if (MainFormRibbonControl.SelectedPage == DesignRibbonPage)
+                {
+                    ShowDesignPanelBarButton_ItemClick(sender, null);
+                }
+
+                else if (NewSimSetup)
+                {
+                    if(MainFormRibbonControl.SelectedPage == SimSetupRibbonPage)
+                    {
+                        SimulationSetupBasePanel.Visible = true;
+
+                        SimulationSetupBasePanel.BringToFront();
+                    }
+                }
             }
+
         }
 
         private void OnTextInputChanged(object sender, EventArgs e)
         {
             UpdateDocumentFromUI();
+        }
+
+        private void StepIPSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            UpdateDocumentFromUI();
+            Doc.Input.Calculate();
+            Doc.Input.StepInputCalculate();
+
+            StepSignalChartControl.Dock = DockStyle.Fill;
+
+            Series StepFunction = new Series("Displacement", ViewType.Line);
+
+            StepSignalChartControl.Series.Clear();
+
+            for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+            {
+                StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.StepInput[i]));
+            }
+
+            StepSignalChartControl.Series.Add(StepFunction);
+
+            XYDiagram diagram = (XYDiagram)StepSignalChartControl.Diagram;
+
+            //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+            diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram.AxisX.Alignment = AxisAlignment.Near;
+            diagram.AxisX.Title.Text = "Time (s)";
+            diagram.AxisX.Title.TextColor = Color.Black;
+            diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+            diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+            //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+            diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram.AxisY.Alignment = AxisAlignment.Near;
+            diagram.AxisY.Title.Text = "Displacement";
+            diagram.AxisY.Title.TextColor = Color.Black;
+            diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+            diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+            StepSignalChartControl.Update();
         }
     }
 }

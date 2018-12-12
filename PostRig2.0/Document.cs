@@ -68,7 +68,7 @@ namespace PostRig2._0
             Input.EndTime = reader.ReadDouble();
             Input.TimeStep = reader.ReadDouble();
 
-            Input.StepAmplitudeChangeTime = reader.ReadDouble();
+            Input.StepStartTime = reader.ReadDouble();
             Input.StepAmplitude = reader.ReadDouble();
             Input.ExcitationFrequencyHz = reader.ReadDouble();
 
@@ -109,7 +109,7 @@ namespace PostRig2._0
 
             writer.Write(Input.TimeStep);
 
-            writer.Write(Input.StepAmplitudeChangeTime);
+            writer.Write(Input.StepStartTime);
 
             writer.Write(Input.StepAmplitude);
 
