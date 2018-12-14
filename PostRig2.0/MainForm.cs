@@ -27,10 +27,13 @@ namespace PostRig2._0
         static readonly double rallyCarDampingCoefficient = 16000.0;
 
         private bool NewCarBuilt = false;
-
         private bool NewSimSetup = false;
+        private bool ViewResults = false;
+
         private bool SingleStepIP = false;
         private bool MultipleStepIP = false;
+
+        private bool RunSuccess = false;
 
 
         public Document Doc { get; set; }
@@ -158,7 +161,7 @@ namespace PostRig2._0
 
                 strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[1].GetValue(SimSetupValuesColumn).ToString();
 
-                if(double.TryParse(strval, out dblVal))
+                if (double.TryParse(strval, out dblVal))
                 {
                     Doc.Input.TimeStep = dblVal;
                 }
@@ -169,7 +172,7 @@ namespace PostRig2._0
 
                 strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[2].GetValue(SimSetupValuesColumn).ToString();
 
-                if(double.TryParse(strval, out dblVal))
+                if (double.TryParse(strval, out dblVal))
                 {
                     Doc.Input.EndTime = dblVal;
                 }
@@ -202,7 +205,7 @@ namespace PostRig2._0
 
                 strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].GetValue(SimSetupValuesColumn).ToString();
 
-                if(double.TryParse(strval, out dblVal))
+                if (double.TryParse(strval, out dblVal))
                 {
                     Doc.Input.IntervalBetweenSteps = dblVal;
                 }
@@ -266,16 +269,12 @@ namespace PostRig2._0
             FileRibbonBasePanel.Visible = false;
 
             DesignRibbonPage.Visible = true;
-
+            SimSetupRibbonPage.Visible = true;
+            ResultsRibbonPage.Visible = true;
 
             DesignRibbonBasePanel.Visible = true;
-            SimSetupRibbonPage.Visible = true;
-
-
 
             MainFormRibbonControl.SelectedPage = DesignRibbonPage;
-
-
         }
 
 
@@ -296,14 +295,13 @@ namespace PostRig2._0
 
             if (Doc != null)
             {
-                UpdateUIFromDocument();
-
                 FileRibbonBasePanel.Visible = false;
 
                 DesignRibbonPage.Visible = true;
+                SimSetupRibbonPage.Visible = true;
+                ResultsRibbonPage.Visible = true;
 
                 DesignRibbonBasePanel.Visible = true;
-                SimSetupRibbonPage.Visible = true;
 
                 MainFormRibbonControl.SelectedPage = DesignRibbonPage;
             }
@@ -382,9 +380,18 @@ namespace PostRig2._0
 
                         SimulationSetupBasePanel.BringToFront();
                     }
+
+                    else if (ViewResults)
+                    {
+                        if (MainFormRibbonControl.SelectedPage == ResultsRibbonPage)
+                        {
+                            ResultsBasePanel.Visible = true;
+
+                            ResultsBasePanel.BringToFront();
+                        }
+                    }
                 }
             }
-
         }
 
 
@@ -466,7 +473,7 @@ namespace PostRig2._0
             NewSimSetup = true;
         }
 
-        
+
 
         private void SingleStepIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
         {
@@ -480,15 +487,15 @@ namespace PostRig2._0
                     SimSetupParametersColumn.TreeList.Nodes[1].ExpandAll();
                     SimSetupParametersColumn.TreeList.Nodes[1].Visible = true;
 
-                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].Visible = true;
+                    SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].Visible = false;
                     SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].Visible = false;
                     SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].Visible = false;
                     SimSetupValuesColumn.TreeList.Nodes[1].Nodes[3].Visible = true;
                 }
 
-                
+
             }
-            
+
         }
 
         private void MultipleStepIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
@@ -509,9 +516,9 @@ namespace PostRig2._0
                     SimSetupValuesColumn.TreeList.Nodes[1].Nodes[3].Visible = true;
                 }
 
-                
+
             }
-            
+
         }
 
         private void SingleStepIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
@@ -522,7 +529,7 @@ namespace PostRig2._0
 
         }
 
-        private void MultipleStepIPCheckItem_OnClick(object sender,ItemClickEventArgs e)
+        private void MultipleStepIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
         {
             SingleStepIPCheckItem.Checked = false;
             MultipleStepIPCheckItem.Checked = true; ;
@@ -543,17 +550,20 @@ namespace PostRig2._0
                 Doc.Input.MultipleStepIPNeedsToRecalculate = true;
             }
 
-
-
             Doc.Input.InputDataCalculate();
+
+            UpdateSimSetupPlotBarButton_ItemClick(sender, e);
+
         }
 
         private void InputSignalSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if(SingleStepIP || MultipleStepIP)
+            if (SingleStepIP || MultipleStepIP)
             {
                 StepSignalChartControl.Dock = DockStyle.Fill;
                 StepSignalChartControl.Visible = true;
+
+                //BodyResponseChartControl.Visible = false;
 
                 Series StepFunction = new Series("Displacement", ViewType.Line);
 
@@ -588,12 +598,314 @@ namespace PostRig2._0
 
                 StepSignalChartControl.Update();
             }
-            
+
         }
 
         private void UpdateSimSetupPlotBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             InputSignalSimSetupBarButton_ItemClick(sender, e);
+        }
+
+        private void RunSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (SingleStepIP)
+            {
+                InitialiseSimSetupBarButton_ItemClick(sender, e);
+
+                Doc.Input.OutputDataCalculate();
+
+                RunSuccess = true;
+            }
+
+            else if (MultipleStepIP)
+            {
+                RunSuccess = false;
+            }
+
+            if (RunSuccess)
+            {
+                MessageBox.Show("Simulation Successful");
+
+                ViewResults = true;
+            }
+
+            else if (!RunSuccess)
+            {
+
+                MessageBox.Show("Simulation Failed! \nPlease Select Single Step Input and Run", "Error", MessageBoxButtons.OK);
+                //DialogResult dialog = MessageBox.Show("The software currently cannot solve for Multiple Step Input. But it is capabale of displaying the Input Signal. Would you like to view the Input signal", "Message", MessageBoxButtons.YesNo);
+
+                //if(dialog == DialogResult.Yes)
+                //{
+                //    InitialiseSimSetupBarButton_ItemClick(sender, e);
+                //}
+            }
+        }
+
+        private void BodyDisplacementResultsBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ResultsBasePanel.Visible = true;
+            ResultsBasePanel.BringToFront();
+
+
+
+            if (SingleStepIP || MultipleStepIP && ViewResults)
+            {
+                BodyDisplacementChartControl.Visible = true;
+                SpringForceChartControl.Visible = false;
+                DamperForceChartControl.Visible = false;
+                BodyForceChartControl.Visible = false;
+                VerticalAccelnChartControl.Visible = false;
+
+
+                BodyDisplacementChartControl.Dock = DockStyle.Fill;
+
+                //BodyResponseChartControl.Visible = false;
+
+                Series BodyDisplacement = new Series("Displacement", ViewType.Spline);
+
+                BodyDisplacementChartControl.Series.Clear();
+
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                {
+                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.ResponseToInitialConditions[i]));
+                }
+
+                BodyDisplacementChartControl.Series.Add(BodyDisplacement);
+
+                XYDiagram diagram = (XYDiagram)BodyDisplacementChartControl.Diagram;
+
+                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Alignment = AxisAlignment.Near;
+                diagram.AxisX.Title.Text = "Time (s)";
+                diagram.AxisX.Title.TextColor = Color.Black;
+                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Alignment = AxisAlignment.Near;
+                diagram.AxisY.Title.Text = "Displacement (m)";
+                diagram.AxisY.Title.TextColor = Color.Black;
+                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                BodyDisplacementChartControl.Update();
+            }
+        }
+
+        private void SpringForcePlotBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ResultsBasePanel.Visible = true;
+            ResultsBasePanel.BringToFront();
+
+            if (SingleStepIP || MultipleStepIP && ViewResults)
+            {
+                BodyDisplacementChartControl.Visible = false;
+                SpringForceChartControl.Visible = true;
+                DamperForceChartControl.Visible = false;
+                BodyForceChartControl.Visible = false;
+                VerticalAccelnChartControl.Visible = false;
+
+
+                SpringForceChartControl.Dock = DockStyle.Fill;
+
+                //BodyResponseChartControl.Visible = false;
+
+                Series SpringForce = new Series("Spring Force", ViewType.Spline);
+
+                SpringForceChartControl.Series.Clear();
+
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                {
+                    SpringForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.SpringForceICR[i]));
+                }
+
+                SpringForceChartControl.Series.Add(SpringForce);
+
+                XYDiagram diagram = (XYDiagram)SpringForceChartControl.Diagram;
+
+                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Alignment = AxisAlignment.Near;
+                diagram.AxisX.Title.Text = "Time (s)";
+                diagram.AxisX.Title.TextColor = Color.Black;
+                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Alignment = AxisAlignment.Near;
+                diagram.AxisY.Title.Text = "Force (N)";
+                diagram.AxisY.Title.TextColor = Color.Black;
+                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                SpringForceChartControl.Update();
+            }
+        }
+
+        private void DamperForcePlotBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ResultsBasePanel.Visible = true;
+            ResultsBasePanel.BringToFront();
+
+            if (SingleStepIP || MultipleStepIP && ViewResults)
+            {
+                BodyDisplacementChartControl.Visible = false;
+                SpringForceChartControl.Visible = false;
+                DamperForceChartControl.Visible = true;
+                BodyForceChartControl.Visible = false;
+                VerticalAccelnChartControl.Visible = false;
+
+
+                DamperForceChartControl.Dock = DockStyle.Fill;
+
+                //BodyResponseChartControl.Visible = false;
+
+                Series DamperForce = new Series("Damper Force", ViewType.Spline);
+
+                DamperForceChartControl.Series.Clear();
+
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                {
+                    DamperForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.DamperForceICR[i]));
+                }
+
+                DamperForceChartControl.Series.Add(DamperForce);
+
+                XYDiagram diagram = (XYDiagram)DamperForceChartControl.Diagram;
+
+                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Alignment = AxisAlignment.Near;
+                diagram.AxisX.Title.Text = "Time (s)";
+                diagram.AxisX.Title.TextColor = Color.Black;
+                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Alignment = AxisAlignment.Near;
+                diagram.AxisY.Title.Text = "Force (N)";
+                diagram.AxisY.Title.TextColor = Color.Black;
+                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                DamperForceChartControl.Update();
+            }
+        }
+
+        private void BodyForcePlotBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ResultsBasePanel.Visible = true;
+            ResultsBasePanel.BringToFront();
+
+            if (SingleStepIP || MultipleStepIP && ViewResults)
+            {
+                BodyDisplacementChartControl.Visible = false;
+                SpringForceChartControl.Visible = false;
+                DamperForceChartControl.Visible = false;
+                BodyForceChartControl.Visible = true;
+                VerticalAccelnChartControl.Visible = false;
+
+
+                BodyForceChartControl.Dock = DockStyle.Fill;
+
+
+                Series BodyForce = new Series("Body Force", ViewType.Spline);
+
+                BodyForceChartControl.Series.Clear();
+
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                {
+                    BodyForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyForceICR[i]));
+                }
+
+                BodyForceChartControl.Series.Add(BodyForce);
+
+                XYDiagram diagram = (XYDiagram)BodyForceChartControl.Diagram;
+
+                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Alignment = AxisAlignment.Near;
+                diagram.AxisX.Title.Text = "Time (s)";
+                diagram.AxisX.Title.TextColor = Color.Black;
+                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Alignment = AxisAlignment.Near;
+                diagram.AxisY.Title.Text = "Force (N)";
+                diagram.AxisY.Title.TextColor = Color.Black;
+                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                BodyForceChartControl.Update();
+            }
+        }
+
+        private void VerticalAccelnPlotBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ResultsBasePanel.Visible = true;
+            ResultsBasePanel.BringToFront();
+
+            if (SingleStepIP || MultipleStepIP && ViewResults)
+            {
+                BodyDisplacementChartControl.Visible = false;
+                SpringForceChartControl.Visible = false;
+                DamperForceChartControl.Visible = false;
+                BodyForceChartControl.Visible = false;
+                VerticalAccelnChartControl.Visible = true;
+
+
+                VerticalAccelnChartControl.Dock = DockStyle.Fill;
+
+                //BodyResponseChartControl.Visible = false;
+
+                Series VerticalAcceln = new Series("Vertical Acceleration", ViewType.Spline);
+
+                VerticalAccelnChartControl.Series.Clear();
+
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                {
+                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.AccelerationICR[i]));
+                }
+
+                VerticalAccelnChartControl.Series.Add(VerticalAcceln);
+
+                XYDiagram diagram = (XYDiagram)VerticalAccelnChartControl.Diagram;
+
+                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Alignment = AxisAlignment.Near;
+                diagram.AxisX.Title.Text = "Time (s)";
+                diagram.AxisX.Title.TextColor = Color.Black;
+                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Alignment = AxisAlignment.Near;
+                diagram.AxisY.Title.Text = "Force (N)";
+                diagram.AxisY.Title.TextColor = Color.Black;
+                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+
+                VerticalAccelnChartControl.Update();
+            }
         }
     }
 }

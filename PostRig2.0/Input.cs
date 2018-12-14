@@ -99,10 +99,10 @@ namespace Input
 
 
             StartTime = 0.0;
-            EndTime = 10.0;
+            EndTime = 5.0;
             TimeStep = 0.01;
 
-            StepStartTime = 1.0;
+            StepStartTime = 0.0;
             StepAmplitude = 1.0;
             StepLength = 1.0;
             IntervalBetweenSteps = 1.0;
@@ -113,7 +113,7 @@ namespace Input
             VehicleMass = 1.0;
             SpringStiffness = 1.0;
             DampingCoefficient = 1.0;
-            InitialDisplacement = 0.005;
+            InitialDisplacement = StepAmplitude;
             InitialVelocity = 0.0;
 
 
@@ -625,11 +625,20 @@ namespace Input
 
         public List<double> InputForceOscillations { get; private set; }
 
+
+        public List<double> SingleStepInputForResponse { get; private set; }
+
+        public List<double> MultipleStepInputForResponse { get; private set; }
+
+
+
         public List<double> ResponseToHarmonicInput { get; private set; }
 
         public List<double> ResponseToInitialConditions { get; private set; }
 
         public List<double> TotalResponse { get; private set; }
+
+
 
         public List<double> VelocityICR { get; private set; }
 
@@ -637,11 +646,15 @@ namespace Input
 
         public List<double> VelocityTR { get; private set; }
 
+
+
         public List<double> AccelerationICR { get; private set; }
 
         public List<double> AccelerationHR { get; private set; }
 
         public List<double> AccelerationTR { get; private set; }
+
+
 
         public List<double> SpringForceICR { get; private set; }
 
@@ -649,11 +662,15 @@ namespace Input
 
         public List<double> SpringForceTR { get; private set; }
 
+
+
         public List<double> DamperForceICR { get; private set; }
 
         public List<double> DamperForceHR { get; private set; }
 
         public List<double> DamperForceTR { get; private set; }
+
+
 
         public List<double> BodyForceICR { get; private set; }
 
@@ -716,6 +733,70 @@ namespace Input
         }
 
 
+        //private void SingleStepIPForResponseCalculate()
+        //{
+        //    if (singleStepIPNeedsToRecalculate)
+        //    {
+        //        if(SingleStepInputForResponse == null)
+        //        {
+        //            SingleStepInputForResponse = new List<double>();
+        //        }
+
+        //        SingleStepInputForResponse.Clear();
+
+        //        for(double i = StartTime; i<= EndTime; i+= TimeStep)
+        //        {
+        //            if(i == StepStartTime)
+        //            {
+        //                SingleStepInputForResponse.Add(StepAmplitude);
+        //            }
+
+        //            else
+        //            {
+        //                SingleStepInputForResponse.Add(0);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void MultipleStepIPForResponse()
+        //{
+        //    if (MultipleStepIPNeedsToRecalculate)
+        //    {
+        //        if (MultipleStepInputForResponse == null)
+        //        {
+        //            MultipleStepInputForResponse = new List<double>();
+        //        }
+
+
+        //        MultipleStepInputForResponse.Clear();
+
+        //        for(int i = 0; i<= NumberOfSteps; i++)
+        //        {
+        //            for(double time = StartTime; time < StepStartTime; time += TimeStep)
+        //            {
+        //                MultipleStepInputForResponse.Add(0.0);
+        //            }
+
+        //            MultipleStepInputForResponse.Add(StepAmplitude);
+
+        //            for(double time = StepStartTime+1; time<StepLength; time += TimeStep)
+        //            {
+        //                MultipleStepInputForResponse.Add(0.0);
+        //            }
+
+        //            MultipleStepInputForResponse.Add(-StepAmplitude);
+
+        //            for(double time = StepStartTime+StepLength+1; time <= EndTime; time += TimeStep)
+        //            {
+        //                MultipleStepInputForResponse.Add(0.0);
+        //            }
+                    
+        //        }
+                
+        //    }
+        //}
+
 
 
         private void MultipleStepIPCalculate()
@@ -737,20 +818,26 @@ namespace Input
 
                 for (int count = 0; count < NumberOfSteps; count++)
                 {
+                    //double a = 0.0;
+                    //double d = a + stepAmplitude;
+
                     for (double time = StepStartTime; time <= StepStartTime + StepLength; time += TimeStep)
                     {
-                        StepInput.Add(StepAmplitude);
+                        //StepInput.Add(d);
+                        StepInput.Add(stepAmplitude);
                     }
 
+                    //double c = a - stepAmplitude;
                     for (double time = StepStartTime + StepLength; time <= StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
                     {
+                        //StepInput.Add(c);
                         StepInput.Add(0.0);
                     }
                 }
 
                 double StepInputEndTime = (StepLength + IntervalBetweenSteps) * NumberOfSteps + StepStartTime;
 
-                for (double time = StepInputEndTime; time < EndTime; time += TimeStep)
+                for (double time = StepInputEndTime; time <= EndTime; time += TimeStep)
                 {
                     StepInput.Add(0.0);
                 }
@@ -850,36 +937,45 @@ namespace Input
                 {
                     foreach (double item in TimeIntervals)
                     {
-                        if (DampingRatio < 1.0)
+                        if(item < StepStartTime)
                         {
-                            double C1 = InitialDisplacement;
-                            double C2 = (InitialVelocity + (DampingRatio * NaturalFrequencyRad * InitialDisplacement)) / DampedNaturalFrequency;
-                            //double X = Math.Sqrt(Math.Pow(C1, 2) + Math.Pow(C2, 2));
-                            double Phy = Math.Atan((DampedNaturalFrequency * InitialDisplacement) / (InitialVelocity + (DampingRatio * NaturalFrequencyRad * InitialDisplacement)));
-                            //double X = InitialDisplacement / Math.Sin(Phy);
-
-                            double x = Math.Exp(-DampingRatio * NaturalFrequencyRad * item) * ((C1 * Math.Cos(DampedNaturalFrequency * item)) + (C2 * Math.Sin(DampedNaturalFrequency * item)));
-                            //double x = X * Math.Exp(-DampingRatio * NaturalFrequencyRad * item) * Math.Cos((DampedNaturalFrequency * item) - Phy);
-                            ResponseToInitialConditions.Add(x);
+                            ResponseToInitialConditions.Add(0.0);
                         }
 
-                        else if (DampingRatio == 1.0)
+                        else
                         {
-                            double C1 = InitialDisplacement;
-                            double C2 = InitialVelocity + (NaturalFrequencyRad * InitialDisplacement);
+                            if (DampingRatio < 1.0)
+                            {
+                                double C1 = InitialDisplacement;
+                                double C2 = (InitialVelocity + (DampingRatio * NaturalFrequencyRad * InitialDisplacement)) / DampedNaturalFrequency;
+                                //double X = Math.Sqrt(Math.Pow(C1, 2) + Math.Pow(C2, 2));
+                                double Phy = Math.Atan((DampedNaturalFrequency * InitialDisplacement) / (InitialVelocity + (DampingRatio * NaturalFrequencyRad * InitialDisplacement)));
+                                //double X = InitialDisplacement / Math.Sin(Phy);
 
-                            double x = (C1 + (C2 * item)) * Math.Exp(-NaturalFrequencyRad * item);
-                            ResponseToInitialConditions.Add(x);
+                                double x = Math.Exp(-DampingRatio * NaturalFrequencyRad * item) * ((C1 * Math.Cos(DampedNaturalFrequency * item)) + (C2 * Math.Sin(DampedNaturalFrequency * item)));
+                                //double x = X * Math.Exp(-DampingRatio * NaturalFrequencyRad * item) * Math.Cos((DampedNaturalFrequency * item) - Phy);
+                                ResponseToInitialConditions.Add(x);
+                            }
+
+                            else if (DampingRatio == 1.0)
+                            {
+                                double C1 = InitialDisplacement;
+                                double C2 = InitialVelocity + (NaturalFrequencyRad * InitialDisplacement);
+
+                                double x = (C1 + (C2 * item)) * Math.Exp(-NaturalFrequencyRad * item);
+                                ResponseToInitialConditions.Add(x);
+                            }
+
+                            else if (DampingRatio > 1.0)
+                            {
+                                double C1 = (InitialDisplacement * NaturalFrequencyRad * (DampingRatio + Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) + InitialVelocity) / (2 * NaturalFrequencyRad * Math.Sqrt(Math.Pow(DampingRatio, 2) - 1));
+                                double C2 = (-InitialDisplacement * NaturalFrequencyRad * (DampingRatio - Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) - InitialVelocity) / (2 * NaturalFrequencyRad * Math.Sqrt(Math.Pow(DampingRatio, 2) - 1));
+
+                                double x = (C1 * Math.Exp((-DampingRatio + Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) * NaturalFrequencyRad * item)) + (C2 * Math.Exp((-DampingRatio - Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) * NaturalFrequencyRad * item));
+                                ResponseToInitialConditions.Add(x);
+                            }
                         }
-
-                        else if (DampingRatio > 1.0)
-                        {
-                            double C1 = (InitialDisplacement * NaturalFrequencyRad * (DampingRatio + Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) + InitialVelocity) / (2 * NaturalFrequencyRad * Math.Sqrt(Math.Pow(DampingRatio, 2) - 1));
-                            double C2 = (-InitialDisplacement * NaturalFrequencyRad * (DampingRatio - Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) - InitialVelocity) / (2 * NaturalFrequencyRad * Math.Sqrt(Math.Pow(DampingRatio, 2) - 1));
-
-                            double x = (C1 * Math.Exp((-DampingRatio + Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) * NaturalFrequencyRad * item)) + (C2 * Math.Exp((-DampingRatio - Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) * NaturalFrequencyRad * item));
-                            ResponseToInitialConditions.Add(x);
-                        }
+                        
 
                     }
                 }

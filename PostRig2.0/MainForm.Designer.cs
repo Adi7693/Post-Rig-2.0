@@ -33,7 +33,12 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraCharts.ChartTitle chartTitle3 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle13 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle14 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle15 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle16 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle17 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle18 = new DevExpress.XtraCharts.ChartTitle();
             this.MainFormRibbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.NewFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.OpenFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
@@ -50,8 +55,14 @@
             this.MultipleStepIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
             this.InputSignalSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.InitialiseSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.RunSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.UpdateSimSetupPlotBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.BodyDisplacementResultsBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.SpringForcePlotBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.DamperForcePlotBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.BodyForcePlotBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerticalAccelnPlotBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.FileRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.FileOptionsFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.OpenSaveFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -66,6 +77,11 @@
             this.IPSignalSimSetupRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.PlotSimSetupGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.RunSimSetupGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ResultsRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.SystemCharacteristicsResultsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ResponseResultsRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.AccelerationResultsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.FileRibbonBasePanel = new DevExpress.XtraEditors.PanelControl();
             this.FilePRSoftwareInfoPanel = new DevExpress.XtraEditors.PanelControl();
             this.PostRigSoftwareLabel = new DevExpress.XtraEditors.LabelControl();
@@ -100,6 +116,14 @@
             this.SimSetupParametersColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.SimSetupValuesColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.SimSetupUnitsColumns = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.ResultsBasePanel = new DevExpress.XtraEditors.PanelControl();
+            this.VerticalAccelnChartControl = new DevExpress.XtraCharts.ChartControl();
+            this.BodyForceChartControl = new DevExpress.XtraCharts.ChartControl();
+            this.DamperForceChartControl = new DevExpress.XtraCharts.ChartControl();
+            this.BodyDisplacementChartControl = new DevExpress.XtraCharts.ChartControl();
+            this.SpringForceChartControl = new DevExpress.XtraCharts.ChartControl();
+            this.ResultsLeftSidePanel = new DevExpress.XtraEditors.PanelControl();
+            this.treeList1 = new DevExpress.XtraTreeList.TreeList();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormRibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FileRibbonBasePanel)).BeginInit();
             this.FileRibbonBasePanel.SuspendLayout();
@@ -122,6 +146,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.StepSignalChartControl)).BeginInit();
             this.SimSetupParametersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SimSetupTreeList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultsBasePanel)).BeginInit();
+            this.ResultsBasePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VerticalAccelnChartControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BodyForceChartControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DamperForceChartControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BodyDisplacementChartControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpringForceChartControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultsLeftSidePanel)).BeginInit();
+            this.ResultsLeftSidePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
             this.SuspendLayout();
             // 
             // MainFormRibbonControl
@@ -144,15 +178,22 @@
             this.MultipleStepIPCheckItem,
             this.InputSignalSimSetupBarButton,
             this.InitialiseSimSetupBarButton,
-            this.barButtonItem1,
-            this.UpdateSimSetupPlotBarButton});
+            this.RunSimSetupBarButton,
+            this.UpdateSimSetupPlotBarButton,
+            this.BodyDisplacementResultsBarButton,
+            this.SpringForcePlotBarButton,
+            this.DamperForcePlotBarButton,
+            this.BodyForcePlotBarButton,
+            this.VerticalAccelnPlotBarButton,
+            this.barButtonItem5});
             this.MainFormRibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.MainFormRibbonControl.MaxItemId = 24;
+            this.MainFormRibbonControl.MaxItemId = 31;
             this.MainFormRibbonControl.Name = "MainFormRibbonControl";
             this.MainFormRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.FileRibbonPage,
             this.DesignRibbonPage,
-            this.SimSetupRibbonPage});
+            this.SimSetupRibbonPage,
+            this.ResultsRibbonPage});
             this.MainFormRibbonControl.Size = new System.Drawing.Size(1140, 143);
             this.MainFormRibbonControl.SelectedPageChanged += new System.EventHandler(this.OnRibbonPageChanged);
             // 
@@ -288,7 +329,7 @@
             // 
             this.InputSignalSimSetupBarButton.Caption = "Input Signal";
             this.InputSignalSimSetupBarButton.Id = 20;
-            this.InputSignalSimSetupBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("InputSgnalSimSetupBarButton.ImageOptions.Image")));
+            this.InputSignalSimSetupBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("InputSignalSimSetupBarButton.ImageOptions.Image")));
             this.InputSignalSimSetupBarButton.Name = "InputSignalSimSetupBarButton";
             this.InputSignalSimSetupBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.InputSignalSimSetupBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.InputSignalSimSetupBarButton_ItemClick);
@@ -302,13 +343,14 @@
             this.InitialiseSimSetupBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.InitialiseSimSetupBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.InitialiseSimSetupBarButton_ItemClick);
             // 
-            // barButtonItem1
+            // RunSimSetupBarButton
             // 
-            this.barButtonItem1.Caption = "Run";
-            this.barButtonItem1.Id = 22;
-            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.RunSimSetupBarButton.Caption = "Run";
+            this.RunSimSetupBarButton.Id = 22;
+            this.RunSimSetupBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RunSimSetupBarButton.ImageOptions.Image")));
+            this.RunSimSetupBarButton.Name = "RunSimSetupBarButton";
+            this.RunSimSetupBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.RunSimSetupBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RunSimSetupBarButton_ItemClick);
             // 
             // UpdateSimSetupPlotBarButton
             // 
@@ -318,6 +360,59 @@
             this.UpdateSimSetupPlotBarButton.Name = "UpdateSimSetupPlotBarButton";
             this.UpdateSimSetupPlotBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.UpdateSimSetupPlotBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.UpdateSimSetupPlotBarButton_ItemClick);
+            // 
+            // BodyDisplacementResultsBarButton
+            // 
+            this.BodyDisplacementResultsBarButton.Caption = "Body Response";
+            this.BodyDisplacementResultsBarButton.Id = 25;
+            this.BodyDisplacementResultsBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("BodyDisplacementResultsBarButton.ImageOptions.Image")));
+            this.BodyDisplacementResultsBarButton.Name = "BodyDisplacementResultsBarButton";
+            this.BodyDisplacementResultsBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.BodyDisplacementResultsBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BodyDisplacementResultsBarButton_ItemClick);
+            // 
+            // SpringForcePlotBarButton
+            // 
+            this.SpringForcePlotBarButton.Caption = "Spring Force";
+            this.SpringForcePlotBarButton.Id = 26;
+            this.SpringForcePlotBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SpringForcePlotBarButton.ImageOptions.Image")));
+            this.SpringForcePlotBarButton.Name = "SpringForcePlotBarButton";
+            this.SpringForcePlotBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.SpringForcePlotBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SpringForcePlotBarButton_ItemClick);
+            // 
+            // DamperForcePlotBarButton
+            // 
+            this.DamperForcePlotBarButton.Caption = "Damper Force";
+            this.DamperForcePlotBarButton.Id = 27;
+            this.DamperForcePlotBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("DamperForcePlotBarButton.ImageOptions.Image")));
+            this.DamperForcePlotBarButton.Name = "DamperForcePlotBarButton";
+            this.DamperForcePlotBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.DamperForcePlotBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DamperForcePlotBarButton_ItemClick);
+            // 
+            // BodyForcePlotBarButton
+            // 
+            this.BodyForcePlotBarButton.Caption = "Body Force";
+            this.BodyForcePlotBarButton.Id = 28;
+            this.BodyForcePlotBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("BodyForcePlotBarButton.ImageOptions.Image")));
+            this.BodyForcePlotBarButton.Name = "BodyForcePlotBarButton";
+            this.BodyForcePlotBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.BodyForcePlotBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BodyForcePlotBarButton_ItemClick);
+            // 
+            // VerticalAccelnPlotBarButton
+            // 
+            this.VerticalAccelnPlotBarButton.Caption = "Vertical Acceleration";
+            this.VerticalAccelnPlotBarButton.Id = 29;
+            this.VerticalAccelnPlotBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("VerticalAccelnPlotBarButton.ImageOptions.Image")));
+            this.VerticalAccelnPlotBarButton.Name = "VerticalAccelnPlotBarButton";
+            this.VerticalAccelnPlotBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.VerticalAccelnPlotBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerticalAccelnPlotBarButton_ItemClick);
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "System Characteristics";
+            this.barButtonItem5.Id = 30;
+            this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // FileRibbonPage
             // 
@@ -425,9 +520,47 @@
             // RunSimSetupGroup
             // 
             this.RunSimSetupGroup.ItemLinks.Add(this.InitialiseSimSetupBarButton);
-            this.RunSimSetupGroup.ItemLinks.Add(this.barButtonItem1);
+            this.RunSimSetupGroup.ItemLinks.Add(this.RunSimSetupBarButton);
             this.RunSimSetupGroup.Name = "RunSimSetupGroup";
             this.RunSimSetupGroup.Text = "Run";
+            // 
+            // ResultsRibbonPage
+            // 
+            this.ResultsRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.SystemCharacteristicsResultsGroup,
+            this.ResponseResultsRibbonGroup,
+            this.ribbonPageGroup1,
+            this.AccelerationResultsGroup});
+            this.ResultsRibbonPage.Name = "ResultsRibbonPage";
+            this.ResultsRibbonPage.Text = "Results";
+            this.ResultsRibbonPage.Visible = false;
+            // 
+            // SystemCharacteristicsResultsGroup
+            // 
+            this.SystemCharacteristicsResultsGroup.ItemLinks.Add(this.barButtonItem5);
+            this.SystemCharacteristicsResultsGroup.Name = "SystemCharacteristicsResultsGroup";
+            this.SystemCharacteristicsResultsGroup.Text = "System Characteristics";
+            this.SystemCharacteristicsResultsGroup.Visible = false;
+            // 
+            // ResponseResultsRibbonGroup
+            // 
+            this.ResponseResultsRibbonGroup.ItemLinks.Add(this.BodyDisplacementResultsBarButton);
+            this.ResponseResultsRibbonGroup.Name = "ResponseResultsRibbonGroup";
+            this.ResponseResultsRibbonGroup.Text = "Response";
+            // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.SpringForcePlotBarButton);
+            this.ribbonPageGroup1.ItemLinks.Add(this.DamperForcePlotBarButton);
+            this.ribbonPageGroup1.ItemLinks.Add(this.BodyForcePlotBarButton);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "Force";
+            // 
+            // AccelerationResultsGroup
+            // 
+            this.AccelerationResultsGroup.ItemLinks.Add(this.VerticalAccelnPlotBarButton);
+            this.AccelerationResultsGroup.Name = "AccelerationResultsGroup";
+            this.AccelerationResultsGroup.Text = "Acceleration";
             // 
             // FileRibbonBasePanel
             // 
@@ -800,14 +933,14 @@
             // StepSignalChartControl
             // 
             this.StepSignalChartControl.Legend.Name = "Default Legend";
-            this.StepSignalChartControl.Location = new System.Drawing.Point(459, 99);
+            this.StepSignalChartControl.Location = new System.Drawing.Point(443, 36);
             this.StepSignalChartControl.Name = "StepSignalChartControl";
             this.StepSignalChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.StepSignalChartControl.Size = new System.Drawing.Size(589, 421);
+            this.StepSignalChartControl.Size = new System.Drawing.Size(523, 45);
             this.StepSignalChartControl.TabIndex = 1;
-            chartTitle3.Text = "Step Signal";
+            chartTitle13.Text = "Step Signal";
             this.StepSignalChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle3});
+            chartTitle13});
             this.StepSignalChartControl.Visible = false;
             // 
             // SimSetupParametersPanel
@@ -866,7 +999,7 @@
             this.SimSetupTreeList.AppendNode(new object[] {
             "Step Amplitude",
             null,
-            "seconds"}, 4);
+            "m"}, 4);
             this.SimSetupTreeList.EndUnboundLoad();
             this.SimSetupTreeList.OptionsView.AutoWidth = false;
             this.SimSetupTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
@@ -885,6 +1018,8 @@
             this.SimSetupParametersColumn.OptionsColumn.AllowSize = false;
             this.SimSetupParametersColumn.OptionsColumn.AllowSort = false;
             this.SimSetupParametersColumn.OptionsColumn.FixedWidth = true;
+            this.SimSetupParametersColumn.OptionsColumn.ShowInCustomizationForm = false;
+            this.SimSetupParametersColumn.OptionsColumn.ShowInExpressionEditor = false;
             this.SimSetupParametersColumn.OptionsFilter.AllowAutoFilter = false;
             this.SimSetupParametersColumn.OptionsFilter.AllowFilter = false;
             this.SimSetupParametersColumn.OptionsFilter.ImmediateUpdateAutoFilter = false;
@@ -903,6 +1038,8 @@
             this.SimSetupValuesColumn.OptionsColumn.AllowSize = false;
             this.SimSetupValuesColumn.OptionsColumn.AllowSort = false;
             this.SimSetupValuesColumn.OptionsColumn.FixedWidth = true;
+            this.SimSetupValuesColumn.OptionsColumn.ShowInCustomizationForm = false;
+            this.SimSetupValuesColumn.OptionsColumn.ShowInExpressionEditor = false;
             this.SimSetupValuesColumn.OptionsFilter.AllowAutoFilter = false;
             this.SimSetupValuesColumn.OptionsFilter.AllowFilter = false;
             this.SimSetupValuesColumn.OptionsFilter.ImmediateUpdateAutoFilter = false;
@@ -923,12 +1060,113 @@
             this.SimSetupUnitsColumns.OptionsColumn.AllowSize = false;
             this.SimSetupUnitsColumns.OptionsColumn.AllowSort = false;
             this.SimSetupUnitsColumns.OptionsColumn.FixedWidth = true;
+            this.SimSetupUnitsColumns.OptionsColumn.ShowInCustomizationForm = false;
+            this.SimSetupUnitsColumns.OptionsColumn.ShowInExpressionEditor = false;
             this.SimSetupUnitsColumns.OptionsFilter.AllowAutoFilter = false;
             this.SimSetupUnitsColumns.OptionsFilter.AllowFilter = false;
             this.SimSetupUnitsColumns.OptionsFilter.ImmediateUpdateAutoFilter = false;
             this.SimSetupUnitsColumns.OptionsFilter.ShowEmptyDateFilter = false;
             this.SimSetupUnitsColumns.Visible = true;
             this.SimSetupUnitsColumns.VisibleIndex = 2;
+            // 
+            // ResultsBasePanel
+            // 
+            this.ResultsBasePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.ResultsBasePanel.Controls.Add(this.VerticalAccelnChartControl);
+            this.ResultsBasePanel.Controls.Add(this.BodyForceChartControl);
+            this.ResultsBasePanel.Controls.Add(this.DamperForceChartControl);
+            this.ResultsBasePanel.Controls.Add(this.BodyDisplacementChartControl);
+            this.ResultsBasePanel.Controls.Add(this.SpringForceChartControl);
+            this.ResultsBasePanel.Controls.Add(this.ResultsLeftSidePanel);
+            this.ResultsBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ResultsBasePanel.Location = new System.Drawing.Point(0, 143);
+            this.ResultsBasePanel.Name = "ResultsBasePanel";
+            this.ResultsBasePanel.Size = new System.Drawing.Size(1140, 739);
+            this.ResultsBasePanel.TabIndex = 7;
+            this.ResultsBasePanel.Visible = false;
+            // 
+            // VerticalAccelnChartControl
+            // 
+            this.VerticalAccelnChartControl.Legend.Name = "Default Legend";
+            this.VerticalAccelnChartControl.Location = new System.Drawing.Point(488, 500);
+            this.VerticalAccelnChartControl.Name = "VerticalAccelnChartControl";
+            this.VerticalAccelnChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.VerticalAccelnChartControl.Size = new System.Drawing.Size(300, 200);
+            this.VerticalAccelnChartControl.TabIndex = 6;
+            chartTitle14.Text = "Vertical Acceleration";
+            this.VerticalAccelnChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle14});
+            this.VerticalAccelnChartControl.Visible = false;
+            // 
+            // BodyForceChartControl
+            // 
+            this.BodyForceChartControl.Legend.Name = "Default Legend";
+            this.BodyForceChartControl.Location = new System.Drawing.Point(319, 267);
+            this.BodyForceChartControl.Name = "BodyForceChartControl";
+            this.BodyForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.BodyForceChartControl.Size = new System.Drawing.Size(300, 200);
+            this.BodyForceChartControl.TabIndex = 5;
+            chartTitle15.Text = "Body Force";
+            this.BodyForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle15});
+            this.BodyForceChartControl.Visible = false;
+            // 
+            // DamperForceChartControl
+            // 
+            this.DamperForceChartControl.Legend.Name = "Default Legend";
+            this.DamperForceChartControl.Location = new System.Drawing.Point(666, 28);
+            this.DamperForceChartControl.Name = "DamperForceChartControl";
+            this.DamperForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.DamperForceChartControl.Size = new System.Drawing.Size(300, 200);
+            this.DamperForceChartControl.TabIndex = 4;
+            chartTitle16.Text = "Damper Force";
+            this.DamperForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle16});
+            this.DamperForceChartControl.Visible = false;
+            // 
+            // BodyDisplacementChartControl
+            // 
+            this.BodyDisplacementChartControl.Legend.Name = "Default Legend";
+            this.BodyDisplacementChartControl.Location = new System.Drawing.Point(319, 28);
+            this.BodyDisplacementChartControl.Name = "BodyDisplacementChartControl";
+            this.BodyDisplacementChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.BodyDisplacementChartControl.Size = new System.Drawing.Size(300, 200);
+            this.BodyDisplacementChartControl.TabIndex = 3;
+            chartTitle17.Text = "Body Displacement";
+            this.BodyDisplacementChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle17});
+            this.BodyDisplacementChartControl.Visible = false;
+            // 
+            // SpringForceChartControl
+            // 
+            this.SpringForceChartControl.Legend.Name = "Default Legend";
+            this.SpringForceChartControl.Location = new System.Drawing.Point(666, 268);
+            this.SpringForceChartControl.Name = "SpringForceChartControl";
+            this.SpringForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.SpringForceChartControl.Size = new System.Drawing.Size(300, 200);
+            this.SpringForceChartControl.TabIndex = 2;
+            chartTitle18.Text = "Spring Force";
+            this.SpringForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle18});
+            this.SpringForceChartControl.Visible = false;
+            // 
+            // ResultsLeftSidePanel
+            // 
+            this.ResultsLeftSidePanel.Controls.Add(this.treeList1);
+            this.ResultsLeftSidePanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ResultsLeftSidePanel.Location = new System.Drawing.Point(0, 0);
+            this.ResultsLeftSidePanel.Name = "ResultsLeftSidePanel";
+            this.ResultsLeftSidePanel.Size = new System.Drawing.Size(300, 739);
+            this.ResultsLeftSidePanel.TabIndex = 0;
+            this.ResultsLeftSidePanel.Visible = false;
+            // 
+            // treeList1
+            // 
+            this.treeList1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.treeList1.Location = new System.Drawing.Point(2, 2);
+            this.treeList1.Name = "treeList1";
+            this.treeList1.Size = new System.Drawing.Size(296, 286);
+            this.treeList1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -941,9 +1179,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1140, 882);
+            this.Controls.Add(this.ResultsBasePanel);
+            this.Controls.Add(this.FileRibbonBasePanel);
             this.Controls.Add(this.SimulationSetupBasePanel);
             this.Controls.Add(this.DesignRibbonBasePanel);
-            this.Controls.Add(this.FileRibbonBasePanel);
             this.Controls.Add(this.MainFormRibbonControl);
             this.Name = "MainForm";
             this.Ribbon = this.MainFormRibbonControl;
@@ -975,6 +1214,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.StepSignalChartControl)).EndInit();
             this.SimSetupParametersPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SimSetupTreeList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultsBasePanel)).EndInit();
+            this.ResultsBasePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.VerticalAccelnChartControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BodyForceChartControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DamperForceChartControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BodyDisplacementChartControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpringForceChartControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultsLeftSidePanel)).EndInit();
+            this.ResultsLeftSidePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1045,9 +1294,28 @@
         private DevExpress.XtraBars.BarButtonItem InputSignalSimSetupBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup PlotSimSetupGroup;
         private DevExpress.XtraBars.BarButtonItem InitialiseSimSetupBarButton;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem RunSimSetupBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup RunSimSetupGroup;
         private DevExpress.XtraBars.BarButtonItem UpdateSimSetupPlotBarButton;
+        private DevExpress.XtraBars.BarButtonItem BodyDisplacementResultsBarButton;
+        private DevExpress.XtraBars.BarButtonItem SpringForcePlotBarButton;
+        private DevExpress.XtraBars.BarButtonItem DamperForcePlotBarButton;
+        private DevExpress.XtraBars.BarButtonItem BodyForcePlotBarButton;
+        private DevExpress.XtraBars.BarButtonItem VerticalAccelnPlotBarButton;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ResultsRibbonPage;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup SystemCharacteristicsResultsGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ResponseResultsRibbonGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup AccelerationResultsGroup;
+        private DevExpress.XtraEditors.PanelControl ResultsBasePanel;
+        private DevExpress.XtraEditors.PanelControl ResultsLeftSidePanel;
+        private DevExpress.XtraTreeList.TreeList treeList1;
+        private DevExpress.XtraCharts.ChartControl VerticalAccelnChartControl;
+        private DevExpress.XtraCharts.ChartControl BodyForceChartControl;
+        private DevExpress.XtraCharts.ChartControl DamperForceChartControl;
+        private DevExpress.XtraCharts.ChartControl BodyDisplacementChartControl;
+        private DevExpress.XtraCharts.ChartControl SpringForceChartControl;
     }
 }
 
