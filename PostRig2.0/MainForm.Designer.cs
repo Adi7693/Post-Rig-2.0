@@ -1039,7 +1039,6 @@
             this.SimSetupTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
             this.SimSetupTreeList.Size = new System.Drawing.Size(325, 250);
             this.SimSetupTreeList.TabIndex = 0;
-            this.SimSetupTreeList.ExpandAll();
             // 
             // SimSetupParametersColumn
             // 

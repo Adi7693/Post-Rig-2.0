@@ -70,9 +70,15 @@ namespace PostRig2._0
 
             Input.StepStartTime = reader.ReadDouble();
             Input.StepAmplitude = reader.ReadDouble();
-            Input.ExcitationFrequencyHz = reader.ReadDouble();
 
-            Input.InputForce = reader.ReadDouble();
+            if (Version == 1)
+            {
+                /*This is in case of older files from V1 which had excitation frequency and input force.
+                2 readDouble will need to be wasted */
+                reader.ReadDouble();
+
+                reader.ReadDouble();
+            }
 
             Input.VehicleMass = reader.ReadDouble();
 
@@ -112,10 +118,6 @@ namespace PostRig2._0
             writer.Write(Input.StepStartTime);
 
             writer.Write(Input.StepAmplitude);
-
-            writer.Write(Input.ExcitationFrequencyHz);
-
-            writer.Write(Input.InputForce);
 
             writer.Write(Input.VehicleMass);
 
