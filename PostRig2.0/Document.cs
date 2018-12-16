@@ -160,6 +160,7 @@ namespace PostRig2._0
             {
                 string strval = (string)rows[i][0];
                 double dblval = -1.0;
+
                 if (double.TryParse(strval, out dblval))
                 {
                     Input.TimeIntervals.Add(dblval);
@@ -171,8 +172,6 @@ namespace PostRig2._0
                 {
                     Input.CustomInput.Add(dblval);
                 }
-
-
             }
 
 

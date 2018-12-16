@@ -78,6 +78,29 @@ namespace Input
             }
         }
 
+        private bool customIPCalculate;
+
+        public bool CustomIPCalculate
+        {
+            get
+            {
+                return customIPCalculate;
+            }
+
+            set
+            {
+                if (value.Equals(customIPCalculate))
+                {
+                    customIPCalculate = true;
+                }
+
+                else
+                {
+                    customIPCalculate = false;
+                }
+            }
+        }
+
 
 
         #region Constructor
@@ -102,7 +125,7 @@ namespace Input
             EndTime = 5.0;
             TimeStep = 0.01;
 
-            StepStartTime = 0.0;
+            StepStartTime = 1.0;
             StepAmplitude = 1.0;
             StepLength = 1.0;
             IntervalBetweenSteps = 1.0;
@@ -219,7 +242,7 @@ namespace Input
                     if (value > StartTime && value < EndTime)
                     {
                         stepStartTime = value;
-                        singleStepIPNeedsToRecalculate = true;
+                        multipleStepIPNeedsToRecalculate = true;
 
                         //InputDataNeedsToRecalculate = true;
                         //ResponseNeedsToRecalculate = true;
@@ -243,6 +266,7 @@ namespace Input
                 {
                     stepAmplitude = value;
                     singleStepIPNeedsToRecalculate = true;
+                    multipleStepIPNeedsToRecalculate = true;
 
                     //InputDataNeedsToRecalculate = true;
                     //ResponseNeedsToRecalculate = true;
@@ -268,7 +292,7 @@ namespace Input
                 if (!value.Equals(intervalBetweenStep))
                 {
                     intervalBetweenStep = value;
-                    singleStepIPNeedsToRecalculate = true;
+                    multipleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -288,7 +312,7 @@ namespace Input
                 if (!value.Equals(stepLength))
                 {
                     stepLength = value;
-                    singleStepIPNeedsToRecalculate = true;
+                    multipleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -617,11 +641,18 @@ namespace Input
 
         public List<double> TimeIntervals { get; set; }
 
-        public List<double> StepInput { get; private set; }
-
         public List<double> CosineOscillation { get; private set; }
 
+
+        public List<double> SingleStepInput { get; private set; }
+
+        public List<double> MultipleStepInput { get; private set; }
+
+
         public List<double> CustomInput { get; set; }
+
+        public List<double> CustomInputVelocity { get; private set; }
+
 
         public List<double> InputForceOscillations { get; private set; }
 
@@ -655,7 +686,6 @@ namespace Input
         public List<double> AccelerationTR { get; private set; }
 
 
-
         public List<double> SpringForceICR { get; private set; }
 
         public List<double> SpringForceHR { get; private set; }
@@ -679,6 +709,7 @@ namespace Input
         public List<double> BodyForceTR { get; private set; }
 
         #endregion
+
 
         private void TimeCalculate()
         {
@@ -709,24 +740,24 @@ namespace Input
         {
             if (singleStepIPNeedsToRecalculate)
             {
-                if (StepInput == null)
+                if (SingleStepInput == null)
                 {
-                    StepInput = new List<double>();
+                    SingleStepInput = new List<double>();
                 }
 
-                StepInput.Clear();
+                SingleStepInput.Clear();
 
                 foreach (double item in TimeIntervals)
                 {
 
                     if (item < StepStartTime)
                     {
-                        StepInput.Add(0.0);
+                        SingleStepInput.Add(0.0);
                     }
 
                     else if (item >= StepStartTime)
                     {
-                        StepInput.Add(StepAmplitude);
+                        SingleStepInput.Add(StepAmplitude);
                     }
                 }
             }
@@ -791,28 +822,45 @@ namespace Input
         //            {
         //                MultipleStepInputForResponse.Add(0.0);
         //            }
-                    
+
         //        }
-                
+
         //    }
         //}
 
+        private void CustomIPVelocity()
+        {
+            if (CustomIPCalculate)
+            {
+                if (CustomInputVelocity == null)
+                {
+                    CustomInputVelocity = new List<double>();
+                }
 
+                CustomInputVelocity.Clear();
 
+                CustomInputVelocity.Add(0.0);
+
+                for (int i = 1; i < CustomInput.Count; i++)
+                {
+                    
+                }
+            }
+        } 
         private void MultipleStepIPCalculate()
         {
             if (multipleStepIPNeedsToRecalculate)
             {
-                if (StepInput == null)
+                if (MultipleStepInput == null)
                 {
-                    StepInput = new List<double>();
+                    MultipleStepInput = new List<double>();
                 }
 
-                StepInput.Clear();
+                MultipleStepInput.Clear();
                 
                 for (double time = 0.0; time < StepStartTime; time += TimeStep)
                 {
-                    StepInput.Add(0.0);
+                    MultipleStepInput.Add(0.0);
                 }
 
 
@@ -824,14 +872,14 @@ namespace Input
                     for (double time = StepStartTime; time <= StepStartTime + StepLength; time += TimeStep)
                     {
                         //StepInput.Add(d);
-                        StepInput.Add(stepAmplitude);
+                        MultipleStepInput.Add(stepAmplitude);
                     }
 
                     //double c = a - stepAmplitude;
                     for (double time = StepStartTime + StepLength; time <= StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
                     {
                         //StepInput.Add(c);
-                        StepInput.Add(0.0);
+                        MultipleStepInput.Add(0.0);
                     }
                 }
 
@@ -839,7 +887,7 @@ namespace Input
 
                 for (double time = StepInputEndTime; time <= EndTime; time += TimeStep)
                 {
-                    StepInput.Add(0.0);
+                    MultipleStepInput.Add(0.0);
                 }
 
             }
@@ -1390,6 +1438,8 @@ namespace Input
             {
                 MultipleStepIPCalculate();
             }
+
+
 
             
         }
