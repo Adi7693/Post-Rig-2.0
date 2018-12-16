@@ -7,8 +7,6 @@ namespace Input
     {
         private bool TimeNeedsToRecalculate;
 
-        private bool FrequencyNeedsToRecalculate;
-        private bool ForceNeedsToRecalculate;
         private bool ResponseNeedsToRecalculate;
 
         public bool SingleStepIPNeedsToRecalculate { get; set; }
@@ -27,8 +25,6 @@ namespace Input
             SingleStepIPNeedsToRecalculate = false;
             MultipleStepIPNeedsToRecalculate = false;
             CustomIPCalculate = false;
-            FrequencyNeedsToRecalculate = false;
-            ForceNeedsToRecalculate = false;
             ResponseNeedsToRecalculate = false;
 
             StartTime = 0.0;

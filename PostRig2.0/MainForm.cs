@@ -104,9 +104,6 @@ namespace PostRig2._0
                 SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].SetValue(SimSetupValuesColumn, Doc.Input.IntervalBetweenSteps);
 
                 SimSetupValuesColumn.TreeList.Nodes[2].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StepAmplitude);
-
-
-
             }
         }
 
@@ -226,10 +223,7 @@ namespace PostRig2._0
                 {
                     Error = true;
                 }
-
-
-
-
+                
                 if (Error)
                 {
                     UpdateUIFromDocument();
@@ -262,7 +256,7 @@ namespace PostRig2._0
 
         // New File Creation
 
-        private void NewFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void NewFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             Doc = new Document();
 
@@ -282,7 +276,7 @@ namespace PostRig2._0
 
         // Open Existing File
 
-        private void OpenFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void OpenFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
 
@@ -312,7 +306,7 @@ namespace PostRig2._0
 
         // Save File
 
-        private void SaveFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void SaveFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (Doc != null && !string.IsNullOrWhiteSpace(Doc.FileName))
             {
@@ -327,7 +321,7 @@ namespace PostRig2._0
 
         // Save As
 
-        private void SaveAsFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void SaveAsFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (Doc != null)
             {
@@ -349,7 +343,7 @@ namespace PostRig2._0
 
         // Close Program
 
-        private void CloseFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void CloseFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             DialogResult dialog = MessageBox.Show("Do You Really Want To Close The Program?", "Exit", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.Yes)
@@ -399,7 +393,7 @@ namespace PostRig2._0
 
         // Design Ribbon Panel Actions
 
-        private void BuildCarHomeRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void BuildCarHomeRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             VehicleDataHomeRibbonPanel.Visible = true;
 
@@ -453,7 +447,7 @@ namespace PostRig2._0
             UpdateUIFromDocument();
         }
 
-        private void ShowDesignPanelBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ShowDesignPanelBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             DesignRibbonBasePanel.Visible = true;
 
@@ -493,9 +487,6 @@ namespace PostRig2._0
                 if (SingleStepIP)
                 {
                     SimSetupParametersPanel.Visible = true;
-
-                    //SimSetupParametersColumn.TreeList.Nodes[1].ExpandAll();
-                    //SimSetupParametersColumn.TreeList.Nodes[1].Visible = true;
 
                     SimSetupValuesColumn.TreeList.Nodes[1].Collapse();
                     SimSetupValuesColumn.TreeList.Nodes[1].Visible = false;
@@ -547,7 +538,7 @@ namespace PostRig2._0
                 {
                     SimSetupParametersPanel.Visible = false;
 
-                    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV File(*.csv)| *.csv", ValidateNames = true })
+                    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV Files (*.csv)| *.csv", ValidateNames = true })
                     {
                         if(ofd.ShowDialog()== DialogResult.OK)
                         {
