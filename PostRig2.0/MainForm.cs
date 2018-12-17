@@ -482,10 +482,16 @@ namespace PostRig2._0
                 MultipleStepIP = false;
                 CustomIP = false;
 
+
+
                 CustomIPChartControl.Visible = false;
 
                 if (SingleStepIP)
                 {
+                    Doc.Input.TimeNeedsToRecalculate = true;
+                    Doc.Input.SingleStepIPNeedsToRecalculate = true;
+                    Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+
                     SimSetupParametersPanel.Visible = true;
 
                     SimSetupValuesColumn.TreeList.Nodes[1].Collapse();
@@ -512,6 +518,10 @@ namespace PostRig2._0
 
                 if (MultipleStepIP)
                 {
+                    Doc.Input.TimeNeedsToRecalculate = true;
+                    Doc.Input.SingleStepIPNeedsToRecalculate = false;
+                    Doc.Input.MultipleStepIPNeedsToRecalculate = true;
+
                     SimSetupParametersPanel.Visible = true;
 
                     SimSetupValuesColumn.TreeList.Nodes[1].Expand();
@@ -577,21 +587,11 @@ namespace PostRig2._0
         {
             UpdateDocumentFromUI();
 
-            if (SingleStepIP)
-            {
-                Doc.Input.SingleStepIPNeedsToRecalculate = true;
-                Doc.Input.MultipleStepIPNeedsToRecalculate = false;
-            }
-            else if (MultipleStepIP)
-            {
-                Doc.Input.SingleStepIPNeedsToRecalculate = false;
-                Doc.Input.MultipleStepIPNeedsToRecalculate = true;
-            }
-
             if (!CustomIP)
             {
                 Doc.Input.InputDataCalculate();
             }
+
             UpdateSimSetupPlotBarButton_ItemClick(sender, e);
 
         }
@@ -611,7 +611,7 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.SingleStepInput[i]));
+                    StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.RoadDisplacement[i]));
                 }
 
                 StepSignalChartControl.Series.Add(StepFunction);
@@ -652,7 +652,7 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    MultipleStepSeries.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.MultipleStepInput[i]));
+                    MultipleStepSeries.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.RoadDisplacement[i]));
                 }
 
                 StepSignalChartControl.Series.Add(MultipleStepSeries);
@@ -695,7 +695,7 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    CustomIPSeries.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.CustomInput[i]));
+                    CustomIPSeries.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.RoadDisplacement[i]));
                 }
 
                 CustomIPChartControl.Series.Add(CustomIPSeries);
@@ -732,23 +732,38 @@ namespace PostRig2._0
 
         private void RunSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (SingleStepIP)
+            InitialiseSimSetupBarButton_ItemClick(sender, e);
+
+            Doc.Input.OutputDataCalculate();
+
+            if (Doc.Input.ResponseCalculationComplete)
             {
-                InitialiseSimSetupBarButton_ItemClick(sender, e);
-
-                Doc.Input.OutputDataCalculate();
-
                 RunSuccess = true;
             }
 
-            else if (MultipleStepIP)
+            else if (!Doc.Input.ResponseCalculationComplete)
             {
                 RunSuccess = false;
             }
 
+
+            //if (SingleStepIP)
+            //{
+            //    InitialiseSimSetupBarButton_ItemClick(sender, e);
+
+            //    Doc.Input.OutputDataCalculate();
+
+            //    RunSuccess = true;
+            //}
+
+            //else if (MultipleStepIP)
+            //{
+            //    RunSuccess = false;
+            //}
+
             if (RunSuccess)
             {
-                MessageBox.Show("Simulation Successful");
+                MessageBox.Show("Run Successful");
 
                 ViewResults = true;
             }
@@ -756,7 +771,7 @@ namespace PostRig2._0
             else if (!RunSuccess)
             {
 
-                MessageBox.Show("Simulation Failed! \nPlease Select Single Step Input and Run", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Run Failed!", "Error", MessageBoxButtons.OK);
                 //DialogResult dialog = MessageBox.Show("The software currently cannot solve for Multiple Step Input. But it is capabale of displaying the Input Signal. Would you like to view the Input signal", "Message", MessageBoxButtons.YesNo);
 
                 //if(dialog == DialogResult.Yes)
@@ -773,7 +788,7 @@ namespace PostRig2._0
 
 
 
-            if (SingleStepIP || MultipleStepIP && ViewResults)
+            if (ViewResults)
             {
                 BodyDisplacementChartControl.Visible = true;
                 SpringForceChartControl.Visible = false;
@@ -792,7 +807,7 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.ResponseToInitialConditions[i]));
+                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyDisplacement[i]));
                 }
 
                 BodyDisplacementChartControl.Series.Add(BodyDisplacement);
@@ -826,7 +841,7 @@ namespace PostRig2._0
             ResultsBasePanel.Visible = true;
             ResultsBasePanel.BringToFront();
 
-            if (SingleStepIP || MultipleStepIP && ViewResults)
+            if (ViewResults)
             {
                 BodyDisplacementChartControl.Visible = false;
                 SpringForceChartControl.Visible = true;
@@ -843,9 +858,9 @@ namespace PostRig2._0
 
                 SpringForceChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                for (int i = 0; i < Doc.Input.SpringForce.Count; i++)
                 {
-                    SpringForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.SpringForceICR[i]));
+                    SpringForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.SpringForce[i]));
                 }
 
                 SpringForceChartControl.Series.Add(SpringForce);
@@ -879,7 +894,7 @@ namespace PostRig2._0
             ResultsBasePanel.Visible = true;
             ResultsBasePanel.BringToFront();
 
-            if (SingleStepIP || MultipleStepIP && ViewResults)
+            if (ViewResults)
             {
                 BodyDisplacementChartControl.Visible = false;
                 SpringForceChartControl.Visible = false;
@@ -896,9 +911,9 @@ namespace PostRig2._0
 
                 DamperForceChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                for (int i = 0; i < Doc.Input.DamperForce.Count; i++)
                 {
-                    DamperForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.DamperForceICR[i]));
+                    DamperForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.DamperForce[i]));
                 }
 
                 DamperForceChartControl.Series.Add(DamperForce);
@@ -932,7 +947,7 @@ namespace PostRig2._0
             ResultsBasePanel.Visible = true;
             ResultsBasePanel.BringToFront();
 
-            if (SingleStepIP || MultipleStepIP && ViewResults)
+            if (ViewResults)
             {
                 BodyDisplacementChartControl.Visible = false;
                 SpringForceChartControl.Visible = false;
@@ -948,9 +963,9 @@ namespace PostRig2._0
 
                 BodyForceChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                for (int i = 0; i < Doc.Input.BodyForce.Count; i++)
                 {
-                    BodyForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyForceICR[i]));
+                    BodyForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyForce[i]));
                 }
 
                 BodyForceChartControl.Series.Add(BodyForce);
@@ -984,7 +999,7 @@ namespace PostRig2._0
             ResultsBasePanel.Visible = true;
             ResultsBasePanel.BringToFront();
 
-            if (SingleStepIP || MultipleStepIP && ViewResults)
+            if (ViewResults)
             {
                 BodyDisplacementChartControl.Visible = false;
                 SpringForceChartControl.Visible = false;
@@ -1001,9 +1016,9 @@ namespace PostRig2._0
 
                 VerticalAccelnChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
+                for (int i = 0; i < Doc.Input.BodyAcceln.Count; i++)
                 {
-                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.AccelerationICR[i]));
+                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyAcceln[i]));
                 }
 
                 VerticalAccelnChartControl.Series.Add(VerticalAcceln);
@@ -1023,7 +1038,7 @@ namespace PostRig2._0
                 diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
                 diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
                 diagram.AxisY.Alignment = AxisAlignment.Near;
-                diagram.AxisY.Title.Text = "Force (N)";
+                diagram.AxisY.Title.Text = "Acceleration (m/s^2)";
                 diagram.AxisY.Title.TextColor = Color.Black;
                 diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
                 diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);

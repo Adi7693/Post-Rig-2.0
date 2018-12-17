@@ -149,14 +149,14 @@ namespace PostRig2._0
                 Input.TimeIntervals = new List<double>();
             }
 
-            if (Input.CustomInput == null)
+            if (Input.RoadDisplacement == null)
             {
-                Input.CustomInput = new List<double>();
+                Input.RoadDisplacement = new List<double>();
             }
 
 
             Input.TimeIntervals.Clear();
-            Input.CustomInput.Clear();
+            Input.RoadDisplacement.Clear();
 
             for (int i = 0; i < rows.Count; i++)
             {
@@ -172,11 +172,10 @@ namespace PostRig2._0
 
                 if (double.TryParse(strval, out dblval))
                 {
-                    Input.CustomInput.Add(dblval);
+                    Input.RoadDisplacement.Add(dblval);
                 }
             }
-
-
+            
             reader.Close();
 
             fs.Close();

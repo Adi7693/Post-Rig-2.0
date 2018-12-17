@@ -5,7 +5,7 @@ namespace Input
 {
     public class InputData
     {
-        private bool TimeNeedsToRecalculate;
+        public bool TimeNeedsToRecalculate;
 
         private bool ResponseNeedsToRecalculate;
 
@@ -15,17 +15,20 @@ namespace Input
 
         public bool CustomIPCalculate { get; set; }
 
+        public bool ResponseCalculationComplete { get; private set; }
+
 
 
         #region Constructor
 
         public InputData()
         {
-            TimeNeedsToRecalculate = false;
+            TimeNeedsToRecalculate = true;
             SingleStepIPNeedsToRecalculate = false;
             MultipleStepIPNeedsToRecalculate = false;
             CustomIPCalculate = false;
             ResponseNeedsToRecalculate = false;
+            ResponseCalculationComplete = false;
 
             StartTime = 0.0;
             EndTime = 5.0;
@@ -39,12 +42,17 @@ namespace Input
             VehicleMass = 1.0;
             SpringStiffness = 1.0;
             DampingCoefficient = 1.0;
-            InitialDisplacement = StepAmplitude;
+
+            InitialDisplacement = 0.0;
             InitialVelocity = 0.0;
         }
         #endregion
 
         #region Input Properties
+
+        // Time Frame Calculate
+
+
         private double _startTime;
 
         public double StartTime
@@ -59,8 +67,6 @@ namespace Input
                 {
                     _startTime = value;
                     TimeNeedsToRecalculate = true;
-                    SingleStepIPNeedsToRecalculate = true;
-                    MultipleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -80,8 +86,6 @@ namespace Input
                 {
                     _timeStep = value;
                     TimeNeedsToRecalculate = true;
-                    SingleStepIPNeedsToRecalculate = true;
-                    MultipleStepIPNeedsToRecalculate = true;
                 }
             }
         }
@@ -104,14 +108,13 @@ namespace Input
                     {
                         _endTime = value;
                         TimeNeedsToRecalculate = true;
-                        SingleStepIPNeedsToRecalculate = true;
-                        MultipleStepIPNeedsToRecalculate = true;
                     }
                 }
             }
         }
 
 
+        // Step Input Data
 
         private double stepStartTime;
 
@@ -129,7 +132,7 @@ namespace Input
                     if (value > StartTime && value < EndTime)
                     {
                         stepStartTime = value;
-                        MultipleStepIPNeedsToRecalculate = true;
+                        ResponseNeedsToRecalculate = true;
                     }
                 }
             }
@@ -149,8 +152,7 @@ namespace Input
                 if (!value.Equals(stepAmplitude))
                 {
                     stepAmplitude = value;
-                    SingleStepIPNeedsToRecalculate = true;
-                    MultipleStepIPNeedsToRecalculate = true;
+                    ResponseNeedsToRecalculate = true;
                 }
             }
         }
@@ -172,7 +174,7 @@ namespace Input
                 if (!value.Equals(intervalBetweenStep))
                 {
                     intervalBetweenStep = value;
-                    MultipleStepIPNeedsToRecalculate = true;
+                    ResponseNeedsToRecalculate = true;
                 }
             }
         }
@@ -192,13 +194,20 @@ namespace Input
                 if (!value.Equals(stepLength))
                 {
                     stepLength = value;
-                    MultipleStepIPNeedsToRecalculate = true;
+                    ResponseNeedsToRecalculate = true;
                 }
             }
         }
 
 
-        // Initial Displacement in m
+        /* Initial Displacement in m
+         * Initial Displacement of the Body at Time t=0
+         * 
+         * X1(0)
+         * 
+
+        */
+
         private double initialDisplacement;
 
         public double InitialDisplacement
@@ -214,16 +223,17 @@ namespace Input
                 {
                     initialDisplacement = value;
                     ResponseNeedsToRecalculate = true;
-
-                    //ResponseToICNeedsToRecalculate = true;
-                    //TotalResponseNeedsToRecalculate = true;
-                    //InputDataNeedsToRecalculate = true;
                 }
             }
         }
 
 
-        // Initial Velocity in m/s
+        /*
+         * Initial Velocity in m/s
+         * Initial Velocity of the body at time t = 0
+         * X1[Dot](0) = X2
+         * 
+         */
 
         private double initialVelocity;
 
@@ -240,10 +250,6 @@ namespace Input
                 {
                     initialVelocity = value;
                     ResponseNeedsToRecalculate = true;
-
-                    //InputDataNeedsToRecalculate = true;
-                    //ResponseToICNeedsToRecalculate = true;
-                    //TotalResponseNeedsToRecalculate = true;
                 }
             }
         }
@@ -268,11 +274,6 @@ namespace Input
                         _vehicleMass = value;
                         ResponseNeedsToRecalculate = true;
 
-                        //InputDataNeedsToRecalculate = true;
-                        //VehicleDataNeedsToRecalculate = true;
-                        //ResponseToICNeedsToRecalculate=true;
-                        //ResponseToHarmonicIPNeedsToRecalculate=true;
-                        //TotalResponseNeedsToRecalculate=true;
                     }
                 }
             }
@@ -295,11 +296,6 @@ namespace Input
                     _springStiffness = value;
                     ResponseNeedsToRecalculate = true;
 
-                    //InputDataNeedsToRecalculate = true;
-                    //VehicleDataNeedsToRecalculate = true;
-                    //ResponseToICNeedsToRecalculate = true;
-                    //ResponseToHarmonicIPNeedsToRecalculate = true;
-                    //TotalResponseNeedsToRecalculate = true;
                 }
 
             }
@@ -321,12 +317,6 @@ namespace Input
                 {
                     _dampingCoefficient = value;
                     ResponseNeedsToRecalculate = true;
-
-                    //InputDataNeedsToRecalculate = true;
-                    //VehicleDataNeedsToRecalculate = true;
-                    //ResponseToICNeedsToRecalculate = true;
-                    //ResponseToHarmonicIPNeedsToRecalculate = true;
-                    //TotalResponseNeedsToRecalculate = true;
                 }
             }
 
@@ -412,34 +402,29 @@ namespace Input
 
         public List<double> MultipleStepInput { get; private set; }
 
+        // RoadDisplacement = Zr
+        public List<double> RoadDisplacement { get; set; }
 
-        public List<double> CustomInput { get; set; }
+        // RoadVelocity = Zr[Dot]
+        public List<double> RoadVerticalVelocity { get; private set; }
 
-        public List<double> CustomInputVelocity { get; private set; }
-
-
+        // Body Displacment = Zb = X1
         public List<double> BodyDisplacement { get; private set; }
 
+        // Body Velocity = Zb[Dot] = X1[dot] = X2
         public List<double> BodyVelocity { get; private set; }
 
+        // Body Acceleration = Zb[Double Dot] = X2[Dot]
         public List<double> BodyAcceln { get; private set; }
 
-        
-        public List<double> ResponseToInitialConditions { get; private set; }
-        
-        public List<double> VelocityICR { get; private set; }
-        
-        public List<double> AccelerationICR { get; private set; }
-        
 
-        public List<double> SpringForceICR { get; private set; }
-        
-        public List<double> DamperForceICR { get; private set; }
+        public List<double> SpringForce { get; private set; }
 
-        public List<double> BodyForceICR { get; private set; }
+        public List<double> DamperForce { get; private set; }
+
+        public List<double> BodyForce { get; private set; }
 
         #endregion
-
 
         private void TimeCalculate()
         {
@@ -470,243 +455,185 @@ namespace Input
         {
             if (SingleStepIPNeedsToRecalculate)
             {
-                if (SingleStepInput == null)
+                if (RoadDisplacement == null)
                 {
-                    SingleStepInput = new List<double>();
+                    RoadDisplacement = new List<double>();
                 }
 
-                SingleStepInput.Clear();
+                RoadDisplacement.Clear();
 
                 foreach (double item in TimeIntervals)
                 {
 
                     if (item < StepStartTime)
                     {
-                        SingleStepInput.Add(0.0);
+                        RoadDisplacement.Add(0.0);
                     }
 
                     else if (item >= StepStartTime)
                     {
-                        SingleStepInput.Add(StepAmplitude);
+                        RoadDisplacement.Add(StepAmplitude);
                     }
                 }
             }
         }
 
-        private void CustomIPVelocity()
+
+        // Custom Road Input Vertical Velocity
+
+        private void RoadVerticalVelocityCalculate()
         {
-            if (CustomIPCalculate)
+
+            if (ResponseNeedsToRecalculate)
             {
-                if (CustomInputVelocity == null)
+                if (RoadVerticalVelocity == null)
                 {
-                    CustomInputVelocity = new List<double>();
+                    RoadVerticalVelocity = new List<double>();
                 }
 
-                CustomInputVelocity.Clear();
+                RoadVerticalVelocity.Clear();
 
-                CustomInputVelocity.Add(0.0);
+                RoadVerticalVelocity.Add(0.0);
 
-                for (int i = 1; i < CustomInput.Count; i++)
+                for (int i = 1; i < TimeIntervals.Count; i++)
                 {
-                    
+                    double ZrDot = (RoadDisplacement[i - 1]) - RoadDisplacement[i] / (TimeIntervals[i - 1] - TimeIntervals[i]);
+
+                    RoadVerticalVelocity.Add(ZrDot);
                 }
             }
+            
+
         } 
 
         private void MultipleStepIPCalculate()
         {
-            if (MultipleStepIPNeedsToRecalculate)
-            {
-                if (MultipleStepInput == null)
-                {
-                    MultipleStepInput = new List<double>();
-                }
-
-                MultipleStepInput.Clear();
-                
-                for (double time = 0.0; time < StepStartTime; time += TimeStep)
-                {
-                    MultipleStepInput.Add(0.0);
-                }
-
-
-                for (int count = 0; count < NumberOfSteps; count++)
-                {
-                    //double a = 0.0;
-                    //double d = a + stepAmplitude;
-
-                    for (double time = StepStartTime; time <= StepStartTime + StepLength; time += TimeStep)
-                    {
-                        //StepInput.Add(d);
-                        MultipleStepInput.Add(stepAmplitude);
-                    }
-
-                    //double c = a - stepAmplitude;
-                    for (double time = StepStartTime + StepLength; time <= StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
-                    {
-                        //StepInput.Add(c);
-                        MultipleStepInput.Add(0.0);
-                    }
-                }
-
-                double StepInputEndTime = (StepLength + IntervalBetweenSteps) * NumberOfSteps + StepStartTime;
-
-                for (double time = StepInputEndTime; time <= EndTime; time += TimeStep)
-                {
-                    MultipleStepInput.Add(0.0);
-                }
-
-            }
-        }
-
-
-        #region Response Calculations
-
-        private void ResponseToInitialConditionsCalculate()
-        {
             if (ResponseNeedsToRecalculate)
             {
-                if (ResponseToInitialConditions == null)
+                if (MultipleStepIPNeedsToRecalculate)
                 {
-                    ResponseToInitialConditions = new List<double>();
-                }
-
-                ResponseToInitialConditions.Clear();
-
-                // DateTime time = DateTime.Now;
-
-                if (InitialDisplacement == 0.0 && InitialVelocity == 0.0)
-                {
-                    foreach (double item in TimeIntervals)
+                    if (RoadDisplacement == null)
                     {
-                        ResponseToInitialConditions.Add(0.0);
+                        RoadDisplacement = new List<double>();
                     }
-                }
 
-                else
-                {
-                    foreach (double item in TimeIntervals)
+                    RoadDisplacement.Clear();
+
+                    for (double time = 0.0; time < StepStartTime; time += TimeStep)
                     {
-                        if(item < StepStartTime)
+                        RoadDisplacement.Add(0.0);
+                    }
+
+
+                    for (int count = 0; count < NumberOfSteps; count++)
+                    {
+                        //double a = 0.0;
+                        //double d = a + stepAmplitude;
+
+                        for (double time = StepStartTime; time <= StepStartTime + StepLength; time += TimeStep)
                         {
-                            ResponseToInitialConditions.Add(0.0);
+                            //StepInput.Add(d);
+                            RoadDisplacement.Add(stepAmplitude);
                         }
 
-                        else
+                        //double c = a - stepAmplitude;
+                        for (double time = StepStartTime + StepLength; time <= StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
                         {
-                            if (DampingRatio < 1.0)
-                            {
-                                double C1 = InitialDisplacement;
-                                double C2 = (InitialVelocity + (DampingRatio * NaturalFrequencyRad * InitialDisplacement)) / DampedNaturalFrequency;
-                                //double X = Math.Sqrt(Math.Pow(C1, 2) + Math.Pow(C2, 2));
-                                double Phy = Math.Atan((DampedNaturalFrequency * InitialDisplacement) / (InitialVelocity + (DampingRatio * NaturalFrequencyRad * InitialDisplacement)));
-                                //double X = InitialDisplacement / Math.Sin(Phy);
-
-                                double x = Math.Exp(-DampingRatio * NaturalFrequencyRad * item) * ((C1 * Math.Cos(DampedNaturalFrequency * item)) + (C2 * Math.Sin(DampedNaturalFrequency * item)));
-                                //double x = X * Math.Exp(-DampingRatio * NaturalFrequencyRad * item) * Math.Cos((DampedNaturalFrequency * item) - Phy);
-                                ResponseToInitialConditions.Add(x);
-                            }
-
-                            else if (DampingRatio == 1.0)
-                            {
-                                double C1 = InitialDisplacement;
-                                double C2 = InitialVelocity + (NaturalFrequencyRad * InitialDisplacement);
-
-                                double x = (C1 + (C2 * item)) * Math.Exp(-NaturalFrequencyRad * item);
-                                ResponseToInitialConditions.Add(x);
-                            }
-
-                            else if (DampingRatio > 1.0)
-                            {
-                                double C1 = (InitialDisplacement * NaturalFrequencyRad * (DampingRatio + Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) + InitialVelocity) / (2 * NaturalFrequencyRad * Math.Sqrt(Math.Pow(DampingRatio, 2) - 1));
-                                double C2 = (-InitialDisplacement * NaturalFrequencyRad * (DampingRatio - Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) - InitialVelocity) / (2 * NaturalFrequencyRad * Math.Sqrt(Math.Pow(DampingRatio, 2) - 1));
-
-                                double x = (C1 * Math.Exp((-DampingRatio + Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) * NaturalFrequencyRad * item)) + (C2 * Math.Exp((-DampingRatio - Math.Sqrt(Math.Pow(DampingRatio, 2) - 1)) * NaturalFrequencyRad * item));
-                                ResponseToInitialConditions.Add(x);
-                            }
+                            //StepInput.Add(c);
+                            RoadDisplacement.Add(0.0);
                         }
-                        
+                    }
 
+                    double StepInputEndTime = (StepLength + IntervalBetweenSteps) * NumberOfSteps + StepStartTime;
+
+                    for (double time = StepInputEndTime; time <= EndTime; time += TimeStep)
+                    {
+                        RoadDisplacement.Add(0.0);
                     }
                 }
+            
+
             }
-            //_tResponseToInitialConditions = (DateTime.Now - time).TotalMilliseconds;
         }
 
 
-        #endregion
-
-        #region Velocity Calculations
-
-        private void VelocityICRCalculate()
+        /*  X[dot]2 = -(c/m) X2 - (k/m) X1 + (c/m) Zr[Dot] + (k/m) Zr
+         * 
+         * 
+         * 
+         * 
+         */
+        private void ResponseCalculate()
         {
             if (ResponseNeedsToRecalculate)
             {
-                if (VelocityICR == null)
+                if (BodyDisplacement == null)
                 {
-                    VelocityICR = new List<double>();
+                    BodyDisplacement = new List<double>();
                 }
 
-                VelocityICR.Clear();
-
-                VelocityICR.Add(0.0);
-
-                for (int i = 1; i < ResponseToInitialConditions.Count; i++)
+                if (BodyVelocity == null)
                 {
-                    double dsIC = (ResponseToInitialConditions[i - 1] - ResponseToInitialConditions[i]) / TimeStep;
-
-                    VelocityICR.Add(dsIC);
+                    BodyVelocity = new List<double>();
                 }
+
+                if (BodyAcceln == null)
+                {
+                    BodyAcceln = new List<double>();
+                }
+
+                BodyDisplacement.Clear();
+                BodyVelocity.Clear();
+                BodyAcceln.Clear();
+
+                BodyDisplacement.Add(InitialDisplacement);
+                BodyVelocity.Add(InitialVelocity);
+
+                for (int i = 1; i < TimeIntervals.Count; i++)
+                {
+                    double A = DampingCoefficient / VehicleMass;
+                    double B = SpringStiffness / VehicleMass;
+
+                    double X2Dot = -(A * BodyVelocity[i - 1]) - (B * BodyDisplacement[i - 1]) + (A * RoadVerticalVelocity[i - 1]) + (B * RoadDisplacement[i - 1]);
+
+                    BodyAcceln.Add(X2Dot);
+
+                    double X2 = (BodyAcceln[i - 1] * (TimeIntervals[i] - TimeIntervals[i - 1])) + BodyVelocity[i - 1];
+
+                    BodyVelocity.Add(X2);
+
+                    double X1 = (BodyVelocity[i - 1] * (TimeIntervals[i] - TimeIntervals[i - 1])) + BodyDisplacement[i - 1];
+
+                    BodyDisplacement.Add(X1);
+                }
+
+                ResponseCalculationComplete = true;
+
+                ResponseNeedsToRecalculate = false;
 
             }
+            
         }
-
-        #endregion
-
-        #region Acceleration Calculations
-
-        private void AccelerationICRCalculate()
-        {
-            if (ResponseNeedsToRecalculate)
-            {
-                if (AccelerationICR == null)
-                {
-                    AccelerationICR = new List<double>();
-                }
-
-                AccelerationICR.Clear();
-
-                AccelerationICR.Add(0.0);
-
-                for (int i = 1; i < VelocityICR.Count; i++)
-                {
-                    double dvIC = (VelocityICR[i - 1] - VelocityICR[i]) / TimeStep;
-
-                    AccelerationICR.Add(dvIC);
-                }
-            }
-        }
-
-        #endregion
 
         #region Spring Force Calculations
 
-        private void SpringForceICRCalculate()
+
+        private void SpringForceCalculate()
         {
-            if (ResponseNeedsToRecalculate)
+            if (ResponseCalculationComplete)
             {
-                if (SpringForceICR == null)
+                if (SpringForce == null)
                 {
-                    SpringForceICR = new List<double>();
+                    SpringForce = new List<double>();
                 }
 
-                SpringForceICR.Clear();
+                SpringForce.Clear();
 
-                foreach (double item in ResponseToInitialConditions)
+                for (int i=0; i<RoadDisplacement.Count; i++)
                 {
-                    double SF = SpringStiffness * item;
+                    double Fs = SpringStiffness * (BodyDisplacement[i] - RoadDisplacement[i]);
 
-                    SpringForceICR.Add(SF);
+                    SpringForce.Add(Fs);
                 }
             }
         }
@@ -715,21 +642,22 @@ namespace Input
 
         #region Damper Force Calculations
 
-        private void DamperForceICRCalculate()
+        private void DamperForceCalculate()
         {
-            if (ResponseNeedsToRecalculate)
+            if (ResponseCalculationComplete)
             {
-                if (DamperForceICR == null)
+                if (DamperForce == null)
                 {
-                    DamperForceICR = new List<double>();
+                    DamperForce = new List<double>();
                 }
 
-                DamperForceICR.Clear();
+                DamperForce.Clear();
 
-                foreach (double item in VelocityICR)
+                for(int i = 0; i<BodyVelocity.Count; i++)
                 {
-                    double DF = DampingCoefficient * item;
-                    DamperForceICR.Add(DF);
+                    double Fd = DampingCoefficient * (BodyVelocity[i] - RoadVerticalVelocity[i]);
+
+                    DamperForce.Add(Fd);
                 }
             }
         }
@@ -738,22 +666,22 @@ namespace Input
 
         #region BodyForce
 
-        private void BodyForceICRCalculate()
+        private void BodyForceCalculate()
         {
-            if (ResponseNeedsToRecalculate)
+            if (ResponseCalculationComplete)
             {
-                if (BodyForceICR == null)
+                if (BodyForce == null)
                 {
-                    BodyForceICR = new List<double>();
+                    BodyForce = new List<double>();
                 }
 
-                BodyForceICR.Clear();
+                BodyForce.Clear();
 
-                foreach (double item in AccelerationICR)
+                foreach (double item in BodyAcceln)
                 {
                     double BF = VehicleMass * item;
 
-                    BodyForceICR.Add(BF);
+                    BodyForce.Add(BF);
                 }
             }
         }
@@ -762,28 +690,48 @@ namespace Input
 
         public void InputDataCalculate()
         {
-           
-            TimeCalculate();
-
-            if (SingleStepIPNeedsToRecalculate)
+            if (TimeNeedsToRecalculate)
             {
-                SingleStepIPCalculate();
+                TimeCalculate();
+
+                if (ResponseNeedsToRecalculate)
+                {
+                    if (SingleStepIPNeedsToRecalculate)
+                    {
+                        SingleStepIPCalculate();
+                    }
+
+                    else if (MultipleStepIPNeedsToRecalculate)
+                    {
+                        MultipleStepIPCalculate();
+                    }
+                }
             }
 
-            else if (MultipleStepIPNeedsToRecalculate)
-            {
-                MultipleStepIPCalculate();
-            }
+
+            TimeNeedsToRecalculate = false;
+            MultipleStepIPNeedsToRecalculate = false;
+            SingleStepIPNeedsToRecalculate = false;
+            
+
+            
         }
 
         public void OutputDataCalculate()
         {
-            ResponseToInitialConditionsCalculate();
-            VelocityICRCalculate();
-            AccelerationICRCalculate();
-            SpringForceICRCalculate();
-            DamperForceICRCalculate();
-            BodyForceICRCalculate();
+
+            RoadVerticalVelocityCalculate();
+
+            ResponseCalculate();
+
+            SpringForceCalculate();
+
+            DamperForceCalculate();
+
+            BodyForceCalculate();
+
+            ResponseNeedsToRecalculate = false;
+            
         }
     }
 }
