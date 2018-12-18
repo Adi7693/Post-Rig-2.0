@@ -262,7 +262,7 @@ namespace PostRig2._0
 
             UpdateUIFromDocument();
 
-            FileRibbonBasePanel.Visible = false;
+            HomeRibbonBasePanel.Visible = false;
 
             DesignRibbonPage.Visible = true;
             SimSetupRibbonPage.Visible = true;
@@ -291,7 +291,7 @@ namespace PostRig2._0
 
             if (Doc != null)
             {
-                FileRibbonBasePanel.Visible = false;
+                HomeRibbonBasePanel.Visible = false;
 
                 DesignRibbonPage.Visible = true;
                 SimSetupRibbonPage.Visible = true;
@@ -354,9 +354,9 @@ namespace PostRig2._0
 
         private void AboutFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            FileRibbonBasePanel.Visible = true;
+            HomeRibbonBasePanel.Visible = true;
 
-            FileRibbonBasePanel.BringToFront();
+            HomeRibbonBasePanel.BringToFront();
         }
 
         private void OnRibbonPageChanged(object sender, EventArgs e)
@@ -406,6 +406,15 @@ namespace PostRig2._0
         private void OnTextInputChanged(object sender, EventArgs e)
         {
             UpdateDocumentFromUI();
+        }
+
+
+        private void EnterClicked(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                UpdateDocumentFromUI();
+            }
         }
 
 

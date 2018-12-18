@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraCharts.ChartTitle chartTitle15 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle16 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle17 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle18 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle19 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle20 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle21 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions29 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions30 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions31 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions32 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraCharts.ChartTitle chartTitle50 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle51 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle52 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle53 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle54 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle55 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle56 = new DevExpress.XtraCharts.ChartTitle();
             this.MainFormRibbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.NewFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.OpenFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
@@ -65,7 +65,7 @@
             this.VerticalAccelnPlotBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.SysCharResultsBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.CustomIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
-            this.FileRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.HomeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.FileOptionsFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.OpenSaveFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ReadMeFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -84,7 +84,7 @@
             this.ResponseResultsRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.AccelerationResultsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.FileRibbonBasePanel = new DevExpress.XtraEditors.PanelControl();
+            this.HomeRibbonBasePanel = new DevExpress.XtraEditors.PanelControl();
             this.FilePRSoftwareInfoPanel = new DevExpress.XtraEditors.PanelControl();
             this.PostRigSoftwareLabel = new DevExpress.XtraEditors.LabelControl();
             this.DesignerTitleLabel = new DevExpress.XtraEditors.LabelControl();
@@ -128,8 +128,8 @@
             this.ResultsLeftSidePanel = new DevExpress.XtraEditors.PanelControl();
             this.SystemCharTreeList = new DevExpress.XtraTreeList.TreeList();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormRibbonControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FileRibbonBasePanel)).BeginInit();
-            this.FileRibbonBasePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HomeRibbonBasePanel)).BeginInit();
+            this.HomeRibbonBasePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FilePRSoftwareInfoPanel)).BeginInit();
             this.FilePRSoftwareInfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPanel)).BeginInit();
@@ -195,7 +195,7 @@
             this.MainFormRibbonControl.MaxItemId = 33;
             this.MainFormRibbonControl.Name = "MainFormRibbonControl";
             this.MainFormRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.FileRibbonPage,
+            this.HomeRibbonPage,
             this.DesignRibbonPage,
             this.SimSetupRibbonPage,
             this.ResultsRibbonPage});
@@ -415,7 +415,7 @@
             // 
             this.SysCharResultsBarButton.Caption = "System Characteristics";
             this.SysCharResultsBarButton.Id = 30;
-            this.SysCharResultsBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
+            this.SysCharResultsBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SysCharResultsBarButton.ImageOptions.Image")));
             this.SysCharResultsBarButton.Name = "SysCharResultsBarButton";
             this.SysCharResultsBarButton.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
@@ -429,29 +429,29 @@
             this.CustomIPCheckItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.CustomIPCheckItem_CheckedChanged);
             this.CustomIPCheckItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CustomIPCheckItem_OnClick);
             // 
-            // FileRibbonPage
+            // HomeRibbonPage
             // 
-            this.FileRibbonPage.Appearance.BackColor = System.Drawing.Color.Black;
-            this.FileRibbonPage.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.FileRibbonPage.Appearance.ForeColor = System.Drawing.Color.Blue;
-            this.FileRibbonPage.Appearance.Options.UseBackColor = true;
-            this.FileRibbonPage.Appearance.Options.UseFont = true;
-            this.FileRibbonPage.Appearance.Options.UseForeColor = true;
-            this.FileRibbonPage.Appearance.Options.UseImage = true;
-            this.FileRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.HomeRibbonPage.Appearance.BackColor = System.Drawing.Color.Black;
+            this.HomeRibbonPage.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.HomeRibbonPage.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.HomeRibbonPage.Appearance.Options.UseBackColor = true;
+            this.HomeRibbonPage.Appearance.Options.UseFont = true;
+            this.HomeRibbonPage.Appearance.Options.UseForeColor = true;
+            this.HomeRibbonPage.Appearance.Options.UseImage = true;
+            this.HomeRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.FileOptionsFileRibbonGroup,
             this.OpenSaveFileRibbonGroup,
             this.ReadMeFileRibbonGroup,
             this.AboutFileRibbonGroup,
             this.CloseFileRibbonGroup});
-            this.FileRibbonPage.Name = "FileRibbonPage";
-            this.FileRibbonPage.Text = "File";
+            this.HomeRibbonPage.Name = "HomeRibbonPage";
+            this.HomeRibbonPage.Text = "Home";
             // 
             // FileOptionsFileRibbonGroup
             // 
             this.FileOptionsFileRibbonGroup.ItemLinks.Add(this.NewFileRibbonBarButton);
             this.FileOptionsFileRibbonGroup.Name = "FileOptionsFileRibbonGroup";
-            this.FileOptionsFileRibbonGroup.Text = "New File";
+            this.FileOptionsFileRibbonGroup.Text = "New";
             // 
             // OpenSaveFileRibbonGroup
             // 
@@ -578,25 +578,23 @@
             this.AccelerationResultsGroup.Name = "AccelerationResultsGroup";
             this.AccelerationResultsGroup.Text = "Acceleration";
             // 
-            // FileRibbonBasePanel
+            // HomeRibbonBasePanel
             // 
-            this.FileRibbonBasePanel.Appearance.BackColor = System.Drawing.Color.White;
-            this.FileRibbonBasePanel.Appearance.Options.UseBackColor = true;
-            this.FileRibbonBasePanel.AutoSize = true;
-            this.FileRibbonBasePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FileRibbonBasePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.FileRibbonBasePanel.Controls.Add(this.FilePRSoftwareInfoPanel);
-            this.FileRibbonBasePanel.Controls.Add(this.LogoPanel);
-            this.FileRibbonBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FileRibbonBasePanel.Location = new System.Drawing.Point(0, 143);
-            this.FileRibbonBasePanel.Name = "FileRibbonBasePanel";
-            this.FileRibbonBasePanel.Size = new System.Drawing.Size(1140, 739);
-            this.FileRibbonBasePanel.TabIndex = 1;
+            this.HomeRibbonBasePanel.Appearance.BackColor = System.Drawing.Color.White;
+            this.HomeRibbonBasePanel.Appearance.Options.UseBackColor = true;
+            this.HomeRibbonBasePanel.AutoSize = true;
+            this.HomeRibbonBasePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.HomeRibbonBasePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.HomeRibbonBasePanel.Controls.Add(this.FilePRSoftwareInfoPanel);
+            this.HomeRibbonBasePanel.Controls.Add(this.LogoPanel);
+            this.HomeRibbonBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HomeRibbonBasePanel.Location = new System.Drawing.Point(0, 143);
+            this.HomeRibbonBasePanel.Name = "HomeRibbonBasePanel";
+            this.HomeRibbonBasePanel.Size = new System.Drawing.Size(1140, 739);
+            this.HomeRibbonBasePanel.TabIndex = 1;
             // 
             // FilePRSoftwareInfoPanel
             // 
-            this.FilePRSoftwareInfoPanel.AutoSize = true;
-            this.FilePRSoftwareInfoPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilePRSoftwareInfoPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.FilePRSoftwareInfoPanel.Controls.Add(this.PostRigSoftwareLabel);
             this.FilePRSoftwareInfoPanel.Controls.Add(this.DesignerTitleLabel);
@@ -608,9 +606,9 @@
             this.FilePRSoftwareInfoPanel.Controls.Add(this.VersionDashLabel);
             this.FilePRSoftwareInfoPanel.Controls.Add(this.ReleaseTitleDateLabel);
             this.FilePRSoftwareInfoPanel.Controls.Add(this.DesignerNameLabel);
-            this.FilePRSoftwareInfoPanel.Location = new System.Drawing.Point(570, 217);
+            this.FilePRSoftwareInfoPanel.Location = new System.Drawing.Point(655, 300);
             this.FilePRSoftwareInfoPanel.Name = "FilePRSoftwareInfoPanel";
-            this.FilePRSoftwareInfoPanel.Size = new System.Drawing.Size(541, 306);
+            this.FilePRSoftwareInfoPanel.Size = new System.Drawing.Size(570, 340);
             this.FilePRSoftwareInfoPanel.TabIndex = 2;
             // 
             // PostRigSoftwareLabel
@@ -702,7 +700,7 @@
             this.ReleaseDateLabel.Name = "ReleaseDateLabel";
             this.ReleaseDateLabel.Size = new System.Drawing.Size(128, 31);
             this.ReleaseDateLabel.TabIndex = 1;
-            this.ReleaseDateLabel.Text = "10/12/2018";
+            this.ReleaseDateLabel.Text = "18/12/2018";
             // 
             // VersionDashLabel
             // 
@@ -748,9 +746,9 @@
             this.LogoPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.LogoPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.LogoPanel.ContentImage = ((System.Drawing.Image)(resources.GetObject("LogoPanel.ContentImage")));
-            this.LogoPanel.Location = new System.Drawing.Point(652, 46);
+            this.LogoPanel.Location = new System.Drawing.Point(750, 150);
             this.LogoPanel.Name = "LogoPanel";
-            this.LogoPanel.Size = new System.Drawing.Size(377, 124);
+            this.LogoPanel.Size = new System.Drawing.Size(380, 124);
             this.LogoPanel.TabIndex = 0;
             // 
             // DesignRibbonBasePanel
@@ -830,6 +828,7 @@
             this.SpringStiffnessTextBox.Size = new System.Drawing.Size(185, 30);
             this.SpringStiffnessTextBox.TabIndex = 1;
             this.SpringStiffnessTextBox.LostFocus += new System.EventHandler(this.OnTextInputChanged);
+            this.SpringStiffnessTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnterClicked);
             // 
             // SpringStiffnessUnitLabel
             // 
@@ -920,11 +919,11 @@
             // 
             this.VehicleTemplateButtonPanel.ButtonInterval = 30;
             this.VehicleTemplateButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Road Car", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Race Car", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Rally Car", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Road Car", true, windowsUIButtonImageOptions29, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Race Car", true, windowsUIButtonImageOptions30, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Rally Car", true, windowsUIButtonImageOptions31, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Custom Car", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Custom Car", true, windowsUIButtonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false)});
             this.VehicleTemplateButtonPanel.ForeColor = System.Drawing.Color.Black;
             this.VehicleTemplateButtonPanel.Location = new System.Drawing.Point(113, 170);
             this.VehicleTemplateButtonPanel.Name = "VehicleTemplateButtonPanel";
@@ -955,9 +954,9 @@
             this.CustomIPChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.CustomIPChartControl.Size = new System.Drawing.Size(300, 200);
             this.CustomIPChartControl.TabIndex = 2;
-            chartTitle15.Text = "Custom Input Signal";
+            chartTitle50.Text = "Custom Input Signal";
             this.CustomIPChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle15});
+            chartTitle50});
             this.CustomIPChartControl.Visible = false;
             // 
             // StepSignalChartControl
@@ -968,9 +967,9 @@
             this.StepSignalChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.StepSignalChartControl.Size = new System.Drawing.Size(523, 45);
             this.StepSignalChartControl.TabIndex = 1;
-            chartTitle16.Text = "Step Signal";
+            chartTitle51.Text = "Step Signal";
             this.StepSignalChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle16});
+            chartTitle51});
             this.StepSignalChartControl.Visible = false;
             // 
             // SimSetupParametersPanel
@@ -1128,9 +1127,9 @@
             this.VerticalAccelnChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.VerticalAccelnChartControl.Size = new System.Drawing.Size(300, 200);
             this.VerticalAccelnChartControl.TabIndex = 6;
-            chartTitle17.Text = "Vertical Acceleration";
+            chartTitle52.Text = "Vertical Acceleration";
             this.VerticalAccelnChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle17});
+            chartTitle52});
             this.VerticalAccelnChartControl.Visible = false;
             // 
             // BodyForceChartControl
@@ -1141,9 +1140,9 @@
             this.BodyForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.BodyForceChartControl.Size = new System.Drawing.Size(300, 200);
             this.BodyForceChartControl.TabIndex = 5;
-            chartTitle18.Text = "Body Force";
+            chartTitle53.Text = "Body Force";
             this.BodyForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle18});
+            chartTitle53});
             this.BodyForceChartControl.Visible = false;
             // 
             // DamperForceChartControl
@@ -1154,9 +1153,9 @@
             this.DamperForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.DamperForceChartControl.Size = new System.Drawing.Size(300, 200);
             this.DamperForceChartControl.TabIndex = 4;
-            chartTitle19.Text = "Damper Force";
+            chartTitle54.Text = "Damper Force";
             this.DamperForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle19});
+            chartTitle54});
             this.DamperForceChartControl.Visible = false;
             // 
             // BodyDisplacementChartControl
@@ -1167,9 +1166,9 @@
             this.BodyDisplacementChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.BodyDisplacementChartControl.Size = new System.Drawing.Size(300, 200);
             this.BodyDisplacementChartControl.TabIndex = 3;
-            chartTitle20.Text = "Body Displacement";
+            chartTitle55.Text = "Body Displacement";
             this.BodyDisplacementChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle20});
+            chartTitle55});
             this.BodyDisplacementChartControl.Visible = false;
             // 
             // SpringForceChartControl
@@ -1180,9 +1179,9 @@
             this.SpringForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.SpringForceChartControl.Size = new System.Drawing.Size(300, 200);
             this.SpringForceChartControl.TabIndex = 2;
-            chartTitle21.Text = "Spring Force";
+            chartTitle56.Text = "Spring Force";
             this.SpringForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle21});
+            chartTitle56});
             this.SpringForceChartControl.Visible = false;
             // 
             // ResultsLeftSidePanel
@@ -1214,19 +1213,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1140, 882);
+            this.Controls.Add(this.HomeRibbonBasePanel);
             this.Controls.Add(this.SimulationSetupBasePanel);
             this.Controls.Add(this.DesignRibbonBasePanel);
             this.Controls.Add(this.ResultsBasePanel);
-            this.Controls.Add(this.FileRibbonBasePanel);
             this.Controls.Add(this.MainFormRibbonControl);
             this.Name = "MainForm";
             this.Ribbon = this.MainFormRibbonControl;
             this.Text = "Post Rig v2.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.MainFormRibbonControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FileRibbonBasePanel)).EndInit();
-            this.FileRibbonBasePanel.ResumeLayout(false);
-            this.FileRibbonBasePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HomeRibbonBasePanel)).EndInit();
+            this.HomeRibbonBasePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FilePRSoftwareInfoPanel)).EndInit();
             this.FilePRSoftwareInfoPanel.ResumeLayout(false);
             this.FilePRSoftwareInfoPanel.PerformLayout();
@@ -1268,7 +1266,7 @@
         #endregion
 
         private DevExpress.XtraBars.Ribbon.RibbonControl MainFormRibbonControl;
-        private DevExpress.XtraBars.Ribbon.RibbonPage FileRibbonPage;
+        private DevExpress.XtraBars.Ribbon.RibbonPage HomeRibbonPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup FileOptionsFileRibbonGroup;
         private DevExpress.XtraBars.BarButtonItem NewFileRibbonBarButton;
         private DevExpress.XtraBars.BarButtonItem OpenFileRibbonBarButton;
@@ -1282,7 +1280,7 @@
         private DevExpress.XtraBars.BarButtonItem CloseFileRibbonBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup AboutFileRibbonGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup CloseFileRibbonGroup;
-        private DevExpress.XtraEditors.PanelControl FileRibbonBasePanel;
+        private DevExpress.XtraEditors.PanelControl HomeRibbonBasePanel;
         private DevExpress.XtraEditors.PanelControl LogoPanel;
         private DevExpress.XtraEditors.LabelControl PostRigSoftwareLabel;
         private DevExpress.XtraEditors.LabelControl DesignerTitleLabel;

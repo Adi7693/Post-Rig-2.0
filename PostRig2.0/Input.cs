@@ -205,8 +205,7 @@ namespace Input
          * 
          * X1(0)
          * 
-
-        */
+         */
 
         private double initialDisplacement;
 
@@ -398,15 +397,19 @@ namespace Input
 
         public List<double> TimeIntervals { get; set; }
 
+
+        // Step Signal List
         public List<double> SingleStepInput { get; private set; }
 
         public List<double> MultipleStepInput { get; private set; }
+
 
         // RoadDisplacement = Zr
         public List<double> RoadDisplacement { get; set; }
 
         // RoadVelocity = Zr[Dot]
         public List<double> RoadVerticalVelocity { get; private set; }
+
 
         // Body Displacment = Zb = X1
         public List<double> BodyDisplacement { get; private set; }
@@ -478,34 +481,6 @@ namespace Input
             }
         }
 
-
-        // Custom Road Input Vertical Velocity
-
-        private void RoadVerticalVelocityCalculate()
-        {
-
-            if (ResponseNeedsToRecalculate)
-            {
-                if (RoadVerticalVelocity == null)
-                {
-                    RoadVerticalVelocity = new List<double>();
-                }
-
-                RoadVerticalVelocity.Clear();
-
-                RoadVerticalVelocity.Add(0.0);
-
-                for (int i = 1; i < TimeIntervals.Count; i++)
-                {
-                    double ZrDot = (RoadDisplacement[i - 1]) - RoadDisplacement[i] / (TimeIntervals[i - 1] - TimeIntervals[i]);
-
-                    RoadVerticalVelocity.Add(ZrDot);
-                }
-            }
-            
-
-        } 
-
         private void MultipleStepIPCalculate()
         {
             if (ResponseNeedsToRecalculate)
@@ -530,14 +505,14 @@ namespace Input
                         //double a = 0.0;
                         //double d = a + stepAmplitude;
 
-                        for (double time = StepStartTime; time <= StepStartTime + StepLength; time += TimeStep)
+                        for (double time = StepStartTime; time < StepStartTime + StepLength; time += TimeStep)
                         {
                             //StepInput.Add(d);
                             RoadDisplacement.Add(stepAmplitude);
                         }
 
                         //double c = a - stepAmplitude;
-                        for (double time = StepStartTime + StepLength; time <= StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
+                        for (double time = StepStartTime + StepLength; time < StepStartTime + StepLength + IntervalBetweenSteps; time += TimeStep)
                         {
                             //StepInput.Add(c);
                             RoadDisplacement.Add(0.0);
@@ -551,16 +526,38 @@ namespace Input
                         RoadDisplacement.Add(0.0);
                     }
                 }
-            
+
 
             }
         }
 
 
+        // Custom Road Input Vertical Velocity
+
+        private void RoadVerticalVelocityCalculate()
+        {
+
+            if (ResponseNeedsToRecalculate)
+            {
+                if (RoadVerticalVelocity == null)
+                {
+                    RoadVerticalVelocity = new List<double>();
+                }
+
+                RoadVerticalVelocity.Clear();
+
+                RoadVerticalVelocity.Add(0.0);
+
+                for (int i = 1; i < TimeIntervals.Count; i++)
+                {
+                    double ZrDot = (RoadDisplacement[i - 1]) - RoadDisplacement[i] / (TimeIntervals[i - 1] - TimeIntervals[i]);
+
+                    RoadVerticalVelocity.Add(ZrDot);
+                }
+            }
+        } 
+
         /*  X[dot]2 = -(c/m) X2 - (k/m) X1 + (c/m) Zr[Dot] + (k/m) Zr
-         * 
-         * 
-         * 
          * 
          */
         private void ResponseCalculate()
@@ -588,6 +585,7 @@ namespace Input
 
                 BodyDisplacement.Add(InitialDisplacement);
                 BodyVelocity.Add(InitialVelocity);
+                BodyAcceln.Add(0.0);
 
                 for (int i = 1; i < TimeIntervals.Count; i++)
                 {
