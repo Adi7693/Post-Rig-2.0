@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 
 namespace Input
 {
@@ -7,7 +11,7 @@ namespace Input
     {
         public bool TimeNeedsToRecalculate;
 
-        private bool ResponseNeedsToRecalculate;
+        public bool ResponseNeedsToRecalculate;
 
         public bool SingleStepIPNeedsToRecalculate { get; set; }
 
@@ -16,8 +20,6 @@ namespace Input
         public bool CustomIPCalculate { get; set; }
 
         public bool ResponseCalculationComplete { get; private set; }
-
-
 
         #region Constructor
 
@@ -35,7 +37,7 @@ namespace Input
             TimeStep = 0.01;
 
             StepStartTime = 1.0;
-            StepAmplitude = 1.0;
+            StepAmplitude = 0.005;
             StepLength = 1.0;
             IntervalBetweenSteps = 1.0;
 
@@ -157,9 +159,6 @@ namespace Input
             }
         }
 
-
-
-
         private double intervalBetweenStep;
 
         public double IntervalBetweenSteps
@@ -179,7 +178,6 @@ namespace Input
             }
         }
 
-
         private double stepLength;
 
         public double StepLength
@@ -198,7 +196,6 @@ namespace Input
                 }
             }
         }
-
 
         /* Initial Displacement in m
          * Initial Displacement of the Body at Time t=0
@@ -225,7 +222,6 @@ namespace Input
                 }
             }
         }
-
 
         /*
          * Initial Velocity in m/s
@@ -321,8 +317,6 @@ namespace Input
 
         }
         #endregion
-
-
 
         #region Derived Properties
 
@@ -420,6 +414,9 @@ namespace Input
         // Body Acceleration = Zb[Double Dot] = X2[Dot]
         public List<double> BodyAcceln { get; private set; }
 
+        //Body Acceleration in G's
+        public List<double> BodyAccelnG { get; private set; }
+
 
         public List<double> SpringForce { get; private set; }
 
@@ -429,6 +426,7 @@ namespace Input
 
         #endregion
 
+        # region Time Frame Calculation
         private void TimeCalculate()
         {
             if (TimeNeedsToRecalculate)
@@ -453,7 +451,9 @@ namespace Input
                 TimeNeedsToRecalculate = false;
             }
         }
+        #endregion
 
+        #region Single Step Calculate
         private void SingleStepIPCalculate()
         {
             if (SingleStepIPNeedsToRecalculate)
@@ -480,7 +480,9 @@ namespace Input
                 }
             }
         }
+        #endregion
 
+        #region Multiple Step Calculate
         private void MultipleStepIPCalculate()
         {
             if (ResponseNeedsToRecalculate)
@@ -530,10 +532,11 @@ namespace Input
 
             }
         }
-
+        #endregion
 
         // Custom Road Input Vertical Velocity
 
+        #region Road Vertical Velocity
         private void RoadVerticalVelocityCalculate()
         {
 
@@ -550,16 +553,17 @@ namespace Input
 
                 for (int i = 1; i < TimeIntervals.Count; i++)
                 {
-                    double ZrDot = (RoadDisplacement[i - 1]) - RoadDisplacement[i] / (TimeIntervals[i - 1] - TimeIntervals[i]);
+                    double ZrDot = (RoadDisplacement[i - 1] - RoadDisplacement[i]) / (TimeIntervals[i - 1] - TimeIntervals[i]);
 
                     RoadVerticalVelocity.Add(ZrDot);
                 }
             }
-        } 
+        }
+        #endregion
 
-        /*  X[dot]2 = -(c/m) X2 - (k/m) X1 + (c/m) Zr[Dot] + (k/m) Zr
-         * 
-         */
+        //  X[dot]2 = -(c/m) X2 - (k/m) X1 + (c/m) Zr[Dot] + (k/m) Zr
+
+        #region Response Calculation
         private void ResponseCalculate()
         {
             if (ResponseNeedsToRecalculate)
@@ -610,11 +614,11 @@ namespace Input
                 ResponseNeedsToRecalculate = false;
 
             }
-            
+
         }
+        #endregion
 
         #region Spring Force Calculations
-
 
         private void SpringForceCalculate()
         {
@@ -627,7 +631,7 @@ namespace Input
 
                 SpringForce.Clear();
 
-                for (int i=0; i<RoadDisplacement.Count; i++)
+                for (int i = 0; i < RoadDisplacement.Count; i++)
                 {
                     double Fs = SpringStiffness * (BodyDisplacement[i] - RoadDisplacement[i]);
 
@@ -651,7 +655,7 @@ namespace Input
 
                 DamperForce.Clear();
 
-                for(int i = 0; i<BodyVelocity.Count; i++)
+                for (int i = 0; i < BodyVelocity.Count; i++)
                 {
                     double Fd = DampingCoefficient * (BodyVelocity[i] - RoadVerticalVelocity[i]);
 
@@ -686,6 +690,29 @@ namespace Input
 
         #endregion
 
+        #region Body Acceleration
+        private void BodyAccelnGCalculate()
+        {
+            if (ResponseCalculationComplete)
+            {
+                if (BodyAccelnG == null)
+                {
+                    BodyAccelnG = new List<double>();
+                }
+
+                BodyAccelnG.Clear();
+
+                foreach (double item in BodyAcceln)
+                {
+                    double G = item / 9.81;
+
+                    BodyAccelnG.Add(G);
+                }
+            }
+        }
+        #endregion
+
+        #region Input Data Calculation
         public void InputDataCalculate()
         {
             if (TimeNeedsToRecalculate)
@@ -706,30 +733,297 @@ namespace Input
                 }
             }
 
-
             TimeNeedsToRecalculate = false;
             MultipleStepIPNeedsToRecalculate = false;
             SingleStepIPNeedsToRecalculate = false;
-            
 
-            
         }
+        #endregion
 
+        #region Output Data Calculation
         public void OutputDataCalculate()
         {
 
-            RoadVerticalVelocityCalculate();
+            if (ResponseNeedsToRecalculate)
+            {
+                RoadVerticalVelocityCalculate();
 
-            ResponseCalculate();
+                ResponseCalculate();
 
-            SpringForceCalculate();
+                BodyAccelnGCalculate();
 
-            DamperForceCalculate();
+                SpringForceCalculate();
 
-            BodyForceCalculate();
+                DamperForceCalculate();
+
+                BodyForceCalculate();
+            }
 
             ResponseNeedsToRecalculate = false;
-            
+
         }
+        #endregion
+
+        // Attempt To carry out state space modelling
+
+        #region State Space Modelling Quarter Car Model
+        private double Sm { get; } //Sprung Mass
+
+        private double USm { get; } // Unsprung Mass
+
+        private double Ks { get; } // Suspension Spring Stiffness
+
+        private double Cs { get; } // Suspension Damping Coefficient
+
+        private double Kt { get; } // Tyre Vertical Stiffness
+
+        private List<double> Zr { get; } // Road Displacement
+
+        private List<double> Zs { get; } // Sprung Mass Displacement
+
+        private List<double> Za { get; } // Unsprung Mass Displacement
+
+        private List<double> ZDotS { get; } // Sprung Mass Vertical Velocity
+
+        private List<double> ZdotA { get; } // Unsprung Vertical Velcoity
+
+        private List<double> ZdDotS { get; } // Sprung Mass Vertical Acceln
+
+        private List<double> ZdDotA { get; } // Unsprung Mass Vertical Acceln
+
+        private List<double> DeltaFz { get; } // Dynamic Tyre Load
+
+        private List<double> DeltaZ { get; } // Suspension Travel
+
+
+
+
+
+        private Matrix<double> SystemMatrix
+        {
+            get
+            {
+                if (SystemMatrix == null)
+                {
+                    SystemMatrix = Matrix<double>.Build.Dense(4, 4);
+                }
+
+                return SystemMatrix;
+            }
+
+            set
+            {
+                SystemMatrix[0, 0] = -Cs / Sm;
+                SystemMatrix[0, 1] = Cs / Sm;
+                SystemMatrix[0, 2] = -Ks / Sm;
+                SystemMatrix[0, 3] = Ks / Sm;
+
+                SystemMatrix[1, 0] = Cs / USm;
+                SystemMatrix[1, 1] = -Cs / USm;
+                SystemMatrix[1, 2] = Ks / USm;
+                SystemMatrix[1, 3] = -Ks / USm;
+
+                SystemMatrix[2, 0] = 1.0;
+                SystemMatrix[2, 1] = 0.0;
+                SystemMatrix[2, 2] = 0.0;
+                SystemMatrix[2, 3] = 0.0;
+
+                SystemMatrix[3, 0] = 0.0;
+                SystemMatrix[3, 1] = 1.0;
+                SystemMatrix[3, 2] = 0.0;
+                SystemMatrix[3, 3] = 0.0;
+
+            }
+        }
+
+        private Vector<double> StateVector
+        {
+            get
+            {
+                
+
+                return StateVector;
+            }
+
+            set
+            {
+                for (int i = 0; i < Zr.Count; i++)
+                {
+                    
+                }
+
+
+            }
+        }
+
+        private Vector<double> InputVector
+        {
+            get
+            {
+                if (InputVector == null)
+                {
+                    InputVector = Vector<double>.Build.Dense(4);
+                }
+
+                return InputVector;
+            }
+
+            set
+            {
+                InputVector[0] = 0.0;
+
+                InputVector[1] = -Kt / USm;
+
+                InputVector[2] = 0.0;
+
+                InputVector[3] = 0.0;
+
+            }
+        }
+
+
+        private Vector<double> OutputVector
+        {
+            get
+            {
+                if (OutputVector == null)
+                {
+                    OutputVector = Vector<double>.Build.Dense(6);
+                }
+
+                return OutputVector;
+            }
+
+            set
+            {
+                
+                
+
+            }
+        }
+
+        private Matrix<double> OutputMatrix
+        {
+            get
+            {
+                
+
+                return OutputMatrix;
+            }
+
+            set
+            {
+                
+            }
+        }
+
+        private Vector<double> DVector
+        {
+            get
+            {
+                
+
+                return DVector;
+
+            }
+
+            set
+            {
+                DVector[0] = 0.0;
+
+                DVector[1] = Kt / USm;
+
+                DVector[2] = 0.0;
+
+                DVector[3] = 0.0;
+
+                DVector[4] = 0.0;
+
+                DVector[5] = 0.0;
+
+            }
+        }
+
+
+
+        private void StateSpace()
+        {
+            if (StateVector == null)
+            {
+                StateVector = Vector<double>.Build.Dense(4);
+            }
+
+            if (OutputMatrix == null)
+            {
+                OutputMatrix = Matrix<double>.Build.Dense(6, 4);
+            }
+
+            if (DVector == null)
+            {
+                DVector = Vector<double>.Build.Dense(6);
+            }
+
+
+
+            OutputMatrix[0, 0] = -Cs / Sm;
+            OutputMatrix[0, 1] = Cs / Sm;
+            OutputMatrix[0, 3] = -Ks / Sm;
+            OutputMatrix[0, 4] = Ks / Sm;
+
+            OutputMatrix[1, 0] = Cs / USm;
+            OutputMatrix[1, 1] = -Cs / USm;
+            OutputMatrix[1, 3] = Ks / USm;
+            OutputMatrix[1, 4] = -Ks / USm;
+
+            OutputMatrix[2, 0] = 0.0;
+            OutputMatrix[2, 1] = 0.0;
+            OutputMatrix[2, 3] = 0.0;
+            OutputMatrix[2, 4] = -Kt;
+
+            OutputMatrix[3, 0] = 0.0;
+            OutputMatrix[3, 1] = 0.0;
+            OutputMatrix[3, 3] = -1.0;
+            OutputMatrix[3, 4] = 1.0;
+
+            OutputMatrix[4, 0] = 0.0;
+            OutputMatrix[4, 1] = 0.0;
+            OutputMatrix[4, 3] = 1.0;
+            OutputMatrix[4, 4] = 0.0;
+
+            OutputMatrix[5, 0] = 0.0;
+            OutputMatrix[5, 1] = 0.0;
+            OutputMatrix[5, 3] = 0.0;
+            OutputMatrix[5, 4] = 1.0;
+
+
+            for (int i = 0; i < Zr.Count; i++)
+            {
+                StateVector[0] = ZDotS[i];
+
+                StateVector[1] = ZdotA[i];
+
+                StateVector[2] = Zs[i];
+
+                StateVector[3] = Za[i];
+
+
+                OutputVector[0] = ZdDotS[i];
+
+                OutputVector[1] = ZdDotA[i];
+
+                OutputVector[2] = DeltaFz[i];
+
+                OutputVector[3] = DeltaZ[i];
+
+                OutputVector[4] = Zs[i];
+
+                OutputVector[5] = Za[i];
+            }
+
+
+        }
+
+        #endregion
+
     }
 }

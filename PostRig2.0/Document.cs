@@ -8,6 +8,8 @@ namespace PostRig2._0
 {
     public class Document
     {
+        public MainForm MainForm { get; private set; }
+
         public InputData Input { get; set; }
 
         public int Version
@@ -31,15 +33,17 @@ namespace PostRig2._0
             }
         }
 
-        public Document()
+        public Document(MainForm form)
         {
             Input = new InputData();
 
             Version = 0;
+
+            MainForm = form;
         }
 
 
-        public Document(string fileName) : this()
+        public Document(MainForm form, string fileName) : this(form)
         {
             Open(fileName);
         }
@@ -71,24 +75,32 @@ namespace PostRig2._0
             Input.StepStartTime = reader.ReadDouble();
             Input.StepAmplitude = reader.ReadDouble();
 
-            if (Version == 1)
-            {
-                /*This is in case of older files from V1 which had excitation frequency and input force.
-                2 readDouble will need to be wasted */
-                reader.ReadDouble();
-
-                reader.ReadDouble();
-            }
-
             Input.VehicleMass = reader.ReadDouble();
 
             Input.SpringStiffness = reader.ReadDouble();
 
             Input.DampingCoefficient = reader.ReadDouble();
 
-            Input.InitialDisplacement = reader.ReadDouble();
+            MainForm.NewCarBuilt = reader.ReadBoolean();
+            MainForm.NewSimSetup = reader.ReadBoolean();
+            MainForm.ViewResults = reader.ReadBoolean();
+            MainForm.SingleStepIP = reader.ReadBoolean();
+            MainForm.MultipleStepIP = reader.ReadBoolean();
+            MainForm.CustomIP = reader.ReadBoolean();
 
-            Input.InitialVelocity = reader.ReadDouble();
+            if (MainForm.CustomIP)
+            {
+                Input.RoadDisplacement = new List<double>();
+                Input.TimeIntervals = new List<double>();
+
+                int count = reader.ReadInt32();
+
+                for (int i = 0; i < count; i++)
+                {
+                    Input.TimeIntervals.Add(reader.ReadDouble());
+                    Input.RoadDisplacement.Add(reader.ReadDouble());
+                }
+            }
 
             reader.Close();
         }
@@ -125,10 +137,22 @@ namespace PostRig2._0
 
             writer.Write(Input.DampingCoefficient);
 
-            writer.Write(Input.InitialDisplacement);
+            writer.Write(MainForm.NewCarBuilt);
+            writer.Write(MainForm.NewSimSetup);
+            writer.Write(MainForm.ViewResults);
+            writer.Write(MainForm.SingleStepIP);
+            writer.Write(MainForm.MultipleStepIP);
+            writer.Write(MainForm.CustomIP);
 
-            writer.Write(Input.InitialVelocity);
-
+            if (MainForm.CustomIP)
+            {
+                writer.Write(Input.TimeIntervals.Count);
+                for (int i = 0; i < Input.RoadDisplacement.Count; i++)
+                {
+                    writer.Write(Input.TimeIntervals[i]);
+                    writer.Write(Input.RoadDisplacement[i]);
+                }
+            }
 
             writer.Close();
         }

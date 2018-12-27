@@ -9,32 +9,45 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.ButtonPanel;
 using DevExpress.XtraCharts;
+using ZedGraph;
 
 namespace PostRig2._0
 {
     public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        // Initialize Software
+
+        public MainForm()
+        {
+            InitializeComponent();
+
+            VersionLabel.Text = ProductVersion.ToString();
+            SimSetupTreeList.ExpandAll();
+
+        }
+
         static readonly double roadCarCornerWeight = 400.0;
         static readonly double roadCarSpringStiffness = 80000.0;
         static readonly double roadCarDampingCoefficient = 4000.0;
 
-        static readonly double raceCarCornerWeight = 250.0;
+        static readonly double raceCarCornerWeight = 400.0;
         static readonly double raceCarSpringStiffness = 120000.0;
-        static readonly double raceCarDampingCoefficient = 11000.0;
+        static readonly double raceCarDampingCoefficient = 13850.0;
 
-        static readonly double rallyCarCornerWeight = 175.0;
+        static readonly double rallyCarCornerWeight = 400.0;
         static readonly double rallyCarSpringStiffness = 150000.0;
-        static readonly double rallyCarDampingCoefficient = 16000.0;
+        static readonly double rallyCarDampingCoefficient = 17050.0;
 
-        private bool NewCarBuilt = false;
-        private bool NewSimSetup = false;
-        private bool ViewResults = false;
+        public bool NewCarBuilt { get; set; }
+        public bool NewSimSetup { get; set; }
+        public bool ViewResults { get; set; }
 
-        private bool SingleStepIP = false;
-        private bool MultipleStepIP = false;
-        private bool CustomIP = false;
+        public bool SingleStepIP { get; set; }
+        public bool MultipleStepIP { get; set; }
+        public bool CustomIP { get; set; }
 
         private bool RunSuccess = false;
+
 
 
         public Document Doc { get; set; }
@@ -239,26 +252,22 @@ namespace PostRig2._0
             if (Doc != null)
             {
                 // Display Results of Derived Parameters in Input Class
+
+
+
+                ValuesTreeListColumn.TreeList.Nodes[0].SetValue(ValuesTreeListColumn, Doc.Input.NaturalFrequencyHz);
+                ValuesTreeListColumn.TreeList.Nodes[1].SetValue(ValuesTreeListColumn, Doc.Input.CriticalDamping);
+                ValuesTreeListColumn.TreeList.Nodes[2].SetValue(ValuesTreeListColumn, Doc.Input.DampingRatio);
+                
+
             }
         }
-
-        // Initialize Software
-
-        public MainForm()
-        {
-            InitializeComponent();
-
-            VersionLabel.Text = ProductVersion.ToString();
-            SimSetupTreeList.ExpandAll();
-
-        }
-
 
         // New File Creation
 
         private void NewFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Doc = new Document();
+            Doc = new Document(this);
 
             UpdateUIFromDocument();
 
@@ -269,6 +278,13 @@ namespace PostRig2._0
             ResultsRibbonPage.Visible = true;
 
             DesignRibbonBasePanel.Visible = true;
+
+            NewCarBuilt = false;
+            NewSimSetup = false;
+            ViewResults = false;
+
+            SingleStepIP = false;
+            CustomIP = false;
 
             MainFormRibbonControl.SelectedPage = DesignRibbonPage;
         }
@@ -286,11 +302,19 @@ namespace PostRig2._0
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Doc = new Document(dlg.FileName);
+                Doc = new Document(this, dlg.FileName);
             }
 
             if (Doc != null)
             {
+                UpdateUIFromDocument();
+                UpdateResultsFromDocument();
+
+                BuildCarHomeRibbonBarButton_ItemClick(null, null);
+
+                NewSimSetup = true;
+                ViewResults = true;
+
                 HomeRibbonBasePanel.Visible = false;
 
                 DesignRibbonPage.Visible = true;
@@ -300,6 +324,22 @@ namespace PostRig2._0
                 DesignRibbonBasePanel.Visible = true;
 
                 MainFormRibbonControl.SelectedPage = DesignRibbonPage;
+
+                InitialiseSimSetupBarButton_ItemClick(null, null);
+
+                if (!CustomIP)
+                {
+                    Doc.Input.InputDataCalculate();
+                }
+
+                Doc.Input.OutputDataCalculate();
+
+                if (Doc.Input.ResponseCalculationComplete)
+                {
+                    RunSuccess = true;
+                }
+
+
             }
         }
 
@@ -340,6 +380,43 @@ namespace PostRig2._0
             }
         }
 
+        private void HelpFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            HomeRibbonBasePanel.Visible = true;
+
+            HomeRibbonBasePanel.BringToFront();
+
+            try
+            {
+                HelpFilePDFViewer.DocumentFilePath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Help File.pdf";
+            }
+            catch { }
+
+            HelpFilePDFViewer.Dock = DockStyle.Fill;
+
+            HelpFilePDFViewer.Visible = true;
+            HelpFilePDFViewer.BringToFront();
+
+        }
+
+
+        private void CaseStudyFileRibbonGroup_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            HomeRibbonBasePanel.Visible = true;
+
+            HomeRibbonBasePanel.BringToFront();
+
+            try
+            {
+                CaseStudyPDFViewer.DocumentFilePath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Case Study.pdf";
+            }
+            catch { }
+            CaseStudyPDFViewer.Dock = DockStyle.Fill;
+
+            CaseStudyPDFViewer.Visible = true;
+            CaseStudyPDFViewer.BringToFront();
+        }
+
 
         // Close Program
 
@@ -354,6 +431,9 @@ namespace PostRig2._0
 
         private void AboutFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            HelpFilePDFViewer.Visible = false;
+            CaseStudyPDFViewer.Visible = false;
+
             HomeRibbonBasePanel.Visible = true;
 
             HomeRibbonBasePanel.BringToFront();
@@ -372,6 +452,8 @@ namespace PostRig2._0
                 {
                     if (MainFormRibbonControl.SelectedPage == SimSetupRibbonPage)
                     {
+                        CheckInputForTreeList();
+
                         SimulationSetupBasePanel.Visible = true;
 
                         SimulationSetupBasePanel.BringToFront();
@@ -414,6 +496,38 @@ namespace PostRig2._0
             if (e.KeyCode == Keys.Enter)
             {
                 UpdateDocumentFromUI();
+            }
+        }
+
+        
+
+        private void CheckInputForTreeList()
+        {
+            if (SingleStepIP)
+            {
+                SimSetupParametersPanel.Visible = true;
+
+                SimSetupValuesColumn.TreeList.Nodes[1].Collapse();
+                SimSetupValuesColumn.TreeList.Nodes[1].Visible = false;
+
+                SimSetupValuesColumn.TreeList.Nodes[2].Expand();
+                SimSetupValuesColumn.TreeList.Nodes[2].Visible = true;
+            }
+
+            if (MultipleStepIP)
+            {
+                SimSetupParametersPanel.Visible = true;
+
+                SimSetupValuesColumn.TreeList.Nodes[1].Expand();
+                SimSetupValuesColumn.TreeList.Nodes[1].Visible = true;
+
+                SimSetupValuesColumn.TreeList.Nodes[2].Expand();
+                SimSetupValuesColumn.TreeList.Nodes[2].Visible = true;
+            }
+
+            if (CustomIP)
+            {
+                SimSetupParametersPanel.Visible = false;
             }
         }
 
@@ -491,15 +605,15 @@ namespace PostRig2._0
                 MultipleStepIP = false;
                 CustomIP = false;
 
-
-
                 CustomIPChartControl.Visible = false;
 
                 if (SingleStepIP)
                 {
-                    Doc.Input.TimeNeedsToRecalculate = true;
-                    Doc.Input.SingleStepIPNeedsToRecalculate = true;
-                    Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+                    //Doc.Input.TimeNeedsToRecalculate = true;
+                    //Doc.Input.ResponseNeedsToRecalculate = true;
+                    //Doc.Input.CustomIPCalculate = false;
+                    //Doc.Input.SingleStepIPNeedsToRecalculate = true;
+                    //Doc.Input.MultipleStepIPNeedsToRecalculate = false;
 
                     SimSetupParametersPanel.Visible = true;
 
@@ -527,9 +641,11 @@ namespace PostRig2._0
 
                 if (MultipleStepIP)
                 {
-                    Doc.Input.TimeNeedsToRecalculate = true;
-                    Doc.Input.SingleStepIPNeedsToRecalculate = false;
-                    Doc.Input.MultipleStepIPNeedsToRecalculate = true;
+                    //Doc.Input.TimeNeedsToRecalculate = true;
+                    //Doc.Input.ResponseNeedsToRecalculate = true;
+                    //Doc.Input.CustomIPCalculate = false;
+                    //Doc.Input.SingleStepIPNeedsToRecalculate = false;
+                    //Doc.Input.MultipleStepIPNeedsToRecalculate = true;
 
                     SimSetupParametersPanel.Visible = true;
 
@@ -555,6 +671,12 @@ namespace PostRig2._0
 
                 if (CustomIP)
                 {
+                    //Doc.Input.TimeNeedsToRecalculate = false;
+                    //Doc.Input.ResponseNeedsToRecalculate = true;
+                    //Doc.Input.CustomIPCalculate = true;
+                    //Doc.Input.SingleStepIPNeedsToRecalculate = false;
+                    //Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+
                     SimSetupParametersPanel.Visible = false;
 
                     using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV Files (*.csv)| *.csv", ValidateNames = true })
@@ -563,7 +685,14 @@ namespace PostRig2._0
                         {
                             Doc.CustomInputExcelRead(ofd.FileName);
                         }
+
+                        else
+                        {
+                            CustomIP = false;
+                        }
                     }
+
+                    
 
                     InitialiseSimSetupBarButton_ItemClick(sender, e);
                 }
@@ -596,19 +725,87 @@ namespace PostRig2._0
         {
             UpdateDocumentFromUI();
 
+
+            if (SingleStepIP)
+            {
+                Doc.Input.TimeNeedsToRecalculate = true;
+                Doc.Input.ResponseNeedsToRecalculate = true;
+                Doc.Input.CustomIPCalculate = false;
+                Doc.Input.SingleStepIPNeedsToRecalculate = true;
+                Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+            }
+
+            else if (MultipleStepIP)
+            {
+                Doc.Input.TimeNeedsToRecalculate = true;
+                Doc.Input.ResponseNeedsToRecalculate = true;
+                Doc.Input.CustomIPCalculate = false;
+                Doc.Input.SingleStepIPNeedsToRecalculate = false;
+                Doc.Input.MultipleStepIPNeedsToRecalculate = true;
+            }
+
+            else if (CustomIP)
+            {
+                Doc.Input.TimeNeedsToRecalculate = false;
+                Doc.Input.ResponseNeedsToRecalculate = true;
+                Doc.Input.CustomIPCalculate = true;
+                Doc.Input.SingleStepIPNeedsToRecalculate = false;
+                Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+            }
+
             if (!CustomIP)
             {
                 Doc.Input.InputDataCalculate();
             }
 
+
+
             UpdateSimSetupPlotBarButton_ItemClick(sender, e);
 
+            //MessageBox.Show("Initialisation Complete.\nReady To Run!");
+
+        }
+
+        private void RunSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            InitialiseSimSetupBarButton_ItemClick(sender, e);
+
+            Doc.Input.OutputDataCalculate();
+
+            if (Doc.Input.ResponseCalculationComplete)
+            {
+                RunSuccess = true;
+            }
+
+            else if (!Doc.Input.ResponseCalculationComplete)
+            {
+                RunSuccess = false;
+            }
+
+
+
+            if (RunSuccess)
+            {
+                MessageBox.Show("Run Successful");
+
+                UpdateResultsFromDocument();
+
+                ViewResults = true;
+            }
+
+            else if (!RunSuccess)
+            {
+                MessageBox.Show("Run Failed!", "Error", MessageBoxButtons.OK);
+            }
         }
 
         private void InputSignalSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
+            
+
             if (SingleStepIP)
             {
+                
                 StepSignalChartControl.Dock = DockStyle.Fill;
                 StepSignalChartControl.Visible = true;
 
@@ -739,54 +936,15 @@ namespace PostRig2._0
             InputSignalSimSetupBarButton_ItemClick(sender, e);
         }
 
-        private void RunSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        
+
+        private void SysCharResultsBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            InitialiseSimSetupBarButton_ItemClick(sender, e);
-
-            Doc.Input.OutputDataCalculate();
-
-            if (Doc.Input.ResponseCalculationComplete)
-            {
-                RunSuccess = true;
-            }
-
-            else if (!Doc.Input.ResponseCalculationComplete)
-            {
-                RunSuccess = false;
-            }
-
-
-            //if (SingleStepIP)
-            //{
-            //    InitialiseSimSetupBarButton_ItemClick(sender, e);
-
-            //    Doc.Input.OutputDataCalculate();
-
-            //    RunSuccess = true;
-            //}
-
-            //else if (MultipleStepIP)
-            //{
-            //    RunSuccess = false;
-            //}
-
             if (RunSuccess)
             {
-                MessageBox.Show("Run Successful");
+                UpdateResultsFromDocument();
 
-                ViewResults = true;
-            }
-
-            else if (!RunSuccess)
-            {
-
-                MessageBox.Show("Run Failed!", "Error", MessageBoxButtons.OK);
-                //DialogResult dialog = MessageBox.Show("The software currently cannot solve for Multiple Step Input. But it is capabale of displaying the Input Signal. Would you like to view the Input signal", "Message", MessageBoxButtons.YesNo);
-
-                //if(dialog == DialogResult.Yes)
-                //{
-                //    InitialiseSimSetupBarButton_ItemClick(sender, e);
-                //}
+                ResultsLeftSidePanel.Visible = true;
             }
         }
 
@@ -810,7 +968,7 @@ namespace PostRig2._0
 
                 //BodyResponseChartControl.Visible = false;
 
-                Series BodyDisplacement = new Series("Displacement", ViewType.Spline);
+                Series BodyDisplacement = new Series("Body Displacement", ViewType.Spline);
 
                 BodyDisplacementChartControl.Series.Clear();
 
@@ -867,7 +1025,7 @@ namespace PostRig2._0
 
                 SpringForceChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.SpringForce.Count; i++)
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
                     SpringForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.SpringForce[i]));
                 }
@@ -972,7 +1130,7 @@ namespace PostRig2._0
 
                 BodyForceChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.BodyForce.Count; i++)
+                for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
                     BodyForce.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyForce[i]));
                 }
@@ -1027,35 +1185,35 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.BodyAcceln.Count; i++)
                 {
-                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyAcceln[i]));
+                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyAccelnG[i]));
                 }
 
                 VerticalAccelnChartControl.Series.Add(VerticalAcceln);
 
-                XYDiagram diagram = (XYDiagram)VerticalAccelnChartControl.Diagram;
+                //XYDiagram diagram = (XYDiagram)VerticalAccelnChartControl.Diagram;
 
-                //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
-                diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisX.Alignment = AxisAlignment.Near;
-                diagram.AxisX.Title.Text = "Time (s)";
-                diagram.AxisX.Title.TextColor = Color.Black;
-                diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+                ////diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
+                //diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                //diagram.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                //diagram.AxisX.Alignment = AxisAlignment.Near;
+                //diagram.AxisX.Title.Text = "Time (s)";
+                //diagram.AxisX.Title.TextColor = Color.Black;
+                //diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                //diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
 
-                //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
-                diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisY.Alignment = AxisAlignment.Near;
-                diagram.AxisY.Title.Text = "Acceleration (m/s^2)";
-                diagram.AxisY.Title.TextColor = Color.Black;
-                diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+                ////diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
+                //diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                //diagram.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+                //diagram.AxisY.Alignment = AxisAlignment.Near;
+                //diagram.AxisY.Title.Text = "Vertical Acceleration (G)";
+                //diagram.AxisY.Title.TextColor = Color.Black;
+                //diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+                //diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
 
                 VerticalAccelnChartControl.Update();
             }
         }
 
-       
+        
     }
 }
