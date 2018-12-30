@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.ButtonPanel;
 using DevExpress.XtraCharts;
-using ZedGraph;
 
 namespace PostRig2._0
 {
     public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         // Initialize Software
-
         public MainForm()
         {
             InitializeComponent();
@@ -51,9 +45,8 @@ namespace PostRig2._0
         private bool RunSuccess = false;
 
         public string OpenFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-
-
         public string SaveFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+        public string CSVFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
 
         public Document Doc { get; set; }
 
@@ -119,6 +112,9 @@ namespace PostRig2._0
                             case 1:
                                 SaveFilePath = path;
                                 break;
+                            case 2:
+                                CSVFilePath = path;
+                                break;
                             default:
                                 break;
                         }
@@ -146,6 +142,11 @@ namespace PostRig2._0
             if (System.IO.Directory.Exists(SaveFilePath))
             {
                 AllPaths.Add(SaveFilePath);
+            }
+
+            if (System.IO.Directory.Exists(CSVFilePath))
+            {
+                AllPaths.Add(CSVFilePath);
             }
 
             System.IO.File.WriteAllLines(OptionsFile, AllPaths.ToArray());
@@ -310,19 +311,13 @@ namespace PostRig2._0
             if (Doc != null)
             {
                 // Display Results of Derived Parameters in Input Class
-
-
-
                 ValuesTreeListColumn.TreeList.Nodes[0].SetValue(ValuesTreeListColumn, Doc.Input.NaturalFrequencyHz);
                 ValuesTreeListColumn.TreeList.Nodes[1].SetValue(ValuesTreeListColumn, Doc.Input.CriticalDamping);
                 ValuesTreeListColumn.TreeList.Nodes[2].SetValue(ValuesTreeListColumn, Doc.Input.DampingRatio);
-                
-
             }
         }
 
         // New File Creation
-
         private void NewFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             Doc = new Document(this);
@@ -345,9 +340,6 @@ namespace PostRig2._0
             ResultsRibbonPage.Visible = true;
 
             DesignRibbonBasePanel.Visible = true;
-
-
-
             MainFormRibbonControl.SelectedPage = DesignRibbonPage;
         }
 
@@ -365,9 +357,8 @@ namespace PostRig2._0
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Doc = new Document(this, dlg.FileName);
+                OpenFilePath = System.IO.Path.GetDirectoryName(dlg.FileName);
             }
-
-            OpenFilePath = System.IO.Path.GetDirectoryName(dlg.FileName);
 
             if (Doc != null)
             {
@@ -440,9 +431,8 @@ namespace PostRig2._0
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     Doc.SaveAs(dlg.FileName);
+                    SaveFilePath = System.IO.Path.GetDirectoryName(dlg.FileName);
                 }
-
-                SaveFilePath = System.IO.Path.GetDirectoryName(dlg.FileName);
             }
         }
 
@@ -769,11 +759,13 @@ namespace PostRig2._0
 
                     SimSetupParametersPanel.Visible = false;
 
-                    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV Files (*.csv)| *.csv", ValidateNames = true })
+                    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV Files (*.csv)| *.csv", ValidateNames = true, InitialDirectory = CSVFilePath })
                     {
                         if(ofd.ShowDialog()== DialogResult.OK)
                         {
                             Doc.CustomInputExcelRead(ofd.FileName);
+
+                            CSVFilePath = System.IO.Path.GetDirectoryName(ofd.FileName);
                         }
 
                         else
