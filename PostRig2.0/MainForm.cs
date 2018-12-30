@@ -20,9 +20,11 @@ namespace PostRig2._0
         public MainForm()
         {
             InitializeComponent();
-
+            this.FormClosing += new FormClosingEventHandler(ClosingEvent);
             VersionLabel.Text = ProductVersion.ToString();
             SimSetupTreeList.ExpandAll();
+
+            LoadFilePaths();
 
         }
 
@@ -48,7 +50,10 @@ namespace PostRig2._0
 
         private bool RunSuccess = false;
 
+        public string OpenFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
 
+
+        public string SaveFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
 
         public Document Doc { get; set; }
 
@@ -91,6 +96,59 @@ namespace PostRig2._0
             {
                 CheckButtonById("Custom Car");
             }
+        }
+
+        public void LoadFilePaths()
+        {
+            string OptionsFile = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\options.txt";
+
+            if (System.IO.File.Exists(OptionsFile))
+            {
+                string[] AllPaths = System.IO.File.ReadAllLines(OptionsFile);
+
+                for (int i = 0; i < AllPaths.Length; i++)
+                {
+                    string path = AllPaths[i];
+                    if (System.IO.Directory.Exists(path))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                OpenFilePath = path;
+                                break;
+                            case 1:
+                                SaveFilePath = path;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void SaveFilePaths()
+        {
+            string OptionsFile = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\options.txt";
+
+            if (System.IO.File.Exists(OptionsFile))
+            {
+                System.IO.File.Delete(OptionsFile);
+            }
+
+            List<string> AllPaths = new List<string>();
+
+            if (System.IO.Directory.Exists(OpenFilePath))
+            {
+                AllPaths.Add(OpenFilePath);
+            }
+
+            if (System.IO.Directory.Exists(SaveFilePath))
+            {
+                AllPaths.Add(SaveFilePath);
+            }
+
+            System.IO.File.WriteAllLines(OptionsFile, AllPaths.ToArray());
         }
 
         public void UpdateUIFromDocument()
@@ -271,6 +329,15 @@ namespace PostRig2._0
 
             UpdateUIFromDocument();
 
+            NewCarBuilt = false;
+            NewSimSetup = false;
+            ViewResults = false;
+
+            SingleStepIP = false;
+            CustomIP = false;
+
+            BuildCarHomeRibbonBarButton_ItemClick(null, null);
+
             HomeRibbonBasePanel.Visible = false;
 
             DesignRibbonPage.Visible = true;
@@ -279,12 +346,7 @@ namespace PostRig2._0
 
             DesignRibbonBasePanel.Visible = true;
 
-            NewCarBuilt = false;
-            NewSimSetup = false;
-            ViewResults = false;
 
-            SingleStepIP = false;
-            CustomIP = false;
 
             MainFormRibbonControl.SelectedPage = DesignRibbonPage;
         }
@@ -296,7 +358,7 @@ namespace PostRig2._0
         {
             OpenFileDialog dlg = new OpenFileDialog();
 
-            dlg.InitialDirectory = "C:\\";
+            dlg.InitialDirectory = OpenFilePath;
 
             dlg.Filter = "PostRig Files (*.postrig)|*.postrig";
 
@@ -304,6 +366,8 @@ namespace PostRig2._0
             {
                 Doc = new Document(this, dlg.FileName);
             }
+
+            OpenFilePath = System.IO.Path.GetDirectoryName(dlg.FileName);
 
             if (Doc != null)
             {
@@ -367,7 +431,7 @@ namespace PostRig2._0
             {
                 SaveFileDialog dlg = new SaveFileDialog();
 
-                dlg.InitialDirectory = "C:\\";
+                dlg.InitialDirectory = SaveFilePath;
 
                 dlg.Filter = "PostRig Files|*.postrig";
 
@@ -377,6 +441,8 @@ namespace PostRig2._0
                 {
                     Doc.SaveAs(dlg.FileName);
                 }
+
+                SaveFilePath = System.IO.Path.GetDirectoryName(dlg.FileName);
             }
         }
 
@@ -429,6 +495,12 @@ namespace PostRig2._0
             }
         }
 
+
+        private void ClosingEvent(object sender, FormClosingEventArgs e)
+        {
+            SaveFilePaths();
+        }
+
         private void AboutFileRibbonBarButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             HelpFilePDFViewer.Visible = false;
@@ -477,13 +549,29 @@ namespace PostRig2._0
 
         private void BuildCarHomeRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            VehicleDataHomeRibbonPanel.Visible = true;
+            VehicleTemplateHomeRibbonPanel.Visible = true;
+            VehicleTemplateHomeRibbonPanel.BringToFront();
 
             VehicleDataModelPanel.Visible = true;
+
+            CarModelImagePanel.Visible = true;
+
+            SpringDesignDataPanel.Visible = false;
+            SpringDesignPanel.Visible = false;
 
             NewCarBuilt = true;
         }
 
+
+        private void SpringDesignBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SpringDesignDataPanel.Visible = true;
+            SpringDesignPanel.BringToFront();
+
+            SpringDesignPanel.Visible = true;
+            SpringDesignPanel.Dock = DockStyle.Left;
+
+        }
 
         private void OnTextInputChanged(object sender, EventArgs e)
         {
@@ -569,6 +657,8 @@ namespace PostRig2._0
 
             UpdateUIFromDocument();
         }
+
+        
 
         private void ShowDesignPanelBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
