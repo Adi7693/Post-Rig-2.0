@@ -6,7 +6,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraCharts;
 using DevExpress.XtraTreeList;
 
-namespace PostRig2._0
+namespace PostRig2_0
 {
     public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -22,18 +22,6 @@ namespace PostRig2._0
 
         }
 
-        static readonly double roadCarCornerWeight = 400.0;
-        static readonly double roadCarSpringStiffness = 80000.0;
-        static readonly double roadCarDampingCoefficient = 4000.0;
-
-        static readonly double raceCarCornerWeight = 400.0;
-        static readonly double raceCarSpringStiffness = 120000.0;
-        static readonly double raceCarDampingCoefficient = 13850.0;
-
-        static readonly double rallyCarCornerWeight = 400.0;
-        static readonly double rallyCarSpringStiffness = 150000.0;
-        static readonly double rallyCarDampingCoefficient = 17050.0;
-
         public bool NewCarBuilt { get; set; }
         public bool NewSimSetup { get; set; }
         public bool ViewResults { get; set; }
@@ -47,6 +35,8 @@ namespace PostRig2._0
         public string OpenFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
         public string SaveFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
         public string CSVFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+
+        public string CarFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
 
         public Document Doc { get; set; }
 
@@ -73,6 +63,9 @@ namespace PostRig2._0
                                 break;
                             case 2:
                                 CSVFilePath = path;
+                                break;
+                            case 3:
+                                CarFilePath = path;
                                 break;
                             default:
                                 break;
@@ -106,6 +99,11 @@ namespace PostRig2._0
             if (System.IO.Directory.Exists(CSVFilePath))
             {
                 AllPaths.Add(CSVFilePath);
+            }
+
+            if (System.IO.Directory.Exists(CarFilePath))
+            {
+                AllPaths.Add(CarFilePath);
             }
 
             System.IO.File.WriteAllLines(OptionsFile, AllPaths.ToArray());
@@ -656,6 +654,20 @@ namespace PostRig2._0
             NewCarBuilt = true;
         }
 
+
+        private void SaveCar_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            using (OpenFileDialog dialog = new OpenFileDialog() { InitialDirectory = CarFilePath, Filter = "Car Files (*.car)| *.car", ValidateNames = true })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Doc.Input.SaveCar(dialog.FileName);
+
+                    CarFilePath = System.IO.Path.GetDirectoryName(dialog.FileName);
+                }
+            }
+        }
 
         private void SpringDesignBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {

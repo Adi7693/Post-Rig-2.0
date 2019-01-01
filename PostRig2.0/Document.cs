@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using ExcelDataReader;
 using System.Data;
-using Input;
 using System.Collections.Generic;
+using System;
 
-namespace PostRig2._0
+namespace PostRig2_0
 {
     public class Document
     {
@@ -115,60 +115,73 @@ namespace PostRig2._0
 
         public void SaveAs(string fileName)
         {
-            BinaryWriter writer = new BinaryWriter(File.Open(fileName, FileMode.Create));
+            //BinaryWriter writer = new BinaryWriter(File.Open(fileName, FileMode.Create));
 
-            if (Version == 0)
-            {
-                Version = 1;
-            }
-            writer.Write(Version);
+            //if (Version == 0)
+            //{
+            //    Version = 1;
+            //}
+            //writer.Write(Version);
 
-            writer.Write(Input.StartTime);
+            //writer.Write(Input.StartTime);
 
-            writer.Write(Input.EndTime);
+            //writer.Write(Input.EndTime);
 
-            writer.Write(Input.TimeStep);
+            //writer.Write(Input.TimeStep);
 
-            writer.Write(Input.StepStartTime);
+            //writer.Write(Input.StepStartTime);
 
-            writer.Write(Input.StepAmplitude);
+            //writer.Write(Input.StepAmplitude);
 
-            writer.Write(Input.VehicleMass);
+            //writer.Write(Input.VehicleMass);
 
-            writer.Write(Input.SpringStiffness);
+            //writer.Write(Input.SpringStiffness);
 
-            writer.Write(Input.DampingCoefficient);
+            //writer.Write(Input.DampingCoefficient);
 
-            writer.Write(MainForm.NewCarBuilt);
-            writer.Write(MainForm.NewSimSetup);
-            writer.Write(MainForm.ViewResults);
-            writer.Write(MainForm.SingleStepIP);
-            writer.Write(MainForm.MultipleStepIP);
-            writer.Write(MainForm.CustomIP);
+            //writer.Write(MainForm.NewCarBuilt);
+            //writer.Write(MainForm.NewSimSetup);
+            //writer.Write(MainForm.ViewResults);
+            //writer.Write(MainForm.SingleStepIP);
+            //writer.Write(MainForm.MultipleStepIP);
+            //writer.Write(MainForm.CustomIP);
 
-            writer.Write(Input.ForceAmplitude);
+            //writer.Write(Input.ForceAmplitude);
 
-            if (MainForm.CustomIP)
-            {
-                writer.Write(Input.TimeIntervals.Count);
-                for (int i = 0; i < Input.RoadDisplacement.Count; i++)
-                {
-                    writer.Write(Input.TimeIntervals[i]);
-                    writer.Write(Input.RoadDisplacement[i]);
-                }
-            }
+            //if (MainForm.CustomIP)
+            //{
+            //    writer.Write(Input.TimeIntervals.Count);
+            //    for (int i = 0; i < Input.RoadDisplacement.Count; i++)
+            //    {
+            //        writer.Write(Input.TimeIntervals[i]);
+            //        writer.Write(Input.RoadDisplacement[i]);
+            //    }
+            //}
 
-            writer.Close();
+            //writer.Close();
+
+
+            string tempFolderPath = Path.GetTempPath() + Guid.NewGuid().ToString() + "\\";
+
+            Directory.CreateDirectory(tempFolderPath);
+
+            Input.SaveCar(tempFolderPath + "carFile.car");
+
+            Input.SaveSimData(tempFolderPath + "simFile.sim");
+
+
+
         }
 
-        public DataSet CustomIPDataSet { get; private set; }
+
+
 
         public void CustomInputExcelRead(string fileName)
         {
             FileStream fs = File.Open(fileName, FileMode.Open, FileAccess.Read);
             IExcelDataReader reader = ExcelReaderFactory.CreateCsvReader(fs);
 
-            CustomIPDataSet = reader.AsDataSet();
+            DataSet CustomIPDataSet = reader.AsDataSet();
 
             DataRowCollection rows = CustomIPDataSet.Tables[0].Rows;
 

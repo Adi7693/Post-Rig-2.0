@@ -1,4 +1,4 @@
-﻿namespace PostRig2._0
+﻿namespace PostRig2_0
 {
     partial class MainForm
     {
@@ -494,6 +494,7 @@
             this.SaveCarDesignBarButton.Name = "SaveCarDesignBarButton";
             this.SaveCarDesignBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.SaveCarDesignBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.)
             // 
             // HomeRibbonPage
             // 

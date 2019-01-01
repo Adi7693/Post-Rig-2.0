@@ -5,7 +5,7 @@ using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
-namespace Input
+namespace PostRig2_0
 {
     public class InputData
     {
@@ -23,6 +23,8 @@ namespace Input
 
         // Acceleration due to gravity
         readonly double g = 9.81;
+
+        public CarData Car { get; set; }
 
         #region Constructor
 
@@ -255,23 +257,22 @@ namespace Input
         }
 
 
-        private double _vehicleMass;
         // In Kg
 
         public double VehicleMass
         {
             get
             {
-                return _vehicleMass;
+                return Car.VehicleMass;
             }
 
             set
             {
-                if (!value.Equals(_vehicleMass))
+                if (!value.Equals(Car.VehicleMass))
                 {
                     if (value > 0)
                     {
-                        _vehicleMass = value;
+                        Car.VehicleMass = value;
                         ResponseNeedsToRecalculate = true;
 
                     }
@@ -280,20 +281,19 @@ namespace Input
         }
 
 
-        private double _springStiffness;
         // In N/m
         public double SpringStiffness
         {
             get
             {
-                return _springStiffness;
+                return Car.SpringStiffness;
             }
 
             set
             {
-                if (!value.Equals(_springStiffness))
+                if (!value.Equals(Car.SpringStiffness))
                 {
-                    _springStiffness = value;
+                    Car.SpringStiffness = value;
                     ResponseNeedsToRecalculate = true;
 
                 }
@@ -302,7 +302,6 @@ namespace Input
         }
 
 
-        private double _dampingCoefficient;
         // In N/(m/s)
         public double DampingCoefficient
         {
@@ -310,22 +309,20 @@ namespace Input
             {
                 //double c = CriticalDamping * DampingRatio;
 
-                return _dampingCoefficient;
+                return Car.DampingCoefficient;
             }
 
             set
             {
-                if (!value.Equals(_dampingCoefficient))
+                if (!value.Equals(Car.DampingCoefficient))
                 {
-                    _dampingCoefficient = value;
+                    Car.DampingCoefficient = value;
                     ResponseNeedsToRecalculate = true;
                 }
             }
 
         }
         #endregion
-
-        private double _dampingRatio;
 
         public double DampingRatio
         {
@@ -335,17 +332,6 @@ namespace Input
                 double Zeta = Math.Round(DampingCoefficient / CriticalDamping, 3);
                 return Zeta;
             }
-
-            //set
-            //{
-            //    if (!value.Equals(_dampingRatio))
-            //    {
-            //        _dampingRatio = value;
-            //        ResponseNeedsToRecalculate = true ;
-            //    }
-            //}
-
-
         }
 
         #region Derived Properties
@@ -1204,41 +1190,39 @@ namespace Input
         #endregion
 
 
-        private double springFreeLength;
 
         public double SpringFreeLength
         {
             get
             {
-                return springFreeLength;
+                return Car.SpringFreeLength;
             }
 
             set
             {
-                if (!value.Equals(springFreeLength))
+                if (!value.Equals(Car.SpringFreeLength))
                 {
-                    springFreeLength = value;
+                    Car.SpringFreeLength = value;
                 }
             }
         }
 
 
-        private double springCompressedLength;
 
         public double SpringCompressedLength
         {
             get
             {
-                return springCompressedLength;
+                return Car.SpringCompressedLength;
             }
 
             set
             {
-                if (value < springFreeLength)
+                if (value < SpringFreeLength)
                 {
                     if (!value.Equals(SpringCompressedLength))
                     {
-                        springCompressedLength = value;
+                        Car.SpringCompressedLength = value;
                     }
                 }
 
@@ -1251,23 +1235,22 @@ namespace Input
             }
         }
 
-        private double springExtendedLength;
 
         public double SpringExtendedLength
         {
             get
             {
-                return springExtendedLength;
+                return Car.SpringExtendedLength;
             }
 
             set
             {
 
-                if (value > springFreeLength)
+                if (value > SpringFreeLength)
                 {
-                    if (!value.Equals(springExtendedLength))
+                    if (!value.Equals(Car.SpringExtendedLength))
                     {
-                        springExtendedLength = value;
+                        Car.SpringExtendedLength = value;
                     }
                 }
 
@@ -1335,7 +1318,16 @@ namespace Input
 
 
 
+        public void SaveCar(string carFileName)
+        {
+            Car.Save(carFileName);
+        }
 
+
+        public void SaveSimData(string simFileName)
+        {
+
+        }
 
 
         // Attempt To carry out state space modelling

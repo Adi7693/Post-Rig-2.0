@@ -8,7 +8,7 @@
     <ProjectGuid>{B238852E-5BAE-46C4-A397-D97D42C2F735}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PostRig2._0</RootNamespace>
+    <RootNamespace>PostRig2_0</RootNamespace>
     <AssemblyName>PostRig2.0</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -104,6 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarData.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="MainForm.cs">
@@ -114,6 +115,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimData.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +128,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="Case Study.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

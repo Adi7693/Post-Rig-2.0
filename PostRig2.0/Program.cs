@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
 
-namespace PostRig2._0
+namespace PostRig2_0
 {
     static class Program
     {
