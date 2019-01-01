@@ -88,6 +88,8 @@ namespace PostRig2._0
             MainForm.MultipleStepIP = reader.ReadBoolean();
             MainForm.CustomIP = reader.ReadBoolean();
 
+            Input.ForceAmplitude = reader.ReadDouble();
+
             if (MainForm.CustomIP)
             {
                 Input.RoadDisplacement = new List<double>();
@@ -143,6 +145,8 @@ namespace PostRig2._0
             writer.Write(MainForm.SingleStepIP);
             writer.Write(MainForm.MultipleStepIP);
             writer.Write(MainForm.CustomIP);
+
+            writer.Write(Input.ForceAmplitude);
 
             if (MainForm.CustomIP)
             {

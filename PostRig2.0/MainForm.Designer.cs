@@ -30,35 +30,31 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraCharts.XYDiagram xyDiagram13 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series13 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SplineSeriesView splineSeriesView13 = new DevExpress.XtraCharts.SplineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle15 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.ChartTitle chartTitle16 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram14 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series14 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SplineSeriesView splineSeriesView14 = new DevExpress.XtraCharts.SplineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle17 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram15 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series15 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SplineSeriesView splineSeriesView15 = new DevExpress.XtraCharts.SplineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle18 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram16 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series16 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SplineSeriesView splineSeriesView16 = new DevExpress.XtraCharts.SplineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle19 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram17 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series17 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SplineSeriesView splineSeriesView17 = new DevExpress.XtraCharts.SplineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle20 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram18 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series18 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SplineSeriesView splineSeriesView18 = new DevExpress.XtraCharts.SplineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle21 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SplineSeriesView splineSeriesView1 = new DevExpress.XtraCharts.SplineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.ChartTitle chartTitle2 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SplineSeriesView splineSeriesView2 = new DevExpress.XtraCharts.SplineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle3 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram3 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SplineSeriesView splineSeriesView3 = new DevExpress.XtraCharts.SplineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle4 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram4 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SplineSeriesView splineSeriesView4 = new DevExpress.XtraCharts.SplineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle5 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram5 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SplineSeriesView splineSeriesView5 = new DevExpress.XtraCharts.SplineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle6 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram6 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SplineSeriesView splineSeriesView6 = new DevExpress.XtraCharts.SplineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle7 = new DevExpress.XtraCharts.ChartTitle();
             this.MainFormRibbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.NewFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.OpenFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
@@ -68,7 +64,7 @@
             this.CaseStudyFileRibbonGroup = new DevExpress.XtraBars.BarButtonItem();
             this.AboutFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.CloseFileRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
-            this.BuildCarHomeRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.NewCarDesignRibbonBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.ShowHomePanelBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.NewSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.SingleStepIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
@@ -84,7 +80,8 @@
             this.VerticalAccelnPlotBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.SysCharResultsBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.CustomIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
-            this.SpringDesignBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.ExistingCarDesignBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.SaveCarDesignBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.HomeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.FileOptionsFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.OpenSaveFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -92,7 +89,7 @@
             this.AboutFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.CloseFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.DesignRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.BuildHomeRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.CarHomeRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ShowHomeRibbonPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.SimSetupRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.SetupRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -120,25 +117,17 @@
             this.DesignerNameLabel = new DevExpress.XtraEditors.LabelControl();
             this.LogoPanel = new DevExpress.XtraEditors.PanelControl();
             this.DesignRibbonBasePanel = new DevExpress.XtraEditors.PanelControl();
-            this.VehicleDataModelPanel = new DevExpress.XtraEditors.PanelControl();
-            this.VehicleTemplateHomeRibbonPanel = new DevExpress.XtraEditors.PanelControl();
-            this.SpringDesignDataPanel = new System.Windows.Forms.Panel();
-            this.SpringDesignTreeList = new DevExpress.XtraTreeList.TreeList();
-            this.SpringParametersTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.SpringValuesTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.SpringUnitsTreeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.VehicleTemplateButtonPanel = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
-            this.CarModelImagePanel = new DevExpress.XtraEditors.PanelControl();
-            this.DampingCoeffTitleLabel = new DevExpress.XtraEditors.LabelControl();
-            this.DampingCoeffUnitLabel = new DevExpress.XtraEditors.LabelControl();
-            this.DampingCoeffTextBox = new DevExpress.XtraEditors.TextEdit();
-            this.CornerWeightTextBox = new DevExpress.XtraEditors.TextEdit();
-            this.CornerWeightUnitLabel = new DevExpress.XtraEditors.LabelControl();
-            this.SpringStiffnessTitleLabel = new DevExpress.XtraEditors.LabelControl();
-            this.CornerWeightTitleLabel = new DevExpress.XtraEditors.LabelControl();
-            this.SpringStiffnessUnitLabel = new DevExpress.XtraEditors.LabelControl();
+            this.DesignPanelLayoutControl = new DevExpress.XtraLayout.LayoutControl();
+            this.DesignTemplatePanel = new DevExpress.XtraEditors.PanelControl();
+            this.DampingCoefficientTextBox = new DevExpress.XtraEditors.TextEdit();
             this.SpringStiffnessTextBox = new DevExpress.XtraEditors.TextEdit();
-            this.SpringDesignPanel = new DevExpress.XtraEditors.PanelControl();
+            this.CornerWeightTextBox = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.DesignTreeList = new DevExpress.XtraTreeList.TreeList();
+            this.DesignParametersTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.DesignValuesTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.DesignUnitsTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.SimulationSetupBasePanel = new DevExpress.XtraEditors.PanelControl();
             this.CustomIPChartControl = new DevExpress.XtraCharts.ChartControl();
             this.StepInputZedGraph = new ZedGraph.ZedGraphControl();
@@ -167,49 +156,47 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DesignRibbonBasePanel)).BeginInit();
             this.DesignRibbonBasePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.VehicleDataModelPanel)).BeginInit();
-            this.VehicleDataModelPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.VehicleTemplateHomeRibbonPanel)).BeginInit();
-            this.VehicleTemplateHomeRibbonPanel.SuspendLayout();
-            this.SpringDesignDataPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpringDesignTreeList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CarModelImagePanel)).BeginInit();
-            this.CarModelImagePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DampingCoeffTextBox.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CornerWeightTextBox.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DesignPanelLayoutControl)).BeginInit();
+            this.DesignPanelLayoutControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DesignTemplatePanel)).BeginInit();
+            this.DesignTemplatePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DampingCoefficientTextBox.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpringStiffnessTextBox.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpringDesignPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CornerWeightTextBox.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DesignTreeList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SimulationSetupBasePanel)).BeginInit();
             this.SimulationSetupBasePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CustomIPChartControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StepSignalChartControl)).BeginInit();
             this.SimSetupParametersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SimSetupTreeList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsBasePanel)).BeginInit();
             this.ResultsBasePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VerticalAccelnChartControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BodyForceChartControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DamperForceChartControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BodyDisplacementChartControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpringForceChartControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsLeftSidePanel)).BeginInit();
             this.ResultsLeftSidePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SystemCharTreeList)).BeginInit();
@@ -228,7 +215,7 @@
             this.CaseStudyFileRibbonGroup,
             this.AboutFileRibbonBarButton,
             this.CloseFileRibbonBarButton,
-            this.BuildCarHomeRibbonBarButton,
+            this.NewCarDesignRibbonBarButton,
             this.ShowHomePanelBarButton,
             this.NewSimSetupBarButton,
             this.SingleStepIPCheckItem,
@@ -244,9 +231,10 @@
             this.VerticalAccelnPlotBarButton,
             this.SysCharResultsBarButton,
             this.CustomIPCheckItem,
-            this.SpringDesignBarButton});
+            this.ExistingCarDesignBarButton,
+            this.SaveCarDesignBarButton});
             this.MainFormRibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.MainFormRibbonControl.MaxItemId = 59;
+            this.MainFormRibbonControl.MaxItemId = 64;
             this.MainFormRibbonControl.Name = "MainFormRibbonControl";
             this.MainFormRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.HomeRibbonPage,
@@ -336,15 +324,15 @@
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             this.CloseFileRibbonBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CloseFileRibbonBarButton_ItemClick);
             // 
-            // BuildCarHomeRibbonBarButton
+            // NewCarDesignRibbonBarButton
             // 
-            this.BuildCarHomeRibbonBarButton.Caption = "Build Car";
-            this.BuildCarHomeRibbonBarButton.Id = 12;
-            this.BuildCarHomeRibbonBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("BuildCarHomeRibbonBarButton.ImageOptions.Image")));
-            this.BuildCarHomeRibbonBarButton.Name = "BuildCarHomeRibbonBarButton";
-            this.BuildCarHomeRibbonBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            this.NewCarDesignRibbonBarButton.Caption = "New Car";
+            this.NewCarDesignRibbonBarButton.Id = 12;
+            this.NewCarDesignRibbonBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("NewCarDesignRibbonBarButton.ImageOptions.Image")));
+            this.NewCarDesignRibbonBarButton.Name = "NewCarDesignRibbonBarButton";
+            this.NewCarDesignRibbonBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            this.BuildCarHomeRibbonBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BuildCarHomeRibbonBarButton_ItemClick);
+            this.NewCarDesignRibbonBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.NewCarDesignRibbonBarButton_ItemClick);
             // 
             // ShowHomePanelBarButton
             // 
@@ -489,15 +477,23 @@
             this.CustomIPCheckItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.CustomIPCheckItem_CheckedChanged);
             this.CustomIPCheckItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CustomIPCheckItem_OnClick);
             // 
-            // SpringDesignBarButton
+            // ExistingCarDesignBarButton
             // 
-            this.SpringDesignBarButton.Caption = "Spring";
-            this.SpringDesignBarButton.Id = 58;
-            this.SpringDesignBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SpringDesignBarButton.ImageOptions.Image")));
-            this.SpringDesignBarButton.Name = "SpringDesignBarButton";
-            this.SpringDesignBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            this.ExistingCarDesignBarButton.Caption = "Load Car";
+            this.ExistingCarDesignBarButton.Id = 61;
+            this.ExistingCarDesignBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ExistingCarDesignBarButton.ImageOptions.Image")));
+            this.ExistingCarDesignBarButton.Name = "ExistingCarDesignBarButton";
+            this.ExistingCarDesignBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            this.SpringDesignBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SpringDesignBarButton_ItemClick);
+            // 
+            // SaveCarDesignBarButton
+            // 
+            this.SaveCarDesignBarButton.Caption = "Save Car";
+            this.SaveCarDesignBarButton.Id = 62;
+            this.SaveCarDesignBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SaveCarDesignBarButton.ImageOptions.Image")));
+            this.SaveCarDesignBarButton.Name = "SaveCarDesignBarButton";
+            this.SaveCarDesignBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             // 
             // HomeRibbonPage
             // 
@@ -553,18 +549,19 @@
             // DesignRibbonPage
             // 
             this.DesignRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.BuildHomeRibbonGroup,
+            this.CarHomeRibbonGroup,
             this.ShowHomeRibbonPanelGroup});
             this.DesignRibbonPage.Name = "DesignRibbonPage";
             this.DesignRibbonPage.Text = "Design";
             this.DesignRibbonPage.Visible = false;
             // 
-            // BuildHomeRibbonGroup
+            // CarHomeRibbonGroup
             // 
-            this.BuildHomeRibbonGroup.ItemLinks.Add(this.BuildCarHomeRibbonBarButton);
-            this.BuildHomeRibbonGroup.ItemLinks.Add(this.SpringDesignBarButton);
-            this.BuildHomeRibbonGroup.Name = "BuildHomeRibbonGroup";
-            this.BuildHomeRibbonGroup.Text = "Build";
+            this.CarHomeRibbonGroup.ItemLinks.Add(this.NewCarDesignRibbonBarButton);
+            this.CarHomeRibbonGroup.ItemLinks.Add(this.ExistingCarDesignBarButton);
+            this.CarHomeRibbonGroup.ItemLinks.Add(this.SaveCarDesignBarButton);
+            this.CarHomeRibbonGroup.Name = "CarHomeRibbonGroup";
+            this.CarHomeRibbonGroup.Text = "Car";
             // 
             // ShowHomeRibbonPanelGroup
             // 
@@ -847,7 +844,8 @@
             this.DesignRibbonBasePanel.AutoSize = true;
             this.DesignRibbonBasePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.DesignRibbonBasePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.DesignRibbonBasePanel.Controls.Add(this.VehicleDataModelPanel);
+            this.DesignRibbonBasePanel.Controls.Add(this.DesignPanelLayoutControl);
+            this.DesignRibbonBasePanel.Controls.Add(this.DesignTreeList);
             this.DesignRibbonBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DesignRibbonBasePanel.Location = new System.Drawing.Point(0, 143);
             this.DesignRibbonBasePanel.Name = "DesignRibbonBasePanel";
@@ -855,288 +853,193 @@
             this.DesignRibbonBasePanel.TabIndex = 3;
             this.DesignRibbonBasePanel.Visible = false;
             // 
-            // VehicleDataModelPanel
+            // DesignPanelLayoutControl
             // 
-            this.VehicleDataModelPanel.AutoSize = true;
-            this.VehicleDataModelPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.VehicleDataModelPanel.Controls.Add(this.VehicleTemplateHomeRibbonPanel);
-            this.VehicleDataModelPanel.Controls.Add(this.CarModelImagePanel);
-            this.VehicleDataModelPanel.Controls.Add(this.SpringDesignPanel);
-            this.VehicleDataModelPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.VehicleDataModelPanel.Location = new System.Drawing.Point(0, 0);
-            this.VehicleDataModelPanel.Name = "VehicleDataModelPanel";
-            this.VehicleDataModelPanel.Size = new System.Drawing.Size(1140, 728);
-            this.VehicleDataModelPanel.TabIndex = 2;
-            this.VehicleDataModelPanel.Visible = false;
+            this.DesignPanelLayoutControl.Controls.Add(this.DesignTemplatePanel);
+            this.DesignPanelLayoutControl.Location = new System.Drawing.Point(323, 11);
+            this.DesignPanelLayoutControl.Name = "DesignPanelLayoutControl";
+            this.DesignPanelLayoutControl.Root = this.layoutControlGroup1;
+            this.DesignPanelLayoutControl.Size = new System.Drawing.Size(816, 716);
+            this.DesignPanelLayoutControl.TabIndex = 5;
+            this.DesignPanelLayoutControl.Text = "layoutControl1";
             // 
-            // VehicleTemplateHomeRibbonPanel
+            // DesignTemplatePanel
             // 
-            this.VehicleTemplateHomeRibbonPanel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.VehicleTemplateHomeRibbonPanel.Appearance.Options.UseBackColor = true;
-            this.VehicleTemplateHomeRibbonPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.VehicleTemplateHomeRibbonPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.VehicleTemplateHomeRibbonPanel.Controls.Add(this.SpringDesignDataPanel);
-            this.VehicleTemplateHomeRibbonPanel.Controls.Add(this.VehicleTemplateButtonPanel);
-            this.VehicleTemplateHomeRibbonPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.VehicleTemplateHomeRibbonPanel.Location = new System.Drawing.Point(0, 0);
-            this.VehicleTemplateHomeRibbonPanel.Name = "VehicleTemplateHomeRibbonPanel";
-            this.VehicleTemplateHomeRibbonPanel.Size = new System.Drawing.Size(317, 728);
-            this.VehicleTemplateHomeRibbonPanel.TabIndex = 0;
-            this.VehicleTemplateHomeRibbonPanel.Visible = false;
+            this.DesignTemplatePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.DesignTemplatePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.DesignTemplatePanel.ContentImage = ((System.Drawing.Image)(resources.GetObject("DesignTemplatePanel.ContentImage")));
+            this.DesignTemplatePanel.Controls.Add(this.DampingCoefficientTextBox);
+            this.DesignTemplatePanel.Controls.Add(this.SpringStiffnessTextBox);
+            this.DesignTemplatePanel.Controls.Add(this.CornerWeightTextBox);
+            this.DesignTemplatePanel.Location = new System.Drawing.Point(12, 12);
+            this.DesignTemplatePanel.Name = "DesignTemplatePanel";
+            this.DesignTemplatePanel.Size = new System.Drawing.Size(792, 692);
+            this.DesignTemplatePanel.TabIndex = 4;
             // 
-            // SpringDesignDataPanel
+            // DampingCoefficientTextBox
             // 
-            this.SpringDesignDataPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SpringDesignDataPanel.Controls.Add(this.SpringDesignTreeList);
-            this.SpringDesignDataPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.SpringDesignDataPanel.Location = new System.Drawing.Point(0, 0);
-            this.SpringDesignDataPanel.Name = "SpringDesignDataPanel";
-            this.SpringDesignDataPanel.Size = new System.Drawing.Size(317, 728);
-            this.SpringDesignDataPanel.TabIndex = 1;
-            this.SpringDesignDataPanel.Visible = false;
-            // 
-            // SpringDesignTreeList
-            // 
-            this.SpringDesignTreeList.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.SpringParametersTreeListColumn,
-            this.SpringValuesTreeListColumn,
-            this.SpringUnitsTreeListColumn3});
-            this.SpringDesignTreeList.Cursor = System.Windows.Forms.Cursors.Default;
-            this.SpringDesignTreeList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SpringDesignTreeList.Location = new System.Drawing.Point(0, 0);
-            this.SpringDesignTreeList.Name = "SpringDesignTreeList";
-            this.SpringDesignTreeList.BeginUnboundLoad();
-            this.SpringDesignTreeList.AppendNode(new object[] {
-            "Physical Dimensions",
-            null,
-            null}, -1);
-            this.SpringDesignTreeList.AppendNode(new object[] {
-            "Free Length",
-            null,
-            "m"}, 0);
-            this.SpringDesignTreeList.AppendNode(new object[] {
-            "Compressed Length",
-            null,
-            "m"}, 0);
-            this.SpringDesignTreeList.AppendNode(new object[] {
-            "Extended Length",
-            null,
-            "m"}, 0);
-            this.SpringDesignTreeList.AppendNode(new object[] {
-            "Properties",
-            null,
-            null}, -1);
-            this.SpringDesignTreeList.AppendNode(new object[] {
-            "Spring Stiffness",
-            null,
-            "N/m"}, 4);
-            this.SpringDesignTreeList.EndUnboundLoad();
-            this.SpringDesignTreeList.OptionsView.AutoWidth = false;
-            this.SpringDesignTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
-            this.SpringDesignTreeList.Size = new System.Drawing.Size(315, 271);
-            this.SpringDesignTreeList.TabIndex = 1;
-            // 
-            // SpringParametersTreeListColumn
-            // 
-            this.SpringParametersTreeListColumn.Caption = "Parameters";
-            this.SpringParametersTreeListColumn.FieldName = "Parameters";
-            this.SpringParametersTreeListColumn.Name = "SpringParametersTreeListColumn";
-            this.SpringParametersTreeListColumn.OptionsColumn.AllowEdit = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.AllowFocus = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.AllowMove = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.AllowMoveToCustomizationForm = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.AllowSize = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.AllowSort = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.ShowInCustomizationForm = false;
-            this.SpringParametersTreeListColumn.OptionsColumn.ShowInExpressionEditor = false;
-            this.SpringParametersTreeListColumn.Visible = true;
-            this.SpringParametersTreeListColumn.VisibleIndex = 0;
-            this.SpringParametersTreeListColumn.Width = 148;
-            // 
-            // SpringValuesTreeListColumn
-            // 
-            this.SpringValuesTreeListColumn.Caption = "Values";
-            this.SpringValuesTreeListColumn.FieldName = "Values";
-            this.SpringValuesTreeListColumn.Name = "SpringValuesTreeListColumn";
-            this.SpringValuesTreeListColumn.OptionsColumn.AllowMove = false;
-            this.SpringValuesTreeListColumn.OptionsColumn.AllowMoveToCustomizationForm = false;
-            this.SpringValuesTreeListColumn.OptionsColumn.AllowSize = false;
-            this.SpringValuesTreeListColumn.OptionsColumn.AllowSort = false;
-            this.SpringValuesTreeListColumn.OptionsColumn.ShowInCustomizationForm = false;
-            this.SpringValuesTreeListColumn.OptionsColumn.ShowInExpressionEditor = false;
-            this.SpringValuesTreeListColumn.Visible = true;
-            this.SpringValuesTreeListColumn.VisibleIndex = 1;
-            // 
-            // SpringUnitsTreeListColumn3
-            // 
-            this.SpringUnitsTreeListColumn3.Caption = "Units";
-            this.SpringUnitsTreeListColumn3.FieldName = "Units";
-            this.SpringUnitsTreeListColumn3.Name = "SpringUnitsTreeListColumn3";
-            this.SpringUnitsTreeListColumn3.OptionsColumn.AllowEdit = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.AllowFocus = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.AllowMove = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.AllowMoveToCustomizationForm = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.AllowSize = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.AllowSort = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.ShowInCustomizationForm = false;
-            this.SpringUnitsTreeListColumn3.OptionsColumn.ShowInExpressionEditor = false;
-            this.SpringUnitsTreeListColumn3.Visible = true;
-            this.SpringUnitsTreeListColumn3.VisibleIndex = 2;
-            this.SpringUnitsTreeListColumn3.Width = 62;
-            // 
-            // VehicleTemplateButtonPanel
-            // 
-            this.VehicleTemplateButtonPanel.ButtonInterval = 30;
-            this.VehicleTemplateButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Road Car", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Race Car", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Rally Car", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Custom Car", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1, false)});
-            this.VehicleTemplateButtonPanel.ForeColor = System.Drawing.Color.Black;
-            this.VehicleTemplateButtonPanel.Location = new System.Drawing.Point(113, 170);
-            this.VehicleTemplateButtonPanel.Name = "VehicleTemplateButtonPanel";
-            this.VehicleTemplateButtonPanel.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.VehicleTemplateButtonPanel.Size = new System.Drawing.Size(75, 400);
-            this.VehicleTemplateButtonPanel.TabIndex = 0;
-            this.VehicleTemplateButtonPanel.Text = "Vehicle Template";
-            this.VehicleTemplateButtonPanel.ButtonChecked += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.VehicleTemplateButtonPanel_ButtonChecked);
-            // 
-            // CarModelImagePanel
-            // 
-            this.CarModelImagePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.CarModelImagePanel.ContentImage = ((System.Drawing.Image)(resources.GetObject("CarModelImagePanel.ContentImage")));
-            this.CarModelImagePanel.Controls.Add(this.DampingCoeffTitleLabel);
-            this.CarModelImagePanel.Controls.Add(this.DampingCoeffUnitLabel);
-            this.CarModelImagePanel.Controls.Add(this.DampingCoeffTextBox);
-            this.CarModelImagePanel.Controls.Add(this.CornerWeightTextBox);
-            this.CarModelImagePanel.Controls.Add(this.CornerWeightUnitLabel);
-            this.CarModelImagePanel.Controls.Add(this.SpringStiffnessTitleLabel);
-            this.CarModelImagePanel.Controls.Add(this.CornerWeightTitleLabel);
-            this.CarModelImagePanel.Controls.Add(this.SpringStiffnessUnitLabel);
-            this.CarModelImagePanel.Controls.Add(this.SpringStiffnessTextBox);
-            this.CarModelImagePanel.Location = new System.Drawing.Point(335, 16);
-            this.CarModelImagePanel.Name = "CarModelImagePanel";
-            this.CarModelImagePanel.Size = new System.Drawing.Size(762, 680);
-            this.CarModelImagePanel.TabIndex = 1;
-            // 
-            // DampingCoeffTitleLabel
-            // 
-            this.DampingCoeffTitleLabel.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.DampingCoeffTitleLabel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.DampingCoeffTitleLabel.Appearance.Options.UseFont = true;
-            this.DampingCoeffTitleLabel.Appearance.Options.UseForeColor = true;
-            this.DampingCoeffTitleLabel.Location = new System.Drawing.Point(520, 331);
-            this.DampingCoeffTitleLabel.Name = "DampingCoeffTitleLabel";
-            this.DampingCoeffTitleLabel.Size = new System.Drawing.Size(239, 33);
-            this.DampingCoeffTitleLabel.TabIndex = 0;
-            this.DampingCoeffTitleLabel.Text = "Damping Coefficient";
-            // 
-            // DampingCoeffUnitLabel
-            // 
-            this.DampingCoeffUnitLabel.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.DampingCoeffUnitLabel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.DampingCoeffUnitLabel.Appearance.Options.UseFont = true;
-            this.DampingCoeffUnitLabel.Appearance.Options.UseForeColor = true;
-            this.DampingCoeffUnitLabel.Location = new System.Drawing.Point(591, 458);
-            this.DampingCoeffUnitLabel.Name = "DampingCoeffUnitLabel";
-            this.DampingCoeffUnitLabel.Size = new System.Drawing.Size(93, 33);
-            this.DampingCoeffUnitLabel.TabIndex = 0;
-            this.DampingCoeffUnitLabel.Text = "N/(m/s)";
-            // 
-            // DampingCoeffTextBox
-            // 
-            this.DampingCoeffTextBox.Location = new System.Drawing.Point(540, 396);
-            this.DampingCoeffTextBox.Name = "DampingCoeffTextBox";
-            this.DampingCoeffTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15F);
-            this.DampingCoeffTextBox.Properties.Appearance.Options.UseFont = true;
-            this.DampingCoeffTextBox.Size = new System.Drawing.Size(185, 30);
-            this.DampingCoeffTextBox.TabIndex = 1;
-            this.DampingCoeffTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnterClicked);
-            this.DampingCoeffTextBox.LostFocus += new System.EventHandler(this.OnTextInputChanged);
-            // 
-            // CornerWeightTextBox
-            // 
-            this.CornerWeightTextBox.Location = new System.Drawing.Point(289, 160);
-            this.CornerWeightTextBox.Name = "CornerWeightTextBox";
-            this.CornerWeightTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15F);
-            this.CornerWeightTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.CornerWeightTextBox.Properties.Appearance.Options.UseFont = true;
-            this.CornerWeightTextBox.Properties.Appearance.Options.UseForeColor = true;
-            this.CornerWeightTextBox.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Flat;
-            this.CornerWeightTextBox.Size = new System.Drawing.Size(171, 32);
-            this.CornerWeightTextBox.TabIndex = 1;
-            this.CornerWeightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnterClicked);
-            this.CornerWeightTextBox.LostFocus += new System.EventHandler(this.OnTextInputChanged);
-            // 
-            // CornerWeightUnitLabel
-            // 
-            this.CornerWeightUnitLabel.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.CornerWeightUnitLabel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.CornerWeightUnitLabel.Appearance.Options.UseFont = true;
-            this.CornerWeightUnitLabel.Appearance.Options.UseForeColor = true;
-            this.CornerWeightUnitLabel.Location = new System.Drawing.Point(358, 222);
-            this.CornerWeightUnitLabel.Name = "CornerWeightUnitLabel";
-            this.CornerWeightUnitLabel.Size = new System.Drawing.Size(31, 33);
-            this.CornerWeightUnitLabel.TabIndex = 0;
-            this.CornerWeightUnitLabel.Text = "Kg";
-            // 
-            // SpringStiffnessTitleLabel
-            // 
-            this.SpringStiffnessTitleLabel.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.SpringStiffnessTitleLabel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.SpringStiffnessTitleLabel.Appearance.Options.UseFont = true;
-            this.SpringStiffnessTitleLabel.Appearance.Options.UseForeColor = true;
-            this.SpringStiffnessTitleLabel.Location = new System.Drawing.Point(9, 331);
-            this.SpringStiffnessTitleLabel.Name = "SpringStiffnessTitleLabel";
-            this.SpringStiffnessTitleLabel.Size = new System.Drawing.Size(185, 33);
-            this.SpringStiffnessTitleLabel.TabIndex = 0;
-            this.SpringStiffnessTitleLabel.Text = "Spring Stiffness";
-            // 
-            // CornerWeightTitleLabel
-            // 
-            this.CornerWeightTitleLabel.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.CornerWeightTitleLabel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.CornerWeightTitleLabel.Appearance.Options.UseFont = true;
-            this.CornerWeightTitleLabel.Appearance.Options.UseForeColor = true;
-            this.CornerWeightTitleLabel.Location = new System.Drawing.Point(289, 95);
-            this.CornerWeightTitleLabel.Name = "CornerWeightTitleLabel";
-            this.CornerWeightTitleLabel.Size = new System.Drawing.Size(171, 33);
-            this.CornerWeightTitleLabel.TabIndex = 0;
-            this.CornerWeightTitleLabel.Text = "Corner Weight";
-            // 
-            // SpringStiffnessUnitLabel
-            // 
-            this.SpringStiffnessUnitLabel.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.SpringStiffnessUnitLabel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.SpringStiffnessUnitLabel.Appearance.Options.UseFont = true;
-            this.SpringStiffnessUnitLabel.Appearance.Options.UseForeColor = true;
-            this.SpringStiffnessUnitLabel.Location = new System.Drawing.Point(76, 458);
-            this.SpringStiffnessUnitLabel.Name = "SpringStiffnessUnitLabel";
-            this.SpringStiffnessUnitLabel.Size = new System.Drawing.Size(51, 33);
-            this.SpringStiffnessUnitLabel.TabIndex = 0;
-            this.SpringStiffnessUnitLabel.Text = "N/m";
+            this.DampingCoefficientTextBox.Location = new System.Drawing.Point(513, 428);
+            this.DampingCoefficientTextBox.Name = "DampingCoefficientTextBox";
+            this.DampingCoefficientTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DampingCoefficientTextBox.Properties.Appearance.Options.UseFont = true;
+            this.DampingCoefficientTextBox.Properties.ReadOnly = true;
+            this.DampingCoefficientTextBox.Size = new System.Drawing.Size(134, 26);
+            this.DampingCoefficientTextBox.TabIndex = 0;
             // 
             // SpringStiffnessTextBox
             // 
-            this.SpringStiffnessTextBox.Location = new System.Drawing.Point(9, 396);
+            this.SpringStiffnessTextBox.Location = new System.Drawing.Point(128, 428);
             this.SpringStiffnessTextBox.Name = "SpringStiffnessTextBox";
-            this.SpringStiffnessTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15F);
+            this.SpringStiffnessTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SpringStiffnessTextBox.Properties.Appearance.Options.UseFont = true;
-            this.SpringStiffnessTextBox.Size = new System.Drawing.Size(185, 30);
-            this.SpringStiffnessTextBox.TabIndex = 1;
-            this.SpringStiffnessTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnterClicked);
-            this.SpringStiffnessTextBox.LostFocus += new System.EventHandler(this.OnTextInputChanged);
+            this.SpringStiffnessTextBox.Properties.ReadOnly = true;
+            this.SpringStiffnessTextBox.Size = new System.Drawing.Size(134, 26);
+            this.SpringStiffnessTextBox.TabIndex = 0;
             // 
-            // SpringDesignPanel
+            // CornerWeightTextBox
             // 
-            this.SpringDesignPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.SpringDesignPanel.ContentImage = ((System.Drawing.Image)(resources.GetObject("SpringDesignPanel.ContentImage")));
-            this.SpringDesignPanel.Location = new System.Drawing.Point(323, 3);
-            this.SpringDesignPanel.Name = "SpringDesignPanel";
-            this.SpringDesignPanel.Size = new System.Drawing.Size(817, 721);
-            this.SpringDesignPanel.TabIndex = 3;
-            this.SpringDesignPanel.Visible = false;
+            this.CornerWeightTextBox.Location = new System.Drawing.Point(309, 295);
+            this.CornerWeightTextBox.MenuManager = this.MainFormRibbonControl;
+            this.CornerWeightTextBox.Name = "CornerWeightTextBox";
+            this.CornerWeightTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CornerWeightTextBox.Properties.Appearance.Options.UseFont = true;
+            this.CornerWeightTextBox.Properties.ReadOnly = true;
+            this.CornerWeightTextBox.Size = new System.Drawing.Size(134, 26);
+            this.CornerWeightTextBox.TabIndex = 0;
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(816, 716);
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.DesignTemplatePanel;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(796, 696);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // DesignTreeList
+            // 
+            this.DesignTreeList.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.DesignParametersTreeListColumn,
+            this.DesignValuesTreeListColumn,
+            this.DesignUnitsTreeListColumn});
+            this.DesignTreeList.Cursor = System.Windows.Forms.Cursors.Default;
+            this.DesignTreeList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.DesignTreeList.Location = new System.Drawing.Point(0, 0);
+            this.DesignTreeList.Name = "DesignTreeList";
+            this.DesignTreeList.BeginUnboundLoad();
+            this.DesignTreeList.AppendNode(new object[] {
+            "Body",
+            null,
+            null}, -1);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Vehicle Mass",
+            null,
+            "Kg"}, 0);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Spring",
+            null,
+            null}, -1);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Property",
+            null,
+            null}, 2);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Spring Stiffness",
+            null,
+            "N/m"}, 3);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Dimensions",
+            null,
+            null}, 2);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Free Length",
+            null,
+            "m"}, 5);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Compressed Length",
+            null,
+            "m"}, 5);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Extended Length",
+            null,
+            "m"}, 5);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Damper",
+            null,
+            null}, -1);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Damping Coefficient",
+            null,
+            "N/(m/s)"}, 9);
+            this.DesignTreeList.AppendNode(new object[] {
+            "Damping Ratio",
+            null,
+            "-"}, 9);
+            this.DesignTreeList.EndUnboundLoad();
+            this.DesignTreeList.OptionsView.AutoWidth = false;
+            this.DesignTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
+            this.DesignTreeList.Size = new System.Drawing.Size(310, 728);
+            this.DesignTreeList.TabIndex = 1;
+            this.DesignTreeList.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.DesignTreeList_FocusChanged);
+            this.DesignTreeList.CellValueChanged += new DevExpress.XtraTreeList.CellValueChangedEventHandler(this.DesignTreeList_OnCellValueChanged);
+            // 
+            // DesignParametersTreeListColumn
+            // 
+            this.DesignParametersTreeListColumn.Caption = "Parameters";
+            this.DesignParametersTreeListColumn.FieldName = "Parameters";
+            this.DesignParametersTreeListColumn.Name = "DesignParametersTreeListColumn";
+            this.DesignParametersTreeListColumn.OptionsColumn.AllowEdit = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.AllowFocus = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.AllowMove = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.AllowMoveToCustomizationForm = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.AllowSize = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.AllowSort = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.ShowInCustomizationForm = false;
+            this.DesignParametersTreeListColumn.OptionsColumn.ShowInExpressionEditor = false;
+            this.DesignParametersTreeListColumn.Visible = true;
+            this.DesignParametersTreeListColumn.VisibleIndex = 0;
+            this.DesignParametersTreeListColumn.Width = 148;
+            // 
+            // DesignValuesTreeListColumn
+            // 
+            this.DesignValuesTreeListColumn.Caption = "Values";
+            this.DesignValuesTreeListColumn.FieldName = "Values";
+            this.DesignValuesTreeListColumn.Name = "DesignValuesTreeListColumn";
+            this.DesignValuesTreeListColumn.OptionsColumn.AllowMove = false;
+            this.DesignValuesTreeListColumn.OptionsColumn.AllowMoveToCustomizationForm = false;
+            this.DesignValuesTreeListColumn.OptionsColumn.AllowSize = false;
+            this.DesignValuesTreeListColumn.OptionsColumn.AllowSort = false;
+            this.DesignValuesTreeListColumn.OptionsColumn.ShowInCustomizationForm = false;
+            this.DesignValuesTreeListColumn.OptionsColumn.ShowInExpressionEditor = false;
+            this.DesignValuesTreeListColumn.Visible = true;
+            this.DesignValuesTreeListColumn.VisibleIndex = 1;
+            // 
+            // DesignUnitsTreeListColumn
+            // 
+            this.DesignUnitsTreeListColumn.Caption = "Units";
+            this.DesignUnitsTreeListColumn.FieldName = "Units";
+            this.DesignUnitsTreeListColumn.Name = "DesignUnitsTreeListColumn";
+            this.DesignUnitsTreeListColumn.OptionsColumn.AllowEdit = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.AllowFocus = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.AllowMove = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.AllowMoveToCustomizationForm = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.AllowSize = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.AllowSort = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.ShowInCustomizationForm = false;
+            this.DesignUnitsTreeListColumn.OptionsColumn.ShowInExpressionEditor = false;
+            this.DesignUnitsTreeListColumn.Visible = true;
+            this.DesignUnitsTreeListColumn.VisibleIndex = 2;
+            this.DesignUnitsTreeListColumn.Width = 62;
             // 
             // SimulationSetupBasePanel
             // 
@@ -1154,27 +1057,27 @@
             // 
             // CustomIPChartControl
             // 
-            xyDiagram13.AxisX.Title.Text = "Time (s)";
-            xyDiagram13.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram13.AxisY.Title.Text = "Displacement (s)";
-            xyDiagram13.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram13.EnableAxisXScrolling = true;
-            xyDiagram13.EnableAxisXZooming = true;
-            xyDiagram13.EnableAxisYScrolling = true;
-            xyDiagram13.EnableAxisYZooming = true;
-            this.CustomIPChartControl.Diagram = xyDiagram13;
+            xyDiagram1.AxisX.Title.Text = "Time (s)";
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.Title.Text = "Displacement (s)";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram1.EnableAxisXScrolling = true;
+            xyDiagram1.EnableAxisXZooming = true;
+            xyDiagram1.EnableAxisYScrolling = true;
+            xyDiagram1.EnableAxisYZooming = true;
+            this.CustomIPChartControl.Diagram = xyDiagram1;
             this.CustomIPChartControl.Legend.Name = "Default Legend";
             this.CustomIPChartControl.Location = new System.Drawing.Point(338, 238);
             this.CustomIPChartControl.Name = "CustomIPChartControl";
-            series13.Name = "Displacement";
-            series13.View = splineSeriesView13;
+            series1.Name = "Displacement";
+            series1.View = splineSeriesView1;
             this.CustomIPChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series13};
+        series1};
             this.CustomIPChartControl.Size = new System.Drawing.Size(351, 217);
             this.CustomIPChartControl.TabIndex = 2;
-            chartTitle15.Text = "Custom Input Signal";
+            chartTitle1.Text = "Custom Input Signal";
             this.CustomIPChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle15});
+            chartTitle1});
             this.CustomIPChartControl.Visible = false;
             // 
             // StepInputZedGraph
@@ -1201,9 +1104,9 @@
             this.StepSignalChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.StepSignalChartControl.Size = new System.Drawing.Size(351, 219);
             this.StepSignalChartControl.TabIndex = 1;
-            chartTitle16.Text = "Step Signal";
+            chartTitle2.Text = "Step Signal";
             this.StepSignalChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle16});
+            chartTitle2});
             this.StepSignalChartControl.Visible = false;
             // 
             // SimSetupParametersPanel
@@ -1261,18 +1164,28 @@
             null,
             "seconds"}, 4);
             this.SimSetupTreeList.AppendNode(new object[] {
-            "Amplitude",
+            "Step Input Data",
             null,
             null}, -1);
             this.SimSetupTreeList.AppendNode(new object[] {
             "Step Amplitude",
             null,
             "m"}, 8);
+            this.SimSetupTreeList.AppendNode(new object[] {
+            "Step Force Data",
+            null,
+            null}, -1);
+            this.SimSetupTreeList.AppendNode(new object[] {
+            "Force Amplitude",
+            null,
+            "N"}, 10);
             this.SimSetupTreeList.EndUnboundLoad();
             this.SimSetupTreeList.OptionsView.AutoWidth = false;
             this.SimSetupTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
             this.SimSetupTreeList.Size = new System.Drawing.Size(325, 250);
             this.SimSetupTreeList.TabIndex = 0;
+            this.SimSetupTreeList.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.SimSetupTreeList_FocusChanged);
+            this.SimSetupTreeList.CellValueChanged += new DevExpress.XtraTreeList.CellValueChangedEventHandler(this.SimSetupTreeList_OnCellValueChanged);
             // 
             // SimSetupParametersColumn
             // 
@@ -1353,148 +1266,148 @@
             // 
             // VerticalAccelnChartControl
             // 
-            xyDiagram14.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram14.AxisX.Title.Text = "Time (s)";
-            xyDiagram14.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram14.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram14.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram14.AxisY.Title.Text = "Acceleration (G)";
-            xyDiagram14.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram14.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram14.EnableAxisXScrolling = true;
-            xyDiagram14.EnableAxisXZooming = true;
-            xyDiagram14.EnableAxisYScrolling = true;
-            xyDiagram14.EnableAxisYZooming = true;
-            this.VerticalAccelnChartControl.Diagram = xyDiagram14;
+            xyDiagram2.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram2.AxisX.Title.Text = "Time (s)";
+            xyDiagram2.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram2.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram2.AxisY.Title.Text = "Acceleration (G)";
+            xyDiagram2.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram2.EnableAxisXScrolling = true;
+            xyDiagram2.EnableAxisXZooming = true;
+            xyDiagram2.EnableAxisYScrolling = true;
+            xyDiagram2.EnableAxisYZooming = true;
+            this.VerticalAccelnChartControl.Diagram = xyDiagram2;
             this.VerticalAccelnChartControl.Legend.Name = "Default Legend";
             this.VerticalAccelnChartControl.Location = new System.Drawing.Point(624, 254);
             this.VerticalAccelnChartControl.Name = "VerticalAccelnChartControl";
-            series14.Name = "Vertical Acceleration";
-            series14.View = splineSeriesView14;
+            series2.Name = "Vertical Acceleration";
+            series2.View = splineSeriesView2;
             this.VerticalAccelnChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series14};
+        series2};
             this.VerticalAccelnChartControl.Size = new System.Drawing.Size(254, 199);
             this.VerticalAccelnChartControl.TabIndex = 6;
-            chartTitle17.Text = "Vertical Acceleration";
+            chartTitle3.Text = "Vertical Acceleration";
             this.VerticalAccelnChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle17});
+            chartTitle3});
             this.VerticalAccelnChartControl.Visible = false;
             // 
             // BodyForceChartControl
             // 
-            xyDiagram15.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram15.AxisX.Title.Text = "Time (s)";
-            xyDiagram15.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram15.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram15.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram15.AxisY.Title.Text = "Force (N)";
-            xyDiagram15.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram15.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram15.EnableAxisXScrolling = true;
-            xyDiagram15.EnableAxisXZooming = true;
-            xyDiagram15.EnableAxisYScrolling = true;
-            xyDiagram15.EnableAxisYZooming = true;
-            this.BodyForceChartControl.Diagram = xyDiagram15;
+            xyDiagram3.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram3.AxisX.Title.Text = "Time (s)";
+            xyDiagram3.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram3.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram3.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram3.AxisY.Title.Text = "Force (N)";
+            xyDiagram3.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram3.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram3.EnableAxisXScrolling = true;
+            xyDiagram3.EnableAxisXZooming = true;
+            xyDiagram3.EnableAxisYScrolling = true;
+            xyDiagram3.EnableAxisYZooming = true;
+            this.BodyForceChartControl.Diagram = xyDiagram3;
             this.BodyForceChartControl.Legend.Name = "Default Legend";
             this.BodyForceChartControl.Location = new System.Drawing.Point(319, 256);
             this.BodyForceChartControl.Name = "BodyForceChartControl";
-            series15.Name = "Body Force";
-            series15.View = splineSeriesView15;
+            series3.Name = "Body Force";
+            series3.View = splineSeriesView3;
             this.BodyForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series15};
+        series3};
             this.BodyForceChartControl.Size = new System.Drawing.Size(300, 199);
             this.BodyForceChartControl.TabIndex = 5;
-            chartTitle18.Text = "Body Force";
+            chartTitle4.Text = "Body Force";
             this.BodyForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle18});
+            chartTitle4});
             this.BodyForceChartControl.Visible = false;
             // 
             // DamperForceChartControl
             // 
-            xyDiagram16.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram16.AxisX.Title.Text = "Time (s)";
-            xyDiagram16.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram16.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram16.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram16.AxisY.Title.Text = "Force (N)";
-            xyDiagram16.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram16.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram16.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram16.EnableAxisXScrolling = true;
-            xyDiagram16.EnableAxisXZooming = true;
-            xyDiagram16.EnableAxisYScrolling = true;
-            xyDiagram16.EnableAxisYZooming = true;
-            this.DamperForceChartControl.Diagram = xyDiagram16;
+            xyDiagram4.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram4.AxisX.Title.Text = "Time (s)";
+            xyDiagram4.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram4.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram4.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram4.AxisY.Title.Text = "Force (N)";
+            xyDiagram4.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram4.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram4.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram4.EnableAxisXScrolling = true;
+            xyDiagram4.EnableAxisXZooming = true;
+            xyDiagram4.EnableAxisYScrolling = true;
+            xyDiagram4.EnableAxisYZooming = true;
+            this.DamperForceChartControl.Diagram = xyDiagram4;
             this.DamperForceChartControl.Legend.Name = "Default Legend";
             this.DamperForceChartControl.Location = new System.Drawing.Point(625, 28);
             this.DamperForceChartControl.Name = "DamperForceChartControl";
-            series16.Name = "Damper Force";
-            series16.View = splineSeriesView16;
+            series4.Name = "Damper Force";
+            series4.View = splineSeriesView4;
             this.DamperForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series16};
+        series4};
             this.DamperForceChartControl.Size = new System.Drawing.Size(254, 222);
             this.DamperForceChartControl.TabIndex = 4;
-            chartTitle19.Text = "Damper Force";
+            chartTitle5.Text = "Damper Force";
             this.DamperForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle19});
+            chartTitle5});
             this.DamperForceChartControl.Visible = false;
             // 
             // BodyDisplacementChartControl
             // 
-            xyDiagram17.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram17.AxisX.Title.Text = "Time (s)";
-            xyDiagram17.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram17.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram17.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram17.AxisY.Title.Text = "Displacement (m)";
-            xyDiagram17.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram17.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram17.EnableAxisXScrolling = true;
-            xyDiagram17.EnableAxisXZooming = true;
-            xyDiagram17.EnableAxisYScrolling = true;
-            xyDiagram17.EnableAxisYZooming = true;
-            this.BodyDisplacementChartControl.Diagram = xyDiagram17;
+            xyDiagram5.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram5.AxisX.Title.Text = "Time (s)";
+            xyDiagram5.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram5.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram5.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram5.AxisY.Title.Text = "Displacement (m)";
+            xyDiagram5.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram5.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram5.EnableAxisXScrolling = true;
+            xyDiagram5.EnableAxisXZooming = true;
+            xyDiagram5.EnableAxisYScrolling = true;
+            xyDiagram5.EnableAxisYZooming = true;
+            this.BodyDisplacementChartControl.Diagram = xyDiagram5;
             this.BodyDisplacementChartControl.Legend.Name = "Default Legend";
             this.BodyDisplacementChartControl.Location = new System.Drawing.Point(319, 28);
             this.BodyDisplacementChartControl.Name = "BodyDisplacementChartControl";
-            series17.Name = "Body Displacement";
-            series17.View = splineSeriesView17;
+            series5.Name = "Body Displacement";
+            series5.View = splineSeriesView5;
             this.BodyDisplacementChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series17};
+        series5};
             this.BodyDisplacementChartControl.Size = new System.Drawing.Size(300, 222);
             this.BodyDisplacementChartControl.TabIndex = 3;
-            chartTitle20.Text = "Body Displacement";
+            chartTitle6.Text = "Body Displacement";
             this.BodyDisplacementChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle20});
+            chartTitle6});
             this.BodyDisplacementChartControl.Visible = false;
             // 
             // SpringForceChartControl
             // 
-            xyDiagram18.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram18.AxisX.Title.Text = "Time (s)";
-            xyDiagram18.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram18.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram18.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            xyDiagram18.AxisY.Title.Text = "Force (N)";
-            xyDiagram18.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram18.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram18.EnableAxisXScrolling = true;
-            xyDiagram18.EnableAxisXZooming = true;
-            xyDiagram18.EnableAxisYScrolling = true;
-            xyDiagram18.EnableAxisYZooming = true;
-            this.SpringForceChartControl.Diagram = xyDiagram18;
+            xyDiagram6.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram6.AxisX.Title.Text = "Time (s)";
+            xyDiagram6.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram6.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram6.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            xyDiagram6.AxisY.Title.Text = "Force (N)";
+            xyDiagram6.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram6.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram6.EnableAxisXScrolling = true;
+            xyDiagram6.EnableAxisXZooming = true;
+            xyDiagram6.EnableAxisYScrolling = true;
+            xyDiagram6.EnableAxisYZooming = true;
+            this.SpringForceChartControl.Diagram = xyDiagram6;
             this.SpringForceChartControl.Legend.Name = "Default Legend";
             this.SpringForceChartControl.Location = new System.Drawing.Point(885, 28);
             this.SpringForceChartControl.Name = "SpringForceChartControl";
-            series18.Name = "Spring Force";
-            series18.View = splineSeriesView18;
+            series6.Name = "Spring Force";
+            series6.View = splineSeriesView6;
             this.SpringForceChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series18};
+        series6};
             this.SpringForceChartControl.Size = new System.Drawing.Size(252, 222);
             this.SpringForceChartControl.TabIndex = 2;
-            chartTitle21.Text = "Spring Force";
+            chartTitle7.Text = "Spring Force";
             this.SpringForceChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle21});
+            chartTitle7});
             this.SpringForceChartControl.Visible = false;
             // 
             // ResultsLeftSidePanel
@@ -1611,10 +1524,10 @@
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1140, 871);
+            this.Controls.Add(this.SimulationSetupBasePanel);
             this.Controls.Add(this.DesignRibbonBasePanel);
             this.Controls.Add(this.ResultsBasePanel);
             this.Controls.Add(this.HomeRibbonBasePanel);
-            this.Controls.Add(this.SimulationSetupBasePanel);
             this.Controls.Add(this.MainFormRibbonControl);
             this.Name = "MainForm";
             this.Ribbon = this.MainFormRibbonControl;
@@ -1629,50 +1542,46 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DesignRibbonBasePanel)).EndInit();
             this.DesignRibbonBasePanel.ResumeLayout(false);
-            this.DesignRibbonBasePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.VehicleDataModelPanel)).EndInit();
-            this.VehicleDataModelPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.VehicleTemplateHomeRibbonPanel)).EndInit();
-            this.VehicleTemplateHomeRibbonPanel.ResumeLayout(false);
-            this.SpringDesignDataPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SpringDesignTreeList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CarModelImagePanel)).EndInit();
-            this.CarModelImagePanel.ResumeLayout(false);
-            this.CarModelImagePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DampingCoeffTextBox.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CornerWeightTextBox.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DesignPanelLayoutControl)).EndInit();
+            this.DesignPanelLayoutControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DesignTemplatePanel)).EndInit();
+            this.DesignTemplatePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DampingCoefficientTextBox.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpringStiffnessTextBox.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpringDesignPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CornerWeightTextBox.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DesignTreeList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SimulationSetupBasePanel)).EndInit();
             this.SimulationSetupBasePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomIPChartControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StepSignalChartControl)).EndInit();
             this.SimSetupParametersPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SimSetupTreeList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsBasePanel)).EndInit();
             this.ResultsBasePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VerticalAccelnChartControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BodyForceChartControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DamperForceChartControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BodyDisplacementChartControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(splineSeriesView18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(splineSeriesView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpringForceChartControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsLeftSidePanel)).EndInit();
             this.ResultsLeftSidePanel.ResumeLayout(false);
@@ -1680,6 +1589,16 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void DesignTreeList_AfterFocusNode1(object sender, DevExpress.XtraTreeList.NodeEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void DesignTreeList_AfterFocusNode(object sender, DevExpress.XtraTreeList.NodeEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
@@ -1711,26 +1630,13 @@
         private DevExpress.XtraEditors.LabelControl VersionDashLabel;
         private DevExpress.XtraEditors.LabelControl ReleaseDateDashLabel;
         private DevExpress.XtraEditors.LabelControl DesignerDashLabel;
-        private DevExpress.XtraBars.BarButtonItem BuildCarHomeRibbonBarButton;
+        private DevExpress.XtraBars.BarButtonItem NewCarDesignRibbonBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPage DesignRibbonPage;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup BuildHomeRibbonGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup CarHomeRibbonGroup;
         private DevExpress.XtraEditors.PanelControl FilePRSoftwareInfoPanel;
         private DevExpress.XtraEditors.PanelControl DesignRibbonBasePanel;
-        private DevExpress.XtraEditors.PanelControl VehicleTemplateHomeRibbonPanel;
-        private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel VehicleTemplateButtonPanel;
         private DevExpress.XtraBars.BarButtonItem ShowHomePanelBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ShowHomeRibbonPanelGroup;
-        private DevExpress.XtraEditors.PanelControl VehicleDataModelPanel;
-        private DevExpress.XtraEditors.LabelControl DampingCoeffTitleLabel;
-        private DevExpress.XtraEditors.LabelControl SpringStiffnessTitleLabel;
-        private DevExpress.XtraEditors.LabelControl DampingCoeffUnitLabel;
-        private DevExpress.XtraEditors.TextEdit SpringStiffnessTextBox;
-        private DevExpress.XtraEditors.LabelControl SpringStiffnessUnitLabel;
-        private DevExpress.XtraEditors.TextEdit DampingCoeffTextBox;
-        private DevExpress.XtraEditors.PanelControl CarModelImagePanel;
-        private DevExpress.XtraEditors.TextEdit CornerWeightTextBox;
-        private DevExpress.XtraEditors.LabelControl CornerWeightUnitLabel;
-        private DevExpress.XtraEditors.LabelControl CornerWeightTitleLabel;
         private DevExpress.XtraBars.BarButtonItem NewSimSetupBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPage SimSetupRibbonPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup SetupRibbonGroup;
@@ -1777,13 +1683,19 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn SysCharUnitsTreeListColumn;
         private DevExpress.XtraPdfViewer.PdfViewer HelpFilePDFViewer;
         private DevExpress.XtraPdfViewer.PdfViewer CaseStudyPDFViewer;
-        private DevExpress.XtraEditors.PanelControl SpringDesignPanel;
-        private DevExpress.XtraBars.BarButtonItem SpringDesignBarButton;
-        private System.Windows.Forms.Panel SpringDesignDataPanel;
-        private DevExpress.XtraTreeList.TreeList SpringDesignTreeList;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn SpringParametersTreeListColumn;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn SpringValuesTreeListColumn;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn SpringUnitsTreeListColumn3;
+        private DevExpress.XtraTreeList.TreeList DesignTreeList;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn DesignParametersTreeListColumn;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn DesignValuesTreeListColumn;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn DesignUnitsTreeListColumn;
+        private DevExpress.XtraEditors.PanelControl DesignTemplatePanel;
+        private DevExpress.XtraEditors.TextEdit DampingCoefficientTextBox;
+        private DevExpress.XtraEditors.TextEdit SpringStiffnessTextBox;
+        private DevExpress.XtraEditors.TextEdit CornerWeightTextBox;
+        private DevExpress.XtraLayout.LayoutControl DesignPanelLayoutControl;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraBars.BarButtonItem ExistingCarDesignBarButton;
+        private DevExpress.XtraBars.BarButtonItem SaveCarDesignBarButton;
     }
 }
 

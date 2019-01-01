@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
-using DevExpress.XtraEditors.ButtonPanel;
 using DevExpress.XtraCharts;
+using DevExpress.XtraTreeList;
 
 namespace PostRig2._0
 {
@@ -49,47 +49,6 @@ namespace PostRig2._0
         public string CSVFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
 
         public Document Doc { get; set; }
-
-        private void CheckButtonById(string caption)
-        {
-            foreach (IBaseButton Button in VehicleTemplateButtonPanel.Buttons)
-            {
-                if (Button.Properties.Caption == caption)
-                {
-                    Button.Properties.Checked = true;
-                }
-                else
-                {
-                    Button.Properties.Checked = false;
-                }
-            }
-        }
-
-        public void ValidateVehicleTemplateCheckedButton()
-        {
-            double cornerWeight = Doc.Input.VehicleMass;
-            double springStiffness = Doc.Input.SpringStiffness;
-            double dampingCoefficient = Doc.Input.DampingCoefficient;
-
-            if (cornerWeight == roadCarCornerWeight && springStiffness == roadCarSpringStiffness && dampingCoefficient == roadCarDampingCoefficient)
-            {
-                CheckButtonById("Road Car");
-            }
-
-            else if (cornerWeight == raceCarCornerWeight && springStiffness == raceCarSpringStiffness && dampingCoefficient == raceCarDampingCoefficient)
-            {
-                CheckButtonById("Race Car");
-            }
-
-            else if (cornerWeight == rallyCarCornerWeight && springStiffness == rallyCarSpringStiffness && dampingCoefficient == rallyCarDampingCoefficient)
-            {
-                CheckButtonById("Rally Car");
-            }
-            else
-            {
-                CheckButtonById("Custom Car");
-            }
-        }
 
         public void LoadFilePaths()
         {
@@ -152,20 +111,66 @@ namespace PostRig2._0
             System.IO.File.WriteAllLines(OptionsFile, AllPaths.ToArray());
         }
 
+
+        public void DesignValueUpdates()
+        {
+            UpdateDocumentFromUI();
+
+            UpdateUIFromDocument();
+
+            CornerWeightTextBox.Text = Doc.Input.VehicleMass.ToString();
+            SpringStiffnessTextBox.Text = Doc.Input.SpringStiffness.ToString();
+            DampingCoefficientTextBox.Text = Doc.Input.DampingCoefficient.ToString();
+        }
+
+
+
+
+        public void DesignTreeList_FocusChanged(object sender, FocusedNodeChangedEventArgs e)
+        {
+            DesignValueUpdates();
+
+        }
+
+        public void DesignTreeList_OnCellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            DesignValueUpdates();
+        }
+
+
+        public void SimSetupTreeList_OnCellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            UpdateDocumentFromUI();
+
+            InitialiseSimSetupBarButton_ItemClick(null, null);
+        }
+
+        public void SimSetupTreeList_FocusChanged(object sender, FocusedNodeChangedEventArgs e)
+        {
+            UpdateDocumentFromUI();
+
+            InitialiseSimSetupBarButton_ItemClick(null, null);
+        }
+
+
         public void UpdateUIFromDocument()
         {
             if (Doc != null)
             {
                 // Display Values in UI from Initialised Value in Input Constructor
 
+                DesignValuesTreeListColumn.TreeList.Nodes[0].Nodes[0].SetValue(DesignValuesTreeListColumn, Doc.Input.VehicleMass);
 
-                CornerWeightTextBox.Text = Doc.Input.VehicleMass.ToString();
+                DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[0].Nodes[0].SetValue(DesignValuesTreeListColumn, Doc.Input.SpringStiffness);
 
-                SpringStiffnessTextBox.Text = Doc.Input.SpringStiffness.ToString();
+                DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[1].Nodes[0].SetValue(DesignValuesTreeListColumn, Doc.Input.SpringFreeLength);
+                DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[1].Nodes[1].SetValue(DesignValuesTreeListColumn, Doc.Input.SpringCompressedLength);
+                DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[1].Nodes[2].SetValue(DesignValuesTreeListColumn, Doc.Input.SpringExtendedLength);
 
-                DampingCoeffTextBox.Text = Doc.Input.DampingCoefficient.ToString();
+                DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[0].SetValue(DesignValuesTreeListColumn, Doc.Input.DampingCoefficient);
+                DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[1].SetValue(DesignValuesTreeListColumn, Doc.Input.DampingRatio);
 
-                ValidateVehicleTemplateCheckedButton();
+                
 
                 SimSetupValuesColumn.TreeList.Nodes[0].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StartTime);
                 SimSetupValuesColumn.TreeList.Nodes[0].Nodes[1].SetValue(SimSetupValuesColumn, Doc.Input.TimeStep);
@@ -176,6 +181,9 @@ namespace PostRig2._0
                 SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].SetValue(SimSetupValuesColumn, Doc.Input.IntervalBetweenSteps);
 
                 SimSetupValuesColumn.TreeList.Nodes[2].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StepAmplitude);
+
+                SimSetupValuesColumn.TreeList.Nodes[3].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.ForceAmplitude);
+
             }
         }
 
@@ -192,32 +200,119 @@ namespace PostRig2._0
 
                 bool Error = false;
 
-                if (double.TryParse(CornerWeightTextBox.Text, out dblVal))
+
+                strval = DesignValuesTreeListColumn.TreeList.Nodes[0].Nodes[0].GetValue(DesignValuesTreeListColumn).ToString();
+
+                if(double.TryParse(strval, out dblVal))
                 {
                     Doc.Input.VehicleMass = dblVal;
                 }
+
                 else
                 {
                     Error = true;
                 }
 
-                if (double.TryParse(SpringStiffnessTextBox.Text, out dblVal))
+                strval = DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[0].Nodes[0].GetValue(DesignValuesTreeListColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
                 {
                     Doc.Input.SpringStiffness = dblVal;
                 }
+
                 else
                 {
                     Error = true;
                 }
 
-                if (double.TryParse(DampingCoeffTextBox.Text, out dblVal))
+                strval = DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[1].Nodes[0].GetValue(DesignValuesTreeListColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
                 {
-                    Doc.Input.DampingCoefficient = dblVal;
+                    Doc.Input.SpringFreeLength = dblVal;
                 }
+
                 else
                 {
                     Error = true;
                 }
+
+                strval = DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[1].Nodes[1].GetValue(DesignValuesTreeListColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.SpringCompressedLength = dblVal;
+                }
+
+                else
+                {
+                    Error = true;
+                }
+
+                strval = DesignValuesTreeListColumn.TreeList.Nodes[1].Nodes[1].Nodes[2].GetValue(DesignValuesTreeListColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.SpringExtendedLength = dblVal;
+                }
+
+                else
+                {
+                    Error = true;
+                }
+
+                strval = DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[0].GetValue(DesignValuesTreeListColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.DampingCoefficient = dblVal;
+                }
+
+                else
+                {
+                    Error = true;
+                }
+
+
+                //strval = DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[1].GetValue(DesignValuesTreeListColumn).ToString();
+
+                //if (double.TryParse(strval, out dblVal))
+                //{
+                //    Doc.Input.DampingRatio = dblVal;
+                //}
+
+                //else
+                //{
+                //    Error = true;
+                //}
+
+
+                //if (double.TryParse(CornerWeightTextBox.Text, out dblVal))
+                //{
+                //    Doc.Input.VehicleMass = dblVal;
+                //}
+                //else
+                //{
+                //    Error = true;
+                //}
+
+                //if (double.TryParse(SpringStiffnessTextBox.Text, out dblVal))
+                //{
+                //    Doc.Input.SpringStiffness = dblVal;
+                //}
+                //else
+                //{
+                //    Error = true;
+                //}
+
+                //if (double.TryParse(DampingCoeffTextBox.Text, out dblVal))
+                //{
+                //    Doc.Input.DampingCoefficient = dblVal;
+                //}
+                //else
+                //{
+                //    Error = true;
+                //}
 
                 strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[0].GetValue(SimSetupValuesColumn).ToString();
 
@@ -295,14 +390,26 @@ namespace PostRig2._0
                 {
                     Error = true;
                 }
-                
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[3].Nodes[0].GetValue(SimSetupValuesColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.ForceAmplitude = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+
                 if (Error)
                 {
                     UpdateUIFromDocument();
                     MessageBox.Show("One of the input values is incorrect. Resetting to previous values");
                 }
 
-                ValidateVehicleTemplateCheckedButton();
+                //ValidateVehicleTemplateCheckedButton();
             }
         }
 
@@ -316,6 +423,8 @@ namespace PostRig2._0
                 ValuesTreeListColumn.TreeList.Nodes[2].SetValue(ValuesTreeListColumn, Doc.Input.DampingRatio);
             }
         }
+
+
 
         // New File Creation
         private void NewFileRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
@@ -331,7 +440,8 @@ namespace PostRig2._0
             SingleStepIP = false;
             CustomIP = false;
 
-            BuildCarHomeRibbonBarButton_ItemClick(null, null);
+            NewCarDesignRibbonBarButton_ItemClick(null, null);
+            DesignTreeList_FocusChanged(null, null);
 
             HomeRibbonBasePanel.Visible = false;
 
@@ -365,7 +475,8 @@ namespace PostRig2._0
                 UpdateUIFromDocument();
                 UpdateResultsFromDocument();
 
-                BuildCarHomeRibbonBarButton_ItemClick(null, null);
+                NewCarDesignRibbonBarButton_ItemClick(null, null);
+                DesignTreeList_FocusChanged(null, null);
 
                 NewSimSetup = true;
                 ViewResults = true;
@@ -537,17 +648,10 @@ namespace PostRig2._0
 
         // Design Ribbon Panel Actions
 
-        private void BuildCarHomeRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        private void NewCarDesignRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            VehicleTemplateHomeRibbonPanel.Visible = true;
-            VehicleTemplateHomeRibbonPanel.BringToFront();
-
-            VehicleDataModelPanel.Visible = true;
-
-            CarModelImagePanel.Visible = true;
-
-            SpringDesignDataPanel.Visible = false;
-            SpringDesignPanel.Visible = false;
+            DesignTreeList.ExpandAll();
+            DesignTreeList.Visible = true;
 
             NewCarBuilt = true;
         }
@@ -555,11 +659,42 @@ namespace PostRig2._0
 
         private void SpringDesignBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            SpringDesignDataPanel.Visible = true;
-            SpringDesignPanel.BringToFront();
+            DesignTreeList.Visible = true;
 
-            SpringDesignPanel.Visible = true;
-            SpringDesignPanel.Dock = DockStyle.Left;
+            DesignParametersTreeListColumn.TreeList.Nodes[0].Expand();
+            DesignParametersTreeListColumn.TreeList.Nodes[0].Visible = true;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[1].Expand();
+            DesignParametersTreeListColumn.TreeList.Nodes[1].Visible = true;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[2].Collapse();
+            DesignParametersTreeListColumn.TreeList.Nodes[2].Visible = false;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[3].Collapse();
+            DesignParametersTreeListColumn.TreeList.Nodes[3].Visible = false;
+
+            
+
+        }
+
+
+        private void BuildDamperDesignBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DesignTreeList.Visible = true;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[0].Collapse();
+            DesignParametersTreeListColumn.TreeList.Nodes[0].Visible = false;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[1].Collapse();
+            DesignParametersTreeListColumn.TreeList.Nodes[1].Visible = false;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[2].Collapse();
+            DesignParametersTreeListColumn.TreeList.Nodes[2].Visible = false;
+
+            DesignParametersTreeListColumn.TreeList.Nodes[3].Expand();
+            DesignParametersTreeListColumn.TreeList.Nodes[3].Visible = true;
+
+            
 
         }
 
@@ -610,43 +745,43 @@ namespace PostRig2._0
         }
 
 
-        private void VehicleTemplateButtonPanel_ButtonChecked(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
-        {
-            foreach (IBaseButton button in VehicleTemplateButtonPanel.Buttons)
-            {
-                if (button == e.Button)
-                {
-                    button.Properties.Checked = true;
-                }
-                else
-                {
-                    button.Properties.Checked = false;
-                }
-            }
+        //private void VehicleTemplateButtonPanel_ButtonChecked(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
+        //{
+        //    foreach (IBaseButton button in VehicleTemplateButtonPanel.Buttons)
+        //    {
+        //        if (button == e.Button)
+        //        {
+        //            button.Properties.Checked = true;
+        //        }
+        //        else
+        //        {
+        //            button.Properties.Checked = false;
+        //        }
+        //    }
 
 
-            if (e.Button.Properties.Caption == "Road Car")
-            {
-                Doc.Input.VehicleMass = roadCarCornerWeight;
-                Doc.Input.SpringStiffness = roadCarSpringStiffness;
-                Doc.Input.DampingCoefficient = roadCarDampingCoefficient;
+        //    if (e.Button.Properties.Caption == "Road Car")
+        //    {
+        //        Doc.Input.VehicleMass = roadCarCornerWeight;
+        //        Doc.Input.SpringStiffness = roadCarSpringStiffness;
+        //        Doc.Input.DampingCoefficient = roadCarDampingCoefficient;
 
-            }
-            else if (e.Button.Properties.Caption == "Race Car")
-            {
-                Doc.Input.VehicleMass = raceCarCornerWeight;
-                Doc.Input.SpringStiffness = raceCarSpringStiffness;
-                Doc.Input.DampingCoefficient = raceCarDampingCoefficient;
-            }
-            else if (e.Button.Properties.Caption == "Rally Car")
-            {
-                Doc.Input.VehicleMass = rallyCarCornerWeight;
-                Doc.Input.SpringStiffness = rallyCarSpringStiffness;
-                Doc.Input.DampingCoefficient = rallyCarDampingCoefficient;
-            }
+        //    }
+        //    else if (e.Button.Properties.Caption == "Race Car")
+        //    {
+        //        Doc.Input.VehicleMass = raceCarCornerWeight;
+        //        Doc.Input.SpringStiffness = raceCarSpringStiffness;
+        //        Doc.Input.DampingCoefficient = raceCarDampingCoefficient;
+        //    }
+        //    else if (e.Button.Properties.Caption == "Rally Car")
+        //    {
+        //        Doc.Input.VehicleMass = rallyCarCornerWeight;
+        //        Doc.Input.SpringStiffness = rallyCarSpringStiffness;
+        //        Doc.Input.DampingCoefficient = rallyCarDampingCoefficient;
+        //    }
 
-            UpdateUIFromDocument();
-        }
+        //    UpdateUIFromDocument();
+        //}
 
         
 
@@ -859,10 +994,10 @@ namespace PostRig2._0
                 RunSuccess = true;
             }
 
-            else if (!Doc.Input.ResponseCalculationComplete)
-            {
-                RunSuccess = false;
-            }
+            //else if (!Doc.Input.ResponseCalculationComplete)
+            //{
+            //    RunSuccess = false;
+            //}
 
 
 
@@ -899,7 +1034,7 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.RoadDisplacement[i]));
+                    StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.ForceVector[i]));
                 }
 
                 StepSignalChartControl.Series.Add(StepFunction);
@@ -1056,7 +1191,7 @@ namespace PostRig2._0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyDisplacement[i]));
+                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.StepForceResponse[i]));
                 }
 
                 BodyDisplacementChartControl.Series.Add(BodyDisplacement);
@@ -1265,7 +1400,7 @@ namespace PostRig2._0
 
                 VerticalAccelnChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.BodyAcceln.Count; i++)
+                for (int i = 0; i < Doc.Input.BodyAccelnG.Count; i++)
                 {
                     VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyAccelnG[i]));
                 }
@@ -1296,6 +1431,5 @@ namespace PostRig2._0
             }
         }
 
-        
     }
 }
