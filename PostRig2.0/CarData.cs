@@ -9,6 +9,9 @@ namespace PostRig2_0
 {
     public class CarData
     {
+        public MainForm Mainform { get; set; }
+
+
         public InputData Parent { get; set; }
 
         public string FileName { get; set; }
@@ -29,6 +32,7 @@ namespace PostRig2_0
 
         public CarData(InputData input)
         {
+
             Parent = input;
 
             VehicleMass = 1.0;
@@ -46,6 +50,16 @@ namespace PostRig2_0
         public CarData(InputData input, string fileName) : this(input)
         {
             Load(fileName);
+        }
+
+        public CarData(MainForm form)
+        {
+            Parent = new InputData(this);
+
+            Version = 0;
+
+            Mainform = form;
+            //Mainform.Doc.Input = Parent;
         }
 
 

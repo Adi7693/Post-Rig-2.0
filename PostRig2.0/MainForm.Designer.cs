@@ -68,7 +68,7 @@
             this.ShowHomePanelBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.NewSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.SingleStepIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
-            this.MultipleStepIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
+            this.HarmonicIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
             this.InputSignalSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.InitialiseSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.RunSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
@@ -80,8 +80,10 @@
             this.VerticalAccelnPlotBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.SysCharResultsBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.CustomIPCheckItem = new DevExpress.XtraBars.BarCheckItem();
-            this.ExistingCarDesignBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.LoadCarBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.SaveCarDesignBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.LoadSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.SaveSimSetupBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.HomeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.FileOptionsFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.OpenSaveFileRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -92,7 +94,7 @@
             this.CarHomeRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ShowHomeRibbonPanelGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.SimSetupRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.SetupRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.SimSetupRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.IPSignalSimSetupRibbonGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.PlotSimSetupGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.RunSimSetupGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -130,8 +132,7 @@
             this.DesignUnitsTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.SimulationSetupBasePanel = new DevExpress.XtraEditors.PanelControl();
             this.CustomIPChartControl = new DevExpress.XtraCharts.ChartControl();
-            this.StepInputZedGraph = new ZedGraph.ZedGraphControl();
-            this.StepSignalChartControl = new DevExpress.XtraCharts.ChartControl();
+            this.SimSetupChartControl = new DevExpress.XtraCharts.ChartControl();
             this.SimSetupParametersPanel = new System.Windows.Forms.Panel();
             this.SimSetupTreeList = new DevExpress.XtraTreeList.TreeList();
             this.SimSetupParametersColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -148,6 +149,8 @@
             this.SystemCharTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.ValuesTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.SysCharUnitsTreeListColumn = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.SuspensionGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.SpringBarSubItem = new DevExpress.XtraBars.BarSubItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormRibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HomeRibbonBasePanel)).BeginInit();
             this.HomeRibbonBasePanel.SuspendLayout();
@@ -172,7 +175,7 @@
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(splineSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StepSignalChartControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SimSetupChartControl)).BeginInit();
             this.SimSetupParametersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SimSetupTreeList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsBasePanel)).BeginInit();
@@ -219,7 +222,7 @@
             this.ShowHomePanelBarButton,
             this.NewSimSetupBarButton,
             this.SingleStepIPCheckItem,
-            this.MultipleStepIPCheckItem,
+            this.HarmonicIPCheckItem,
             this.InputSignalSimSetupBarButton,
             this.InitialiseSimSetupBarButton,
             this.RunSimSetupBarButton,
@@ -231,17 +234,20 @@
             this.VerticalAccelnPlotBarButton,
             this.SysCharResultsBarButton,
             this.CustomIPCheckItem,
-            this.ExistingCarDesignBarButton,
-            this.SaveCarDesignBarButton});
+            this.LoadCarBarButton,
+            this.SaveCarDesignBarButton,
+            this.LoadSimSetupBarButton,
+            this.SaveSimSetupBarButton,
+            this.SpringBarSubItem});
             this.MainFormRibbonControl.Location = new System.Drawing.Point(0, 0);
-            this.MainFormRibbonControl.MaxItemId = 64;
+            this.MainFormRibbonControl.MaxItemId = 69;
             this.MainFormRibbonControl.Name = "MainFormRibbonControl";
             this.MainFormRibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.HomeRibbonPage,
             this.DesignRibbonPage,
             this.SimSetupRibbonPage,
             this.ResultsRibbonPage});
-            this.MainFormRibbonControl.Size = new System.Drawing.Size(1140, 143);
+            this.MainFormRibbonControl.Size = new System.Drawing.Size(1140, 179);
             this.MainFormRibbonControl.SelectedPageChanged += new System.EventHandler(this.OnRibbonPageChanged);
             // 
             // NewFileRibbonBarButton
@@ -346,7 +352,7 @@
             // 
             // NewSimSetupBarButton
             // 
-            this.NewSimSetupBarButton.Caption = "New Simulation";
+            this.NewSimSetupBarButton.Caption = "New";
             this.NewSimSetupBarButton.Id = 14;
             this.NewSimSetupBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("NewSimSetupBarButton.ImageOptions.Image")));
             this.NewSimSetupBarButton.Name = "NewSimSetupBarButton";
@@ -356,7 +362,7 @@
             // 
             // SingleStepIPCheckItem
             // 
-            this.SingleStepIPCheckItem.Caption = "Step Input";
+            this.SingleStepIPCheckItem.Caption = "Step";
             this.SingleStepIPCheckItem.Id = 18;
             this.SingleStepIPCheckItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SingleStepIPCheckItem.ImageOptions.Image")));
             this.SingleStepIPCheckItem.Name = "SingleStepIPCheckItem";
@@ -364,16 +370,15 @@
             this.SingleStepIPCheckItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.SingleStepIPCheckItem_CheckedChanged);
             this.SingleStepIPCheckItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SingleStepIPCheckItem_OnClick);
             // 
-            // MultipleStepIPCheckItem
+            // HarmonicIPCheckItem
             // 
-            this.MultipleStepIPCheckItem.Caption = "Multiple Step Signals";
-            this.MultipleStepIPCheckItem.Id = 19;
-            this.MultipleStepIPCheckItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("MultipleStepIPCheckItem.ImageOptions.Image")));
-            this.MultipleStepIPCheckItem.Name = "MultipleStepIPCheckItem";
-            this.MultipleStepIPCheckItem.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.MultipleStepIPCheckItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            this.MultipleStepIPCheckItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.MultipleStepIPCheckItem_CheckedChanged);
-            this.MultipleStepIPCheckItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.MultipleStepIPCheckItem_OnClick);
+            this.HarmonicIPCheckItem.Caption = "Harmonic";
+            this.HarmonicIPCheckItem.Id = 19;
+            this.HarmonicIPCheckItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("HarmonicIPCheckItem.ImageOptions.Image")));
+            this.HarmonicIPCheckItem.Name = "HarmonicIPCheckItem";
+            this.HarmonicIPCheckItem.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.HarmonicIPCheckItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.HarmonicIPCheckItem_CheckedChanged);
+            this.HarmonicIPCheckItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.HarmonicIPCheckItem_OnClick);
             // 
             // InputSignalSimSetupBarButton
             // 
@@ -477,14 +482,15 @@
             this.CustomIPCheckItem.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.CustomIPCheckItem_CheckedChanged);
             this.CustomIPCheckItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CustomIPCheckItem_OnClick);
             // 
-            // ExistingCarDesignBarButton
+            // LoadCarBarButton
             // 
-            this.ExistingCarDesignBarButton.Caption = "Load Car";
-            this.ExistingCarDesignBarButton.Id = 61;
-            this.ExistingCarDesignBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ExistingCarDesignBarButton.ImageOptions.Image")));
-            this.ExistingCarDesignBarButton.Name = "ExistingCarDesignBarButton";
-            this.ExistingCarDesignBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            this.LoadCarBarButton.Caption = "Load Car";
+            this.LoadCarBarButton.Id = 61;
+            this.LoadCarBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("LoadCarBarButton.ImageOptions.Image")));
+            this.LoadCarBarButton.Name = "LoadCarBarButton";
+            this.LoadCarBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.LoadCarBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LoadCarBarButton_ItemClick);
             // 
             // SaveCarDesignBarButton
             // 
@@ -494,7 +500,27 @@
             this.SaveCarDesignBarButton.Name = "SaveCarDesignBarButton";
             this.SaveCarDesignBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            this.SaveCarDesignBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.)
+            this.SaveCarDesignBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SaveCar_ItemClick);
+            // 
+            // LoadSimSetupBarButton
+            // 
+            this.LoadSimSetupBarButton.Caption = "Load";
+            this.LoadSimSetupBarButton.Id = 64;
+            this.LoadSimSetupBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("LoadSimSetupBarButton.ImageOptions.Image")));
+            this.LoadSimSetupBarButton.Name = "LoadSimSetupBarButton";
+            this.LoadSimSetupBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.LoadSimSetupBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LoadSimSetupBarButton_ItemClick);
+            // 
+            // SaveSimSetupBarButton
+            // 
+            this.SaveSimSetupBarButton.Caption = "Save";
+            this.SaveSimSetupBarButton.Id = 66;
+            this.SaveSimSetupBarButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SaveSimSetupBarButton.ImageOptions.Image")));
+            this.SaveSimSetupBarButton.Name = "SaveSimSetupBarButton";
+            this.SaveSimSetupBarButton.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.SaveSimSetupBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SaveSimSetupBarButton_ItemClick);
             // 
             // HomeRibbonPage
             // 
@@ -551,7 +577,8 @@
             // 
             this.DesignRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.CarHomeRibbonGroup,
-            this.ShowHomeRibbonPanelGroup});
+            this.ShowHomeRibbonPanelGroup,
+            this.SuspensionGroup});
             this.DesignRibbonPage.Name = "DesignRibbonPage";
             this.DesignRibbonPage.Text = "Design";
             this.DesignRibbonPage.Visible = false;
@@ -559,8 +586,8 @@
             // CarHomeRibbonGroup
             // 
             this.CarHomeRibbonGroup.ItemLinks.Add(this.NewCarDesignRibbonBarButton);
-            this.CarHomeRibbonGroup.ItemLinks.Add(this.ExistingCarDesignBarButton);
             this.CarHomeRibbonGroup.ItemLinks.Add(this.SaveCarDesignBarButton);
+            this.CarHomeRibbonGroup.ItemLinks.Add(this.LoadCarBarButton);
             this.CarHomeRibbonGroup.Name = "CarHomeRibbonGroup";
             this.CarHomeRibbonGroup.Text = "Car";
             // 
@@ -574,7 +601,7 @@
             // SimSetupRibbonPage
             // 
             this.SimSetupRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.SetupRibbonGroup,
+            this.SimSetupRibbonGroup,
             this.IPSignalSimSetupRibbonGroup,
             this.PlotSimSetupGroup,
             this.RunSimSetupGroup});
@@ -582,16 +609,18 @@
             this.SimSetupRibbonPage.Text = "Simulation Setup";
             this.SimSetupRibbonPage.Visible = false;
             // 
-            // SetupRibbonGroup
+            // SimSetupRibbonGroup
             // 
-            this.SetupRibbonGroup.ItemLinks.Add(this.NewSimSetupBarButton);
-            this.SetupRibbonGroup.Name = "SetupRibbonGroup";
-            this.SetupRibbonGroup.Text = "Setup";
+            this.SimSetupRibbonGroup.ItemLinks.Add(this.NewSimSetupBarButton);
+            this.SimSetupRibbonGroup.ItemLinks.Add(this.SaveSimSetupBarButton);
+            this.SimSetupRibbonGroup.ItemLinks.Add(this.LoadSimSetupBarButton);
+            this.SimSetupRibbonGroup.Name = "SimSetupRibbonGroup";
+            this.SimSetupRibbonGroup.Text = "Simulation Setup";
             // 
             // IPSignalSimSetupRibbonGroup
             // 
             this.IPSignalSimSetupRibbonGroup.ItemLinks.Add(this.SingleStepIPCheckItem);
-            this.IPSignalSimSetupRibbonGroup.ItemLinks.Add(this.MultipleStepIPCheckItem);
+            this.IPSignalSimSetupRibbonGroup.ItemLinks.Add(this.HarmonicIPCheckItem);
             this.IPSignalSimSetupRibbonGroup.ItemLinks.Add(this.CustomIPCheckItem);
             this.IPSignalSimSetupRibbonGroup.Name = "IPSignalSimSetupRibbonGroup";
             this.IPSignalSimSetupRibbonGroup.Text = "Input Signal";
@@ -659,9 +688,9 @@
             this.HomeRibbonBasePanel.Controls.Add(this.FilePRSoftwareInfoPanel);
             this.HomeRibbonBasePanel.Controls.Add(this.LogoPanel);
             this.HomeRibbonBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HomeRibbonBasePanel.Location = new System.Drawing.Point(0, 143);
+            this.HomeRibbonBasePanel.Location = new System.Drawing.Point(0, 179);
             this.HomeRibbonBasePanel.Name = "HomeRibbonBasePanel";
-            this.HomeRibbonBasePanel.Size = new System.Drawing.Size(1140, 728);
+            this.HomeRibbonBasePanel.Size = new System.Drawing.Size(1140, 692);
             this.HomeRibbonBasePanel.TabIndex = 1;
             // 
             // CaseStudyPDFViewer
@@ -707,7 +736,7 @@
             this.PostRigSoftwareLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.PostRigSoftwareLabel.Location = new System.Drawing.Point(178, 50);
             this.PostRigSoftwareLabel.Name = "PostRigSoftwareLabel";
-            this.PostRigSoftwareLabel.Size = new System.Drawing.Size(195, 31);
+            this.PostRigSoftwareLabel.Size = new System.Drawing.Size(234, 37);
             this.PostRigSoftwareLabel.TabIndex = 1;
             this.PostRigSoftwareLabel.Text = "Post Rig Software";
             // 
@@ -720,7 +749,7 @@
             this.DesignerTitleLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.DesignerTitleLabel.Location = new System.Drawing.Point(76, 124);
             this.DesignerTitleLabel.Name = "DesignerTitleLabel";
-            this.DesignerTitleLabel.Size = new System.Drawing.Size(96, 31);
+            this.DesignerTitleLabel.Size = new System.Drawing.Size(117, 37);
             this.DesignerTitleLabel.TabIndex = 1;
             this.DesignerTitleLabel.Text = "Designer";
             // 
@@ -733,7 +762,7 @@
             this.VersionLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.VersionLabel.Location = new System.Drawing.Point(379, 272);
             this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(91, 31);
+            this.VersionLabel.Size = new System.Drawing.Size(109, 37);
             this.VersionLabel.TabIndex = 1;
             this.VersionLabel.Text = "17.2.3.0";
             // 
@@ -746,7 +775,7 @@
             this.DesignerDashLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.DesignerDashLabel.Location = new System.Drawing.Point(289, 124);
             this.DesignerDashLabel.Name = "DesignerDashLabel";
-            this.DesignerDashLabel.Size = new System.Drawing.Size(9, 31);
+            this.DesignerDashLabel.Size = new System.Drawing.Size(10, 37);
             this.DesignerDashLabel.TabIndex = 1;
             this.DesignerDashLabel.Text = "-";
             // 
@@ -759,7 +788,7 @@
             this.VersionTitleLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.VersionTitleLabel.Location = new System.Drawing.Point(76, 272);
             this.VersionTitleLabel.Name = "VersionTitleLabel";
-            this.VersionTitleLabel.Size = new System.Drawing.Size(85, 31);
+            this.VersionTitleLabel.Size = new System.Drawing.Size(101, 37);
             this.VersionTitleLabel.TabIndex = 1;
             this.VersionTitleLabel.Text = "Version";
             // 
@@ -772,7 +801,7 @@
             this.ReleaseDateDashLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.ReleaseDateDashLabel.Location = new System.Drawing.Point(289, 198);
             this.ReleaseDateDashLabel.Name = "ReleaseDateDashLabel";
-            this.ReleaseDateDashLabel.Size = new System.Drawing.Size(9, 31);
+            this.ReleaseDateDashLabel.Size = new System.Drawing.Size(10, 37);
             this.ReleaseDateDashLabel.TabIndex = 1;
             this.ReleaseDateDashLabel.Text = "-";
             // 
@@ -785,7 +814,7 @@
             this.ReleaseDateLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.ReleaseDateLabel.Location = new System.Drawing.Point(379, 198);
             this.ReleaseDateLabel.Name = "ReleaseDateLabel";
-            this.ReleaseDateLabel.Size = new System.Drawing.Size(128, 31);
+            this.ReleaseDateLabel.Size = new System.Drawing.Size(154, 37);
             this.ReleaseDateLabel.TabIndex = 1;
             this.ReleaseDateLabel.Text = "26/12/2018";
             // 
@@ -798,7 +827,7 @@
             this.VersionDashLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.VersionDashLabel.Location = new System.Drawing.Point(289, 272);
             this.VersionDashLabel.Name = "VersionDashLabel";
-            this.VersionDashLabel.Size = new System.Drawing.Size(9, 31);
+            this.VersionDashLabel.Size = new System.Drawing.Size(10, 37);
             this.VersionDashLabel.TabIndex = 1;
             this.VersionDashLabel.Text = "-";
             // 
@@ -811,7 +840,7 @@
             this.ReleaseTitleDateLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.ReleaseTitleDateLabel.Location = new System.Drawing.Point(76, 198);
             this.ReleaseTitleDateLabel.Name = "ReleaseTitleDateLabel";
-            this.ReleaseTitleDateLabel.Size = new System.Drawing.Size(142, 31);
+            this.ReleaseTitleDateLabel.Size = new System.Drawing.Size(170, 37);
             this.ReleaseTitleDateLabel.TabIndex = 1;
             this.ReleaseTitleDateLabel.Text = "Release Date";
             // 
@@ -824,7 +853,7 @@
             this.DesignerNameLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.DesignerNameLabel.Location = new System.Drawing.Point(379, 124);
             this.DesignerNameLabel.Name = "DesignerNameLabel";
-            this.DesignerNameLabel.Size = new System.Drawing.Size(159, 31);
+            this.DesignerNameLabel.Size = new System.Drawing.Size(190, 37);
             this.DesignerNameLabel.TabIndex = 1;
             this.DesignerNameLabel.Text = "Aditya Mhatre";
             // 
@@ -848,9 +877,9 @@
             this.DesignRibbonBasePanel.Controls.Add(this.DesignPanelLayoutControl);
             this.DesignRibbonBasePanel.Controls.Add(this.DesignTreeList);
             this.DesignRibbonBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DesignRibbonBasePanel.Location = new System.Drawing.Point(0, 143);
+            this.DesignRibbonBasePanel.Location = new System.Drawing.Point(0, 179);
             this.DesignRibbonBasePanel.Name = "DesignRibbonBasePanel";
-            this.DesignRibbonBasePanel.Size = new System.Drawing.Size(1140, 728);
+            this.DesignRibbonBasePanel.Size = new System.Drawing.Size(1140, 692);
             this.DesignRibbonBasePanel.TabIndex = 3;
             this.DesignRibbonBasePanel.Visible = false;
             // 
@@ -872,9 +901,9 @@
             this.DesignTemplatePanel.Controls.Add(this.DampingCoefficientTextBox);
             this.DesignTemplatePanel.Controls.Add(this.SpringStiffnessTextBox);
             this.DesignTemplatePanel.Controls.Add(this.CornerWeightTextBox);
-            this.DesignTemplatePanel.Location = new System.Drawing.Point(12, 12);
+            this.DesignTemplatePanel.Location = new System.Drawing.Point(16, 16);
             this.DesignTemplatePanel.Name = "DesignTemplatePanel";
-            this.DesignTemplatePanel.Size = new System.Drawing.Size(792, 692);
+            this.DesignTemplatePanel.Size = new System.Drawing.Size(784, 684);
             this.DesignTemplatePanel.TabIndex = 4;
             // 
             // DampingCoefficientTextBox
@@ -884,7 +913,7 @@
             this.DampingCoefficientTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DampingCoefficientTextBox.Properties.Appearance.Options.UseFont = true;
             this.DampingCoefficientTextBox.Properties.ReadOnly = true;
-            this.DampingCoefficientTextBox.Size = new System.Drawing.Size(134, 26);
+            this.DampingCoefficientTextBox.Size = new System.Drawing.Size(134, 30);
             this.DampingCoefficientTextBox.TabIndex = 0;
             // 
             // SpringStiffnessTextBox
@@ -894,7 +923,7 @@
             this.SpringStiffnessTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SpringStiffnessTextBox.Properties.Appearance.Options.UseFont = true;
             this.SpringStiffnessTextBox.Properties.ReadOnly = true;
-            this.SpringStiffnessTextBox.Size = new System.Drawing.Size(134, 26);
+            this.SpringStiffnessTextBox.Size = new System.Drawing.Size(134, 30);
             this.SpringStiffnessTextBox.TabIndex = 0;
             // 
             // CornerWeightTextBox
@@ -905,7 +934,7 @@
             this.CornerWeightTextBox.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CornerWeightTextBox.Properties.Appearance.Options.UseFont = true;
             this.CornerWeightTextBox.Properties.ReadOnly = true;
-            this.CornerWeightTextBox.Size = new System.Drawing.Size(134, 26);
+            this.CornerWeightTextBox.Size = new System.Drawing.Size(134, 30);
             this.CornerWeightTextBox.TabIndex = 0;
             // 
             // layoutControlGroup1
@@ -923,7 +952,7 @@
             this.layoutControlItem1.Control = this.DesignTemplatePanel;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(796, 696);
+            this.layoutControlItem1.Size = new System.Drawing.Size(790, 690);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -989,10 +1018,11 @@
             this.DesignTreeList.EndUnboundLoad();
             this.DesignTreeList.OptionsView.AutoWidth = false;
             this.DesignTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
-            this.DesignTreeList.Size = new System.Drawing.Size(310, 728);
+            this.DesignTreeList.Size = new System.Drawing.Size(311, 692);
             this.DesignTreeList.TabIndex = 1;
             this.DesignTreeList.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.DesignTreeList_FocusChanged);
             this.DesignTreeList.CellValueChanged += new DevExpress.XtraTreeList.CellValueChangedEventHandler(this.DesignTreeList_OnCellValueChanged);
+            this.DesignTreeList.ExpandAll();
             // 
             // DesignParametersTreeListColumn
             // 
@@ -1046,13 +1076,12 @@
             // 
             this.SimulationSetupBasePanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.SimulationSetupBasePanel.Controls.Add(this.CustomIPChartControl);
-            this.SimulationSetupBasePanel.Controls.Add(this.StepInputZedGraph);
-            this.SimulationSetupBasePanel.Controls.Add(this.StepSignalChartControl);
+            this.SimulationSetupBasePanel.Controls.Add(this.SimSetupChartControl);
             this.SimulationSetupBasePanel.Controls.Add(this.SimSetupParametersPanel);
             this.SimulationSetupBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SimulationSetupBasePanel.Location = new System.Drawing.Point(0, 143);
+            this.SimulationSetupBasePanel.Location = new System.Drawing.Point(0, 179);
             this.SimulationSetupBasePanel.Name = "SimulationSetupBasePanel";
-            this.SimulationSetupBasePanel.Size = new System.Drawing.Size(1140, 728);
+            this.SimulationSetupBasePanel.Size = new System.Drawing.Size(1140, 692);
             this.SimulationSetupBasePanel.TabIndex = 5;
             this.SimulationSetupBasePanel.Visible = false;
             // 
@@ -1081,34 +1110,18 @@
             chartTitle1});
             this.CustomIPChartControl.Visible = false;
             // 
-            // StepInputZedGraph
+            // SimSetupChartControl
             // 
-            this.StepInputZedGraph.Location = new System.Drawing.Point(731, 16);
-            this.StepInputZedGraph.Name = "StepInputZedGraph";
-            this.StepInputZedGraph.ScrollGrace = 0D;
-            this.StepInputZedGraph.ScrollMaxX = 0D;
-            this.StepInputZedGraph.ScrollMaxY = 0D;
-            this.StepInputZedGraph.ScrollMaxY2 = 0D;
-            this.StepInputZedGraph.ScrollMinX = 0D;
-            this.StepInputZedGraph.ScrollMinY = 0D;
-            this.StepInputZedGraph.ScrollMinY2 = 0D;
-            this.StepInputZedGraph.Size = new System.Drawing.Size(401, 216);
-            this.StepInputZedGraph.TabIndex = 3;
-            this.StepInputZedGraph.UseExtendedPrintDialog = true;
-            this.StepInputZedGraph.Visible = false;
-            // 
-            // StepSignalChartControl
-            // 
-            this.StepSignalChartControl.Legend.Name = "Default Legend";
-            this.StepSignalChartControl.Location = new System.Drawing.Point(338, 13);
-            this.StepSignalChartControl.Name = "StepSignalChartControl";
-            this.StepSignalChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.StepSignalChartControl.Size = new System.Drawing.Size(351, 219);
-            this.StepSignalChartControl.TabIndex = 1;
+            this.SimSetupChartControl.Legend.Name = "Default Legend";
+            this.SimSetupChartControl.Location = new System.Drawing.Point(338, 13);
+            this.SimSetupChartControl.Name = "SimSetupChartControl";
+            this.SimSetupChartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.SimSetupChartControl.Size = new System.Drawing.Size(351, 219);
+            this.SimSetupChartControl.TabIndex = 1;
             chartTitle2.Text = "Step Signal";
-            this.StepSignalChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            this.SimSetupChartControl.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
             chartTitle2});
-            this.StepSignalChartControl.Visible = false;
+            this.SimSetupChartControl.Visible = false;
             // 
             // SimSetupParametersPanel
             // 
@@ -1117,7 +1130,7 @@
             this.SimSetupParametersPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.SimSetupParametersPanel.Location = new System.Drawing.Point(0, 0);
             this.SimSetupParametersPanel.Name = "SimSetupParametersPanel";
-            this.SimSetupParametersPanel.Size = new System.Drawing.Size(325, 728);
+            this.SimSetupParametersPanel.Size = new System.Drawing.Size(325, 692);
             this.SimSetupParametersPanel.TabIndex = 0;
             this.SimSetupParametersPanel.Visible = false;
             // 
@@ -1149,37 +1162,33 @@
             null,
             "seconds"}, 0);
             this.SimSetupTreeList.AppendNode(new object[] {
-            "Multiple Step Definition",
+            "Harmonic Input",
             null,
             null}, -1);
             this.SimSetupTreeList.AppendNode(new object[] {
-            "Step Signal Start Time",
+            "Excitation Frequency",
             null,
-            "seconds"}, 4);
+            "Hz"}, 4);
             this.SimSetupTreeList.AppendNode(new object[] {
-            "Step Signal Duration",
-            null,
-            "seconds"}, 4);
-            this.SimSetupTreeList.AppendNode(new object[] {
-            "Interval Between Steps",
-            null,
-            "seconds"}, 4);
-            this.SimSetupTreeList.AppendNode(new object[] {
-            "Step Input Data",
-            null,
-            null}, -1);
-            this.SimSetupTreeList.AppendNode(new object[] {
-            "Step Amplitude",
-            null,
-            "m"}, 8);
-            this.SimSetupTreeList.AppendNode(new object[] {
-            "Step Force Data",
+            "Force",
             null,
             null}, -1);
             this.SimSetupTreeList.AppendNode(new object[] {
             "Force Amplitude",
             null,
-            "N"}, 10);
+            "N"}, 6);
+            this.SimSetupTreeList.AppendNode(new object[] {
+            "Initial Conditions",
+            null,
+            null}, -1);
+            this.SimSetupTreeList.AppendNode(new object[] {
+            "Initial Displacement",
+            null,
+            "m"}, 8);
+            this.SimSetupTreeList.AppendNode(new object[] {
+            "Initial Velocity",
+            null,
+            "m/s"}, 8);
             this.SimSetupTreeList.EndUnboundLoad();
             this.SimSetupTreeList.OptionsView.AutoWidth = false;
             this.SimSetupTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
@@ -1187,6 +1196,7 @@
             this.SimSetupTreeList.TabIndex = 0;
             this.SimSetupTreeList.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.SimSetupTreeList_FocusChanged);
             this.SimSetupTreeList.CellValueChanged += new DevExpress.XtraTreeList.CellValueChangedEventHandler(this.SimSetupTreeList_OnCellValueChanged);
+            this.SimSetupTreeList.ExpandAll();
             // 
             // SimSetupParametersColumn
             // 
@@ -1259,9 +1269,9 @@
             this.ResultsBasePanel.Controls.Add(this.SpringForceChartControl);
             this.ResultsBasePanel.Controls.Add(this.ResultsLeftSidePanel);
             this.ResultsBasePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ResultsBasePanel.Location = new System.Drawing.Point(0, 143);
+            this.ResultsBasePanel.Location = new System.Drawing.Point(0, 179);
             this.ResultsBasePanel.Name = "ResultsBasePanel";
-            this.ResultsBasePanel.Size = new System.Drawing.Size(1140, 728);
+            this.ResultsBasePanel.Size = new System.Drawing.Size(1140, 692);
             this.ResultsBasePanel.TabIndex = 7;
             this.ResultsBasePanel.Visible = false;
             // 
@@ -1417,7 +1427,7 @@
             this.ResultsLeftSidePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ResultsLeftSidePanel.Location = new System.Drawing.Point(0, 0);
             this.ResultsLeftSidePanel.Name = "ResultsLeftSidePanel";
-            this.ResultsLeftSidePanel.Size = new System.Drawing.Size(313, 728);
+            this.ResultsLeftSidePanel.Size = new System.Drawing.Size(313, 692);
             this.ResultsLeftSidePanel.TabIndex = 0;
             this.ResultsLeftSidePanel.Visible = false;
             // 
@@ -1449,6 +1459,7 @@
             this.SystemCharTreeList.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
             this.SystemCharTreeList.Size = new System.Drawing.Size(309, 286);
             this.SystemCharTreeList.TabIndex = 0;
+            this.SystemCharTreeList.ExpandAll();
             // 
             // SystemCharTreeListColumn
             // 
@@ -1514,6 +1525,20 @@
             this.SysCharUnitsTreeListColumn.Visible = true;
             this.SysCharUnitsTreeListColumn.VisibleIndex = 2;
             // 
+            // SuspensionGroup
+            // 
+            this.SuspensionGroup.ItemLinks.Add(this.SpringBarSubItem);
+            this.SuspensionGroup.Name = "SuspensionGroup";
+            this.SuspensionGroup.Text = "Suspension";
+            // 
+            // SpringBarSubItem
+            // 
+            this.SpringBarSubItem.Caption = "Spring";
+            this.SpringBarSubItem.Id = 68;
+            this.SpringBarSubItem.Name = "SpringBarSubItem";
+            this.SpringBarSubItem.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.True;
@@ -1525,10 +1550,10 @@
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1140, 871);
-            this.Controls.Add(this.SimulationSetupBasePanel);
             this.Controls.Add(this.DesignRibbonBasePanel);
             this.Controls.Add(this.ResultsBasePanel);
             this.Controls.Add(this.HomeRibbonBasePanel);
+            this.Controls.Add(this.SimulationSetupBasePanel);
             this.Controls.Add(this.MainFormRibbonControl);
             this.Name = "MainForm";
             this.Ribbon = this.MainFormRibbonControl;
@@ -1559,7 +1584,7 @@
             ((System.ComponentModel.ISupportInitialize)(splineSeriesView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomIPChartControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StepSignalChartControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SimSetupChartControl)).EndInit();
             this.SimSetupParametersPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SimSetupTreeList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultsBasePanel)).EndInit();
@@ -1640,7 +1665,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ShowHomeRibbonPanelGroup;
         private DevExpress.XtraBars.BarButtonItem NewSimSetupBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPage SimSetupRibbonPage;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup SetupRibbonGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup SimSetupRibbonGroup;
         private DevExpress.XtraEditors.PanelControl SimulationSetupBasePanel;
         private System.Windows.Forms.Panel SimSetupParametersPanel;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup IPSignalSimSetupRibbonGroup;
@@ -1648,9 +1673,9 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn SimSetupParametersColumn;
         private DevExpress.XtraTreeList.Columns.TreeListColumn SimSetupValuesColumn;
         private DevExpress.XtraTreeList.Columns.TreeListColumn SimSetupUnitsColumns;
-        private DevExpress.XtraCharts.ChartControl StepSignalChartControl;
+        private DevExpress.XtraCharts.ChartControl SimSetupChartControl;
         private DevExpress.XtraBars.BarCheckItem SingleStepIPCheckItem;
-        private DevExpress.XtraBars.BarCheckItem MultipleStepIPCheckItem;
+        private DevExpress.XtraBars.BarCheckItem HarmonicIPCheckItem;
         private DevExpress.XtraBars.BarButtonItem InputSignalSimSetupBarButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup PlotSimSetupGroup;
         private DevExpress.XtraBars.BarButtonItem InitialiseSimSetupBarButton;
@@ -1678,7 +1703,6 @@
         private DevExpress.XtraCharts.ChartControl SpringForceChartControl;
         private DevExpress.XtraBars.BarCheckItem CustomIPCheckItem;
         private DevExpress.XtraCharts.ChartControl CustomIPChartControl;
-        private ZedGraph.ZedGraphControl StepInputZedGraph;
         private DevExpress.XtraTreeList.Columns.TreeListColumn SystemCharTreeListColumn;
         private DevExpress.XtraTreeList.Columns.TreeListColumn ValuesTreeListColumn;
         private DevExpress.XtraTreeList.Columns.TreeListColumn SysCharUnitsTreeListColumn;
@@ -1694,9 +1718,13 @@
         private DevExpress.XtraEditors.TextEdit CornerWeightTextBox;
         private DevExpress.XtraLayout.LayoutControl DesignPanelLayoutControl;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraBars.BarButtonItem ExistingCarDesignBarButton;
+        private DevExpress.XtraBars.BarButtonItem LoadCarBarButton;
         private DevExpress.XtraBars.BarButtonItem SaveCarDesignBarButton;
+        private DevExpress.XtraBars.BarButtonItem LoadSimSetupBarButton;
+        private DevExpress.XtraBars.BarButtonItem SaveSimSetupBarButton;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraBars.BarSubItem SpringBarSubItem;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup SuspensionGroup;
     }
 }
 

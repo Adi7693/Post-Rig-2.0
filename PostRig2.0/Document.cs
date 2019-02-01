@@ -10,6 +10,10 @@ namespace PostRig2_0
     {
         public MainForm MainForm { get; private set; }
 
+        public CarData Car { get; set; }
+
+        public SimData Sim { get; set; }
+
         public InputData Input { get; set; }
 
         public int Version
@@ -42,6 +46,13 @@ namespace PostRig2_0
             MainForm = form;
         }
 
+        public Document(CarData car)
+        {
+            Car = new CarData(Input);
+
+            Version = 0;
+
+        }
 
         public Document(MainForm form, string fileName) : this(form)
         {
@@ -72,9 +83,6 @@ namespace PostRig2_0
             Input.EndTime = reader.ReadDouble();
             Input.TimeStep = reader.ReadDouble();
 
-            Input.StepStartTime = reader.ReadDouble();
-            Input.StepAmplitude = reader.ReadDouble();
-
             Input.VehicleMass = reader.ReadDouble();
 
             Input.SpringStiffness = reader.ReadDouble();
@@ -85,7 +93,7 @@ namespace PostRig2_0
             MainForm.NewSimSetup = reader.ReadBoolean();
             MainForm.ViewResults = reader.ReadBoolean();
             MainForm.SingleStepIP = reader.ReadBoolean();
-            MainForm.MultipleStepIP = reader.ReadBoolean();
+            MainForm.HarmonicIP = reader.ReadBoolean();
             MainForm.CustomIP = reader.ReadBoolean();
 
             Input.ForceAmplitude = reader.ReadDouble();

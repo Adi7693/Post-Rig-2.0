@@ -20,6 +20,7 @@ namespace PostRig2_0
 
             LoadFilePaths();
 
+
         }
 
         public bool NewCarBuilt { get; set; }
@@ -27,7 +28,7 @@ namespace PostRig2_0
         public bool ViewResults { get; set; }
 
         public bool SingleStepIP { get; set; }
-        public bool MultipleStepIP { get; set; }
+        public bool HarmonicIP { get; set; }
         public bool CustomIP { get; set; }
 
         private bool RunSuccess = false;
@@ -39,6 +40,12 @@ namespace PostRig2_0
         public string CarFilePath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
 
         public Document Doc { get; set; }
+
+        public CarData Car { get; set; }
+
+        public SimData Sim { get; set; }
+
+        public InputData Input { get; set; }
 
         public void LoadFilePaths()
         {
@@ -168,20 +175,16 @@ namespace PostRig2_0
                 DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[0].SetValue(DesignValuesTreeListColumn, Doc.Input.DampingCoefficient);
                 DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[1].SetValue(DesignValuesTreeListColumn, Doc.Input.DampingRatio);
 
-                
-
                 SimSetupValuesColumn.TreeList.Nodes[0].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StartTime);
                 SimSetupValuesColumn.TreeList.Nodes[0].Nodes[1].SetValue(SimSetupValuesColumn, Doc.Input.TimeStep);
                 SimSetupValuesColumn.TreeList.Nodes[0].Nodes[2].SetValue(SimSetupValuesColumn, Doc.Input.EndTime);
 
-                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StepStartTime);
-                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].SetValue(SimSetupValuesColumn, Doc.Input.StepLength);
-                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].SetValue(SimSetupValuesColumn, Doc.Input.IntervalBetweenSteps);
+                SimSetupValuesColumn.TreeList.Nodes[1].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.ExcitationFrequencyHz);
 
-                SimSetupValuesColumn.TreeList.Nodes[2].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.StepAmplitude);
+                SimSetupValuesColumn.TreeList.Nodes[2].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.ForceAmplitude);
 
-                SimSetupValuesColumn.TreeList.Nodes[3].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.ForceAmplitude);
-
+                SimSetupValuesColumn.TreeList.Nodes[3].Nodes[0].SetValue(SimSetupValuesColumn, Doc.Input.InitialDisplacement);
+                SimSetupValuesColumn.TreeList.Nodes[3].Nodes[1].SetValue(SimSetupValuesColumn, Doc.Input.InitialVelocity);
             }
         }
 
@@ -271,47 +274,6 @@ namespace PostRig2_0
                     Error = true;
                 }
 
-
-                //strval = DesignValuesTreeListColumn.TreeList.Nodes[2].Nodes[1].GetValue(DesignValuesTreeListColumn).ToString();
-
-                //if (double.TryParse(strval, out dblVal))
-                //{
-                //    Doc.Input.DampingRatio = dblVal;
-                //}
-
-                //else
-                //{
-                //    Error = true;
-                //}
-
-
-                //if (double.TryParse(CornerWeightTextBox.Text, out dblVal))
-                //{
-                //    Doc.Input.VehicleMass = dblVal;
-                //}
-                //else
-                //{
-                //    Error = true;
-                //}
-
-                //if (double.TryParse(SpringStiffnessTextBox.Text, out dblVal))
-                //{
-                //    Doc.Input.SpringStiffness = dblVal;
-                //}
-                //else
-                //{
-                //    Error = true;
-                //}
-
-                //if (double.TryParse(DampingCoeffTextBox.Text, out dblVal))
-                //{
-                //    Doc.Input.DampingCoefficient = dblVal;
-                //}
-                //else
-                //{
-                //    Error = true;
-                //}
-
                 strval = SimSetupValuesColumn.TreeList.Nodes[0].Nodes[0].GetValue(SimSetupValuesColumn).ToString();
 
                 if (double.TryParse(strval, out dblVal))
@@ -349,29 +311,7 @@ namespace PostRig2_0
 
                 if (double.TryParse(strval, out dblVal))
                 {
-                    Doc.Input.StepStartTime = dblVal;
-                }
-                else
-                {
-                    Error = true;
-                }
-
-                strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[1].GetValue(SimSetupValuesColumn).ToString();
-
-                if (double.TryParse(strval, out dblVal))
-                {
-                    Doc.Input.StepLength = dblVal;
-                }
-                else
-                {
-                    Error = true;
-                }
-
-                strval = SimSetupValuesColumn.TreeList.Nodes[1].Nodes[2].GetValue(SimSetupValuesColumn).ToString();
-
-                if (double.TryParse(strval, out dblVal))
-                {
-                    Doc.Input.IntervalBetweenSteps = dblVal;
+                    Doc.Input.ExcitationFrequencyHz = dblVal;
                 }
                 else
                 {
@@ -382,7 +322,7 @@ namespace PostRig2_0
 
                 if (double.TryParse(strval, out dblVal))
                 {
-                    Doc.Input.StepAmplitude = dblVal;
+                    Doc.Input.ForceAmplitude = dblVal;
                 }
                 else
                 {
@@ -393,7 +333,18 @@ namespace PostRig2_0
 
                 if (double.TryParse(strval, out dblVal))
                 {
-                    Doc.Input.ForceAmplitude = dblVal;
+                    Doc.Input.InitialDisplacement = dblVal;
+                }
+                else
+                {
+                    Error = true;
+                }
+
+                strval = SimSetupValuesColumn.TreeList.Nodes[3].Nodes[1].GetValue(SimSetupValuesColumn).ToString();
+
+                if (double.TryParse(strval, out dblVal))
+                {
+                    Doc.Input.InitialVelocity = dblVal;
                 }
                 else
                 {
@@ -648,6 +599,12 @@ namespace PostRig2_0
 
         private void NewCarDesignRibbonBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
+            Car = new CarData(this);
+
+            UpdateUIFromDocument();
+
+            DesignValueUpdates();
+
             DesignTreeList.ExpandAll();
             DesignTreeList.Visible = true;
 
@@ -658,7 +615,7 @@ namespace PostRig2_0
         private void SaveCar_ItemClick(object sender, ItemClickEventArgs e)
         {
 
-            using (OpenFileDialog dialog = new OpenFileDialog() { InitialDirectory = CarFilePath, Filter = "Car Files (*.car)| *.car", ValidateNames = true })
+            using (SaveFileDialog dialog = new SaveFileDialog() { InitialDirectory = CarFilePath, Filter = "Car Files (*.car)| *.car", ValidateNames = true })
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -668,6 +625,25 @@ namespace PostRig2_0
                 }
             }
         }
+
+        private void LoadCarBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog() { InitialDirectory = CarFilePath, Filter = "Car Files (*.car)| *.car", ValidateNames = true })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Doc.Input.LoadCar(dialog.FileName);
+
+                    CarFilePath = System.IO.Path.GetDirectoryName(dialog.FileName);
+                }
+            }
+
+            UpdateUIFromDocument();
+
+
+            DesignTreeList_OnCellValueChanged(null, null);
+        }
+
 
         private void SpringDesignBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -739,7 +715,7 @@ namespace PostRig2_0
                 SimSetupValuesColumn.TreeList.Nodes[2].Visible = true;
             }
 
-            if (MultipleStepIP)
+            if (HarmonicIP)
             {
                 SimSetupParametersPanel.Visible = true;
 
@@ -757,46 +733,6 @@ namespace PostRig2_0
         }
 
 
-        //private void VehicleTemplateButtonPanel_ButtonChecked(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
-        //{
-        //    foreach (IBaseButton button in VehicleTemplateButtonPanel.Buttons)
-        //    {
-        //        if (button == e.Button)
-        //        {
-        //            button.Properties.Checked = true;
-        //        }
-        //        else
-        //        {
-        //            button.Properties.Checked = false;
-        //        }
-        //    }
-
-
-        //    if (e.Button.Properties.Caption == "Road Car")
-        //    {
-        //        Doc.Input.VehicleMass = roadCarCornerWeight;
-        //        Doc.Input.SpringStiffness = roadCarSpringStiffness;
-        //        Doc.Input.DampingCoefficient = roadCarDampingCoefficient;
-
-        //    }
-        //    else if (e.Button.Properties.Caption == "Race Car")
-        //    {
-        //        Doc.Input.VehicleMass = raceCarCornerWeight;
-        //        Doc.Input.SpringStiffness = raceCarSpringStiffness;
-        //        Doc.Input.DampingCoefficient = raceCarDampingCoefficient;
-        //    }
-        //    else if (e.Button.Properties.Caption == "Rally Car")
-        //    {
-        //        Doc.Input.VehicleMass = rallyCarCornerWeight;
-        //        Doc.Input.SpringStiffness = rallyCarSpringStiffness;
-        //        Doc.Input.DampingCoefficient = rallyCarDampingCoefficient;
-        //    }
-
-        //    UpdateUIFromDocument();
-        //}
-
-        
-
         private void ShowDesignPanelBarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             DesignRibbonBasePanel.Visible = true;
@@ -813,23 +749,54 @@ namespace PostRig2_0
 
             SimulationSetupBasePanel.BringToFront();
 
+            SimSetupParametersPanel.Visible = true;
+
             SimSetupParametersColumn.TreeList.Nodes[1].Collapse();
             SimSetupParametersColumn.TreeList.Nodes[1].Visible = false;
 
             SimSetupParametersColumn.TreeList.Nodes[2].Collapse();
             SimSetupParametersColumn.TreeList.Nodes[2].Visible = false;
 
+            SimSetupParametersColumn.TreeList.Nodes[3].Collapse();
+            SimSetupParametersColumn.TreeList.Nodes[3].Visible = false;
+
             NewSimSetup = true;
         }
 
 
+        private void SaveSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog() { InitialDirectory = CarFilePath, Filter = "Sim Files (*.sim)| *.sim", ValidateNames = true })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Doc.Input.SaveSimData(dialog.FileName);
+
+                    CarFilePath = System.IO.Path.GetDirectoryName(dialog.FileName);
+                }
+            }
+        }
+
+
+        private void LoadSimSetupBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog() { InitialDirectory = CarFilePath, Filter = "Sim Files (*.sim)| *.sim", ValidateNames = true })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Doc.Input.LoadSimData(dialog.FileName);
+
+                    CarFilePath = System.IO.Path.GetDirectoryName(dialog.FileName);
+                }
+            }
+        }
 
         private void SingleStepIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
         {
             if (SingleStepIPCheckItem.Checked)
             {
                 SingleStepIP = true;
-                MultipleStepIP = false;
+                HarmonicIP = false;
                 CustomIP = false;
 
                 CustomIPChartControl.Visible = false;
@@ -849,6 +816,12 @@ namespace PostRig2_0
 
                     SimSetupValuesColumn.TreeList.Nodes[2].Expand();
                     SimSetupValuesColumn.TreeList.Nodes[2].Visible = true;
+
+                    SimSetupValuesColumn.TreeList.Nodes[3].Collapse();
+                    SimSetupValuesColumn.TreeList.Nodes[3].Visible = false;
+
+                    //SimSetupValuesColumn.TreeList.Nodes[3].Collapse();
+                    //SimSetupValuesColumn.TreeList.Nodes[3].Visible = false;
                 }
 
 
@@ -856,17 +829,17 @@ namespace PostRig2_0
 
         }
 
-        private void MultipleStepIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
+        private void HarmonicIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
         {
-            if (MultipleStepIPCheckItem.Checked)
+            if (HarmonicIPCheckItem.Checked)
             {
                 SingleStepIP = false;
-                MultipleStepIP = true;
+                HarmonicIP = true;
                 CustomIP = false;
 
                 CustomIPChartControl.Visible = false;
 
-                if (MultipleStepIP)
+                if (HarmonicIP)
                 {
                     //Doc.Input.TimeNeedsToRecalculate = true;
                     //Doc.Input.ResponseNeedsToRecalculate = true;
@@ -881,11 +854,11 @@ namespace PostRig2_0
 
                     SimSetupValuesColumn.TreeList.Nodes[2].Expand();
                     SimSetupValuesColumn.TreeList.Nodes[2].Visible = true;
+
+                    SimSetupValuesColumn.TreeList.Nodes[3].Collapse();
+                    SimSetupValuesColumn.TreeList.Nodes[3].Visible = false;
                 }
-
-
             }
-
         }
 
         private void CustomIPCheckItem_CheckedChanged(object sender, ItemClickEventArgs e)
@@ -893,7 +866,7 @@ namespace PostRig2_0
             if (CustomIPCheckItem.Checked)
             {
                 SingleStepIP = false;
-                MultipleStepIP = false;
+                HarmonicIP = false;
                 CustomIP = true;
 
                 if (CustomIP)
@@ -931,22 +904,26 @@ namespace PostRig2_0
         private void SingleStepIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
         {
             SingleStepIPCheckItem.Checked = true;
-            MultipleStepIPCheckItem.Checked = false;
+            HarmonicIPCheckItem.Checked = false;
             CustomIPCheckItem.Checked = false;
+
+            SimSetupTreeList_FocusChanged(null, null);
             
         }
 
-        private void MultipleStepIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
+        private void HarmonicIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
         {
             SingleStepIPCheckItem.Checked = false;
-            MultipleStepIPCheckItem.Checked = true;
+            HarmonicIPCheckItem.Checked = true;
             CustomIPCheckItem.Checked = false;
+
+            SimSetupTreeList_FocusChanged(null, null);
         }
 
         private void CustomIPCheckItem_OnClick(object sender, ItemClickEventArgs e)
         {
             SingleStepIPCheckItem.Checked = false;
-            MultipleStepIPCheckItem.Checked = false;
+            HarmonicIPCheckItem.Checked = false;
             CustomIPCheckItem.Checked = true;
         }
 
@@ -960,17 +937,17 @@ namespace PostRig2_0
                 Doc.Input.TimeNeedsToRecalculate = true;
                 Doc.Input.ResponseNeedsToRecalculate = true;
                 Doc.Input.CustomIPCalculate = false;
-                Doc.Input.SingleStepIPNeedsToRecalculate = true;
-                Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+                Doc.Input.StepIPNeedsToRecalculate = true;
+                Doc.Input.HarmonicIPNeedsToRecalculate = false;
             }
 
-            else if (MultipleStepIP)
+            else if (HarmonicIP)
             {
                 Doc.Input.TimeNeedsToRecalculate = true;
                 Doc.Input.ResponseNeedsToRecalculate = true;
                 Doc.Input.CustomIPCalculate = false;
-                Doc.Input.SingleStepIPNeedsToRecalculate = false;
-                Doc.Input.MultipleStepIPNeedsToRecalculate = true;
+                Doc.Input.StepIPNeedsToRecalculate = false;
+                Doc.Input.HarmonicIPNeedsToRecalculate = true;
             }
 
             else if (CustomIP)
@@ -978,8 +955,8 @@ namespace PostRig2_0
                 Doc.Input.TimeNeedsToRecalculate = false;
                 Doc.Input.ResponseNeedsToRecalculate = true;
                 Doc.Input.CustomIPCalculate = true;
-                Doc.Input.SingleStepIPNeedsToRecalculate = false;
-                Doc.Input.MultipleStepIPNeedsToRecalculate = false;
+                Doc.Input.StepIPNeedsToRecalculate = false;
+                Doc.Input.HarmonicIPNeedsToRecalculate = false;
             }
 
             if (!CustomIP)
@@ -987,11 +964,7 @@ namespace PostRig2_0
                 Doc.Input.InputDataCalculate();
             }
 
-
-
             UpdateSimSetupPlotBarButton_ItemClick(sender, e);
-
-            //MessageBox.Show("Initialisation Complete.\nReady To Run!");
 
         }
 
@@ -1035,23 +1008,38 @@ namespace PostRig2_0
             if (SingleStepIP)
             {
                 
-                StepSignalChartControl.Dock = DockStyle.Fill;
-                StepSignalChartControl.Visible = true;
+                SimSetupChartControl.Dock = DockStyle.Fill;
+                SimSetupChartControl.Visible = true;
+                SimSetupChartControl.Titles.Clear();
+
 
                 //BodyResponseChartControl.Visible = false;
 
+                ChartTitle StepTitle = new ChartTitle();
+
+                StepTitle.Text = "Step Input";
+                StepTitle.WordWrap = true;
+                StepTitle.MaxLineCount = 2;
+
+                StepTitle.Alignment = StringAlignment.Center;
+                StepTitle.Dock = ChartTitleDockStyle.Top;
+                StepTitle.Font = new Font("Tahoma", 18);
+                StepTitle.TextColor = Color.Black;
+
+                SimSetupChartControl.Titles.Add(StepTitle);
+                
                 Series StepFunction = new Series("Displacement", ViewType.Line);
 
-                StepSignalChartControl.Series.Clear();
+                SimSetupChartControl.Series.Clear();
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
                     StepFunction.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.ForceVector[i]));
                 }
 
-                StepSignalChartControl.Series.Add(StepFunction);
+                SimSetupChartControl.Series.Add(StepFunction);
 
-                XYDiagram diagram = (XYDiagram)StepSignalChartControl.Diagram;
+                XYDiagram diagram = (XYDiagram)SimSetupChartControl.Diagram;
 
                 //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
                 diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
@@ -1060,7 +1048,7 @@ namespace PostRig2_0
                 diagram.AxisX.Title.Text = "Time (s)";
                 diagram.AxisX.Title.TextColor = Color.Black;
                 diagram.AxisX.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-                diagram.AxisX.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
+                diagram.AxisX.Title.Font = new Font("Tahoma", 14);
 
                 //diagram.AxisY.WholeRange.MinValue = Doc.Input.StartTime;
                 diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
@@ -1071,28 +1059,43 @@ namespace PostRig2_0
                 diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
                 diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
 
-                StepSignalChartControl.Update();
+                SimSetupChartControl.Update();
             }
 
-            else if (MultipleStepIP)
+            else if (HarmonicIP)
             {
-                StepSignalChartControl.Dock = DockStyle.Fill;
-                StepSignalChartControl.Visible = true;
+
+                SimSetupChartControl.Dock = DockStyle.Fill;
+                SimSetupChartControl.Visible = true;
+                SimSetupChartControl.Titles.Clear();
+
+                ChartTitle HarmonicTitle = new ChartTitle();
+
+                HarmonicTitle.Text = "Harmonic Input";
+                HarmonicTitle.WordWrap = true;
+                HarmonicTitle.MaxLineCount = 2;
+
+                HarmonicTitle.Alignment = StringAlignment.Center;
+                HarmonicTitle.Dock = ChartTitleDockStyle.Top;
+                HarmonicTitle.Font = new Font("Tahoma", 18);
+                HarmonicTitle.TextColor = Color.Black;
+
+                SimSetupChartControl.Titles.Add(HarmonicTitle);
 
                 //BodyResponseChartControl.Visible = false;
 
-                Series MultipleStepSeries = new Series("Displacement", ViewType.Line);
+                Series MultipleStepSeries = new Series("Displacement", ViewType.Spline);
 
-                StepSignalChartControl.Series.Clear();
+                SimSetupChartControl.Series.Clear();
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    MultipleStepSeries.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.RoadDisplacement[i]));
+                    MultipleStepSeries.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.HarmonicInput[i]));
                 }
 
-                StepSignalChartControl.Series.Add(MultipleStepSeries);
+                SimSetupChartControl.Series.Add(MultipleStepSeries);
 
-                XYDiagram diagram = (XYDiagram)StepSignalChartControl.Diagram;
+                XYDiagram diagram = (XYDiagram)SimSetupChartControl.Diagram;
 
                 //diagram.AxisX.WholeRange.MinValue = Doc.Input.StartTime;
                 diagram.AxisX.Visibility = DevExpress.Utils.DefaultBoolean.True;
@@ -1112,12 +1115,12 @@ namespace PostRig2_0
                 diagram.AxisY.Title.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
                 diagram.AxisY.Title.Font = new Font("Tahoma", 14, FontStyle.Bold);
 
-                StepSignalChartControl.Update();
+                SimSetupChartControl.Update();
             }
 
             else if (CustomIP)
             {
-                StepSignalChartControl.Visible = false;
+                SimSetupChartControl.Visible = false;
                 CustomIPChartControl.Visible = true;
 
                 CustomIPChartControl.Dock = DockStyle.Fill;
@@ -1203,7 +1206,7 @@ namespace PostRig2_0
 
                 for (int i = 0; i < Doc.Input.TimeIntervals.Count; i++)
                 {
-                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.StepForceResponse[i]));
+                    BodyDisplacement.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.TotalResponse[i]));
                 }
 
                 BodyDisplacementChartControl.Series.Add(BodyDisplacement);
@@ -1412,9 +1415,9 @@ namespace PostRig2_0
 
                 VerticalAccelnChartControl.Series.Clear();
 
-                for (int i = 0; i < Doc.Input.BodyAccelnG.Count; i++)
+                for (int i = 0; i < Doc.Input.BodyAcceln.Count; i++)
                 {
-                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyAccelnG[i]));
+                    VerticalAcceln.Points.Add(new SeriesPoint(Doc.Input.TimeIntervals[i], Doc.Input.BodyAcceln[i]));
                 }
 
                 VerticalAccelnChartControl.Series.Add(VerticalAcceln);
